@@ -1,0 +1,52 @@
+package main.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import main.pojo.User;
+import main.service.UserService;
+
+
+@RestController
+@RequestMapping("/user")
+public class UserController {
+    @Autowired
+    private UserService userService;
+
+    @GetMapping("/listUser")
+    public ResponseEntity<List<User>> listUser(){
+        List<User> userList = userService.listUser();
+        return ResponseEntity.ok(userList);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<User> getUserById(@PathVariable Integer id){
+        User user = userService.getUserById(id);
+        return ResponseEntity.ok(user);
+    } 
+
+    @PostMapping
+    public boolean createUser(@RequestBody User user){
+        return userService.createUser(user);
+    }
+
+    @PutMapping
+    public boolean updateUser(@RequestBody User user){
+        return userService.updateUser(user);
+    }
+
+    @DeleteMapping("/{id}")
+    public boolean deleteUserById(@PathVariable Integer id){
+        return userService.deleteUserById(id);
+    }
+}

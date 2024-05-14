@@ -27,14 +27,29 @@ CREATE TABLE IF NOT EXISTS dish (
     dish_id INT AUTO_INCREMENT PRIMARY KEY,
     dish_name VARCHAR(255) NOT NULL,
     category VARCHAR(255),
-    price DECIMAL(10, 2) NOT NULL,
+    current_price DECIMAL(10, 2) NOT NULL,
     description VARCHAR(255),
     image_url VARCHAR(255),
     is_main_dish INT,
     restaurant_id INT NOT NULL,
-    ingredient VARCHAR(255),
+);
+
+CREATE TABLE IF NOT EXISTS allergy(
+    dish_id INT NOT NULL,
     allergy VARCHAR(255),
-    nutrition VARCHAR(255)
+    PRIMARY KEY(dish_id,allergy),
+);
+
+CREATE TABLE IF NOT EXISTS ingredient(
+    dish_id INT NOT NULL,
+    ingredient VARCHAR(255),
+    PRIMARY KEY(dish_id,ingredient),
+);
+
+CREATE TABLE IF NOT EXISTS nutrition(
+    dish_id INT NOT NULL,
+    nutrition VARCHAR(255),
+    PRIMARY KEY(dish_id,nutrition),
 );
 
 CREATE TABLE IF NOT EXISTS `order` (
@@ -106,17 +121,18 @@ CREATE TABLE IF NOT EXISTS favorite_dish (
 
 CREATE TABLE IF NOT EXISTS seat (
     seat_id INT AUTO_INCREMENT PRIMARY KEY,
+    canteen_id INT NOT NULL PRIMARY KEY,
     location VARCHAR(255) NOT NULL,
-    canteen_id INT NOT NULL,
     status VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS seat_reservation (
     seat_id INT NOT NULL,
     user_id INT NOT NULL,
-    time TIMESTAMP NOT NULL,
+    canteen_id INT NOT NULL,
+    time_booked TIMESTAMP NOT NULL,
     create_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY(seat_id, user_id)
+    PRIMARY KEY(canteen_id,seat_id, user_id)
 );
 
 CREATE TABLE IF NOT EXISTS price (
@@ -145,6 +161,9 @@ ALTER TABLE favorite_dish ADD FOREIGN KEY(dish_id) REFERENCES dish(dish_id) ON D
 ALTER TABLE seat ADD FOREIGN KEY(canteen_id) REFERENCES canteen(canteen_id) ON DELETE CASCADE;  
 ALTER TABLE seat_reservation ADD FOREIGN KEY(seat_id) REFERENCES seat(seat_id) ON DELETE CASCADE;  
 ALTER TABLE seat_reservation ADD FOREIGN KEY(user_id) REFERENCES user(user_id) ON DELETE CASCADE;
+ALTER TABLE seat_reservation ADD FOREIGN KEY(canteen_id) REFERENCES canteen(canteen_id) ON DELETE CASCADE;  
 ALTER TABLE price ADD FOREIGN KEY(dish_id) REFERENCES dish(dish_id) ON DELETE CASCADE;
-
+ALTER TABLE allergy ADD FOREIGN KEY(dish_id) REFERENCES dish(dish_id) ON DELETE CASCADE;  
+ALTER TABLE ingredient ADD FOREIGN KEY(dish_id) REFERENCES dish(dish_id) ON DELETE CASCADE;  
+ALTER TABLE nutrition ADD FOREIGN KEY(dish_id) REFERENCES dish(dish_id) ON DELETE CASCADE;  
 

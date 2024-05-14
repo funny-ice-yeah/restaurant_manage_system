@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS dish (
     dish_id INT AUTO_INCREMENT PRIMARY KEY,
     dish_name VARCHAR(255) NOT NULL,
     category VARCHAR(255),
-    price_id INT NOT NULL,
+    price DECIMAL(10, 2) NOT NULL,
     description VARCHAR(255),
     image_url VARCHAR(255),
     is_main_dish INT,
@@ -120,15 +120,14 @@ CREATE TABLE IF NOT EXISTS seat_reservation (
 );
 
 CREATE TABLE IF NOT EXISTS price (
-    price_id INT AUTO_INCREMENT PRIMARY KEY,
     dish_id INT NOT NULL,
     price DECIMAL(10, 2) NOT NULL,
-    create_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    create_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY(dish_id, create_at)
 );
 
 ALTER TABLE restaurant ADD FOREIGN KEY(canteen_id) REFERENCES canteen(canteen_id) ON DELETE CASCADE;  
 ALTER TABLE dish ADD FOREIGN KEY(restaurant_id) REFERENCES restaurant(restaurant_id) ON DELETE CASCADE;  
-ALTER TABLE dish ADD FOREIGN KEY(price_id) REFERENCES price(price_id);
 ALTER TABLE `order` ADD FOREIGN KEY(user_id) REFERENCES user(user_id) ON DELETE CASCADE;  
 ALTER TABLE `order` ADD FOREIGN KEY(restaurant_id) REFERENCES restaurant(restaurant_id) ON DELETE CASCADE;  
 ALTER TABLE order_detail ADD FOREIGN KEY(order_id) REFERENCES `order`(order_id) ON DELETE CASCADE;  

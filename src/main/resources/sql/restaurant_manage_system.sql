@@ -122,7 +122,8 @@ CREATE TABLE IF NOT EXISTS seat_reservation (
 CREATE TABLE IF NOT EXISTS price (
     price_id INT AUTO_INCREMENT PRIMARY KEY,
     dish_id INT NOT NULL,
-    price DECIMAL(10, 2) NOT NULL
+    price DECIMAL(10, 2) NOT NULL,
+    create_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 ALTER TABLE restaurant ADD FOREIGN KEY(canteen_id) REFERENCES canteen(canteen_id) ON DELETE CASCADE;  

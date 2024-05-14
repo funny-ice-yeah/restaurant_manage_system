@@ -1,3 +1,4 @@
+-- DROP DATABASE restaurant_manage_system;
 CREATE DATABASE IF NOT EXISTS restaurant_manage_system;
 
 USE restaurant_manage_system;
@@ -26,11 +27,14 @@ CREATE TABLE IF NOT EXISTS dish (
     dish_id INT AUTO_INCREMENT PRIMARY KEY,
     dish_name VARCHAR(255) NOT NULL,
     category VARCHAR(255),
-    price DECIMAL(10, 2) NOT NULL,
+    price_id INT NOT NULL,
     description VARCHAR(255),
     image_url VARCHAR(255),
     is_main_dish INT,
-    restaurant_id INT NOT NULL
+    restaurant_id INT NOT NULL,
+    ingredient VARCHAR(255),
+    allergy VARCHAR(255),
+    nutrition VARCHAR(255)
 );
 
 CREATE TABLE IF NOT EXISTS `order` (
@@ -115,9 +119,15 @@ CREATE TABLE IF NOT EXISTS seat_reservation (
     PRIMARY KEY(seat_id, user_id)
 );
 
+CREATE TABLE IF NOT EXISTS price (
+    price_id INT AUTO_INCREMENT PRIMARY KEY,
+    dish_id INT NOT NULL,
+    price DECIMAL(10, 2) NOT NULL
+);
 
 ALTER TABLE restaurant ADD FOREIGN KEY(canteen_id) REFERENCES canteen(canteen_id) ON DELETE CASCADE;  
 ALTER TABLE dish ADD FOREIGN KEY(restaurant_id) REFERENCES restaurant(restaurant_id) ON DELETE CASCADE;  
+ALTER TABLE dish ADD FOREIGN KEY(price_id) REFERENCES price(price_id);
 ALTER TABLE `order` ADD FOREIGN KEY(user_id) REFERENCES user(user_id) ON DELETE CASCADE;  
 ALTER TABLE `order` ADD FOREIGN KEY(restaurant_id) REFERENCES restaurant(restaurant_id) ON DELETE CASCADE;  
 ALTER TABLE order_detail ADD FOREIGN KEY(order_id) REFERENCES `order`(order_id) ON DELETE CASCADE;  
@@ -135,4 +145,6 @@ ALTER TABLE favorite_dish ADD FOREIGN KEY(dish_id) REFERENCES dish(dish_id) ON D
 ALTER TABLE seat ADD FOREIGN KEY(canteen_id) REFERENCES canteen(canteen_id) ON DELETE CASCADE;  
 ALTER TABLE seat_reservation ADD FOREIGN KEY(seat_id) REFERENCES seat(seat_id) ON DELETE CASCADE;  
 ALTER TABLE seat_reservation ADD FOREIGN KEY(user_id) REFERENCES user(user_id) ON DELETE CASCADE;
+ALTER TABLE price ADD FOREIGN KEY(dish_id) REFERENCES dish(dish_id) ON DELETE CASCADE;
+
 

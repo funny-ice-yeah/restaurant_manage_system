@@ -5,7 +5,7 @@
 <mapper namespace="main.dao.NutritionDao">
     <select id="selectByDishId" resultType="main.pojo.Nutrition">
         select * 
-        from restaurant_manage_system.nutrition
+        from nutrition
         where dish_id = #{param};
     </select>
 </mapper>

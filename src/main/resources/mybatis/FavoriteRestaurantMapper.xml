@@ -3,14 +3,14 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="main.dao.FavoriteRestaurantDao">
-    <select id="selectByUserId" resultType="main.pojo.FavoriteRestaurant", parameterType="Integer">
+    <select id="selectByUserId" resultType="main.pojo.FavoriteRestaurant" parameterType="Integer">
         select * 
-        from restaurant_manage_system.favorite_restaurant
+        from favorite_restaurant
         where user_id = #{param}
     </select>
-    <select id="selectByRestaurantId" resultType="main.pojo.FavoriteRestaurant", parameterType="Integer">
+    <select id="selectByRestaurantId" resultType="main.pojo.FavoriteRestaurant" parameterType="Integer">
         select * 
-        from restaurant_manage_system.favorite_restaurant
+        from favorite_restaurant
         where restaurant_id = #{param}
     </select>
 </mapper>

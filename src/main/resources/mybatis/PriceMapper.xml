@@ -5,7 +5,7 @@
 <mapper namespace="main.dao.PriceDao">
     <select id="selectByDishId" resultType="main.pojo.Price">
         select * 
-        from restaurant_manage_system.price
+        from price
         where dish_id = #{param}
     </select>
 </mapper>

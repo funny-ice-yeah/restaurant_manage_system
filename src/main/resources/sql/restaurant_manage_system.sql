@@ -31,25 +31,25 @@ CREATE TABLE IF NOT EXISTS dish (
     description VARCHAR(255),
     image_url VARCHAR(255),
     is_main_dish INT,
-    restaurant_id INT NOT NULL,
+    restaurant_id INT NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS allergy(
+CREATE TABLE IF NOT EXISTS allergy (
     dish_id INT NOT NULL,
-    allergy VARCHAR(255),
-    PRIMARY KEY(dish_id,allergy),
+    allergy VARCHAR(255) NOT NULL,
+    PRIMARY KEY(dish_id, allergy)
 );
 
-CREATE TABLE IF NOT EXISTS ingredient(
+CREATE TABLE IF NOT EXISTS ingredient (
     dish_id INT NOT NULL,
-    ingredient VARCHAR(255),
-    PRIMARY KEY(dish_id,ingredient),
+    ingredient VARCHAR(255) NOT NULL,
+    PRIMARY KEY(dish_id, ingredient)
 );
 
-CREATE TABLE IF NOT EXISTS nutrition(
+CREATE TABLE IF NOT EXISTS nutrition (
     dish_id INT NOT NULL,
-    nutrition VARCHAR(255),
-    PRIMARY KEY(dish_id,nutrition),
+    nutrition VARCHAR(255) NOT NULL,
+    PRIMARY KEY(dish_id, nutrition)
 );
 
 CREATE TABLE IF NOT EXISTS `order` (

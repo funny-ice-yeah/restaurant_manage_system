@@ -5,12 +5,12 @@
 <mapper namespace="main.dao.SeatReservationDao">
     <select id="selectByUserId" resultType="main.pojo.SeatReservation">
         select * 
-        from restaurant_manage_system.seat_reservation
+        from seat_reservation
         where user_id = #{param};
     </select>
     <select id="selectBySeatId" resultType="main.pojo.SeatReservation">
         select * 
-        from restaurant_manage_system.seat_reservation
+        from seat_reservation
         where seat_id = #{param};
     </select>
 </mapper>

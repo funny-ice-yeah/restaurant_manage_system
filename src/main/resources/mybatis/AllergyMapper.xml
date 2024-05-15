@@ -5,7 +5,7 @@
 <mapper namespace="main.dao.AllergyDao">
     <select id="selectByDishId" resultType="main.pojo.Allergy">
         select * 
-        from restaurant_manage_system.allergy
+        from allergy
         where dish_id = #{param};
     </select>
 </mapper>

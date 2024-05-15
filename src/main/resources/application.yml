@@ -13,7 +13,7 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     username: root
     password: 970227
-    url: jdbc:mysql://localhost:3306/database_design_lab1?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT
+    url: jdbc:mysql://localhost:3306/restaurant_manage_system?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT
     driver-class-name: com.mysql.cj.jdbc.Driver
 
 mybatis-plus:
@@ -22,7 +22,3 @@ mybatis-plus:
   configuration:
     map-underscore-to-camel-case: true
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-
-mybatis:
-  configuration:
-    map-underscore-to-camel-case: true

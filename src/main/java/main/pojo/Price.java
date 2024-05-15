@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Price {
-    private Integer dishId;
     private Float price;
     private Timestamp createAt;
 }

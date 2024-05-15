@@ -5,11 +5,11 @@
 <mapper namespace="main.dao.RestaurantDao">
     <select id="selectAll" resultType="main.pojo.Restaurant">
         select * 
-        from restaurant_manage_system.restaurant;
+        from restaurant;
     </select>
-    <select id="selectByName" parameterType="String", resultType="main.pojo.Restaurant">
+    <select id="selectByName" parameterType="String" resultType="main.pojo.Restaurant">
         select * 
-        from restaurant_manage_system.restaurant
+        from restaurant
         where restaurant_name = #{param};
     </select>
 </mapper>

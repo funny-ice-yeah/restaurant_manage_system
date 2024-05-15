@@ -3,9 +3,9 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="main.dao.RestaurantReviewDao">
-    <select id="selectByRestaurantId" resultType="main.pojo.RestaurantReview", parameterType="Integer">
+    <select id="selectByRestaurantId" resultType="main.pojo.RestaurantReview" parameterType="Integer">
         select * 
-        from restaurant_manage_system.restaurant_review
+        from restaurant_review
         where restaurant_id = #{param};
     </select>
 </mapper>

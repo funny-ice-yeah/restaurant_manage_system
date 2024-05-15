@@ -23,7 +23,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/listUser")
+    @GetMapping("/selectAll")
     public ResponseEntity<List<User>> listUser(){
         List<User> userList = userService.selectAll();
         return ResponseEntity.ok(userList);

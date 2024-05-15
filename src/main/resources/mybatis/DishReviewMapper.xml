@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="main.dao.DishReviewDao">
+    <select id="selectByDishId" resultType="main.pojo.DishReview", parameterType="Integer">
+        select * 
+        from restaurant_manage_system.dish_review
+        where dish_id = #{param};
+    </select>
+</mapper>

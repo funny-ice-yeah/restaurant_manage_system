@@ -16,27 +16,27 @@ public class UserServiceImpl implements UserService{
     private UserDao userDao;
 
     @Override
-    public List<User> listUser(){
-        return userDao.listUser();
+    public List<User> selectAll(){
+        return userDao.selectAll();
     }
 
     @Override
-    public User getUser(Integer id){
-        return userDao.getUser(id);
+    public User selectById(Integer id){
+        return userDao.selectById(id);
     }
     @Override
-    public boolean createUser(User user){
-        return userDao.createUser(user) > 0 ? true : false;
-    }
-
-    @Override
-    public boolean updateUser(User user){
-        return userDao.updateUser(user) > 0 ? true : false;
+    public boolean insert(User user){
+        return userDao.insert(user) > 0 ? true : false;
     }
 
     @Override
-    public boolean deleteUser(Integer id){
-        return userDao.deleteUser(id) > 0 ? true : false;
+    public boolean update(User user){
+        return userDao.updateById(user) > 0 ? true : false;
+    }
+
+    @Override
+    public boolean deleteById(Integer id){
+        return userDao.deleteById(id) > 0 ? true : false;
     }
 
 }

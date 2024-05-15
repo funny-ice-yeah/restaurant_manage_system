@@ -5,14 +5,13 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+
 import main.pojo.FavoriteDish;
 
 @Mapper
 @Repository
-public interface FavoriteDishDao {
-    public FavoriteDish getFavoriteDish(Integer id);
-    public List<FavoriteDish> getFavoriteDishByUserId(Integer id);
-    public int createFavoriteDish(FavoriteDish favoriteDish);
-    public int updateFavoriteDish(FavoriteDish favoriteDish);
-    public int deleteFavoriteDish(Integer id);
+public interface FavoriteDishDao extends BaseMapper<FavoriteDish>{
+    public List<FavoriteDish> selectByUserId(Integer id);
+    public List<FavoriteDish> selectByDishId(Integer id);
 }

@@ -25,28 +25,28 @@ public class UserController {
 
     @GetMapping("/listUser")
     public ResponseEntity<List<User>> listUser(){
-        List<User> userList = userService.listUser();
+        List<User> userList = userService.selectAll();
         return ResponseEntity.ok(userList);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<User> getUserById(@PathVariable Integer id){
-        User user = userService.getUser(id);
+        User user = userService.selectById(id);
         return ResponseEntity.ok(user);
     } 
 
     @PostMapping
     public boolean createUser(@RequestBody User user){
-        return userService.createUser(user);
+        return userService.insert(user);
     }
 
     @PutMapping
     public boolean updateUser(@RequestBody User user){
-        return userService.updateUser(user);
+        return userService.update(user);
     }
 
     @DeleteMapping("/{id}")
     public boolean deleteUserById(@PathVariable Integer id){
-        return userService.deleteUser(id);
+        return userService.deleteById(id);
     }
 }

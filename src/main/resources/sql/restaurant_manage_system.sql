@@ -121,7 +121,7 @@ CREATE TABLE IF NOT EXISTS favorite_dish (
 
 CREATE TABLE IF NOT EXISTS seat (
     seat_id INT AUTO_INCREMENT PRIMARY KEY,
-    canteen_id INT NOT NULL PRIMARY KEY,
+    canteen_id INT NOT NULL,
     location VARCHAR(255) NOT NULL,
     status VARCHAR(255) NOT NULL
 );

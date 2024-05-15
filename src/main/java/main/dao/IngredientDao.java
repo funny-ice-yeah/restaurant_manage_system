@@ -4,12 +4,12 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+
 import main.pojo.Ingredient;
 
 @Mapper
 @Repository
-public interface IngredientDao {
-    public List<Ingredient> getIngredientByDishId(Integer id);
-    public int createIngredient(Ingredient ingredient);
-    public int deleteIngredient(Ingredient ingredient);
+public interface IngredientDao extends BaseMapper<Ingredient>{
+    public List<Ingredient> selectByDishId(Integer id);
 }

@@ -5,12 +5,12 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+
 import main.pojo.Price;
 
 @Mapper
 @Repository
-public interface PriceDao {
-    public List<Price> getPriceByDishId(Integer id);
-    public int createPrice(Price price);
-    public int deletePrice(Price price);
+public interface PriceDao extends BaseMapper<Price>{
+    public List<Price> selectByDishId(Integer id);
 }

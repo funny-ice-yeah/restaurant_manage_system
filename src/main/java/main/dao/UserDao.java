@@ -11,8 +11,8 @@ import main.pojo.User;
 @Repository
 public interface UserDao {
     public List<User> listUser();
-    public User getUserById(Integer id);
+    public User getUser(Integer id);
     public int createUser(User user);
     public int updateUser(User user);
-    public int deleteUserById(Integer id);
+    public int deleteUser(Integer id);
 }

@@ -21,8 +21,8 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public User getUserById(Integer id){
-        return userDao.getUserById(id);
+    public User getUser(Integer id){
+        return userDao.getUser(id);
     }
     @Override
     public boolean createUser(User user){
@@ -35,8 +35,8 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public boolean deleteUserById(Integer id){
-        return userDao.deleteUserById(id) > 0 ? true : false;
+    public boolean deleteUser(Integer id){
+        return userDao.deleteUser(id) > 0 ? true : false;
     }
 
 }

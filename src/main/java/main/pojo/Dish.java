@@ -16,7 +16,4 @@ public class Dish {
     private String imageUrl;
     private Integer isMainDish;
     private Integer restaurantId;
-    private String ingredient;
-    private String allergy;
-    private String nutrition;
 }

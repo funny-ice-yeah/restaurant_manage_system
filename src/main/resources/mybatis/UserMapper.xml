@@ -7,7 +7,7 @@
         select * 
         from restaurant_manage_system.user;
     </select>
-    <select id="getUserById" parameterType="Integer">
+    <select id="getUser" parameterType="Integer">
         select * 
         from restaurant_manage_system.user
         where user_id=#{userId}
@@ -21,7 +21,7 @@
         set password=#{password}, user_name=#{userName}, gender=#{gender}, age=#{age}, role=#{role}, role_id=#{roleId}
         where user_id=#{userId};
     </update>
-    <delete id="deleteUserById" parameterType="Integer">
+    <delete id="deleteUser" parameterType="Integer">
         delete from restaurant_manage_system.user
         where user_id=#{userId};
     </delete>

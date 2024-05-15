@@ -12,4 +12,9 @@
         from restaurant
         where restaurant_name = #{param};
     </select>
+    <select id="getRestaurantsByKeyword" parameterType="String" resultType="main.pojo.Restaurant">
+        SELECT * 
+        FROM restaurant
+        WHERE restaurant_name LIKE CONCAT('%',#{param},'%');
+    </select>    
 </mapper>

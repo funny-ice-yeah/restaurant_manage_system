@@ -14,4 +14,5 @@ import main.pojo.Restaurant;
 public interface RestaurantDao extends BaseMapper<Restaurant>{
     public List<Restaurant> selectAll();
     public Restaurant selectByName(String name);
+    public List<Restaurant> getRestaurantsByKeyword(String keyword);
 }

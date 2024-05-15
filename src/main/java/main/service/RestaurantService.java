@@ -10,4 +10,5 @@ public interface RestaurantService {
     public boolean insert(Restaurant restaurant);
     public boolean update(Restaurant restaurant);
     public boolean deleteById(Integer id);
+    public List<Restaurant> getRestaurantsByKeyword(String keyword);
 }

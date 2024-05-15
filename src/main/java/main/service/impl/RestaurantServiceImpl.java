@@ -39,4 +39,9 @@ public class RestaurantServiceImpl implements RestaurantService{
     public boolean deleteById(Integer id){
         return restaurantDao.deleteById(id) > 0 ? true : false;
     }
+    @Override
+    public List<Restaurant> getRestaurantsByKeyword(String keyword){
+        return restaurantDao.getRestaurantsByKeyword(keyword);
+    } 
+
 }

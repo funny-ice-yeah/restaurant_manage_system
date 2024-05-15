@@ -1,0 +1,14 @@
+restaurant_id,restaurant_name,account,password,location,brief_intro,canteen_id
+1,麦当劳,mcdonalds1,mcdonalds123,一楼东,美式快餐 普通店,1
+2,麦当劳,mcdonalds2,mcdonalds456,一楼大厅,美式快餐 旗舰店,3
+3,麦当劳,mcdonalds3,mcdonalds789,二楼北,美式快餐 普通店,1
+4,肯德基,kfc1,kfc123,一楼西,快餐连锁 旗舰店,1
+5,肯德基,kfc2,kfc456,二楼西,快餐连锁 普通店,4
+6,德克士,dicos1,dicos123,二楼东,快餐连锁 普通店,1
+7,德克士,dicos2,dicos456,二楼大厅,快餐连锁 加盟店,3
+8,星巴克,starbucks1,starbucks123,一楼南,咖啡连锁店 旗舰店,5
+9,星巴克,starbucks2,starbucks456,二楼水吧,咖啡连锁店,3
+10,全家便利店,familymart1,familymart123,一楼大厅,便利店连锁 直营店,4
+11,全家便利店,familymart2,familymart456,一楼南,便利店连锁 直营店,2
+12,吉野家,yoshinoya1,yoshinoya123,二楼,日式快餐 直营店,2
+

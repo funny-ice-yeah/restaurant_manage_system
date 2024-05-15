@@ -1,4 +1,4 @@
-package main.service;
+package main.service.impl;
 
 import java.util.List;
 
@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import main.dao.UserDao;
 import main.pojo.User;
+import main.service.UserService;
 
 @Service
 public class UserServiceImpl implements UserService{

@@ -8,4 +8,9 @@
         from dish
         where restaurant_id = #{param};
     </select>
+    <select id="selectMainDishsByRestaurantId" resultType = "main.pojo.Dish" parameterType="Integer">
+        select * 
+        from dish 
+        where restaurant_id = #{param} and is_main_dish = 1; 
+    </select>
 </mapper>

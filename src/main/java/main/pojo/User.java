@@ -19,5 +19,5 @@ public class User {
    private Integer gender; 
    private Integer age;
    private Integer role;
-   private Integer roleId;
+   private String roleId;
 }

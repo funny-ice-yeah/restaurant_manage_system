@@ -18,5 +18,5 @@ public class Restaurant {
     private String password;
     private String location;
     private String briefIntro;
-    private Integer cateenId;
+    private Integer canteenId;
 }

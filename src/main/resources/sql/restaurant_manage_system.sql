@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS user (
     gender INT,
     age INT,
     role INT NOT NULL,
-    role_id INT NOT NULL
+    role_id VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS restaurant (

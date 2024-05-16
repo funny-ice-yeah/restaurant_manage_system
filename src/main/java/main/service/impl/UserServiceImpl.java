@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 
 import main.dao.UserDao;
 import main.pojo.User;
@@ -21,6 +21,12 @@ public class UserServiceImpl implements UserService{
         return userDao.selectAll();
     }
 
+    @Override
+    public User selectByRoleId(String id){
+        QueryWrapper<User> qw = new QueryWrapper<>();
+        qw.eq("role_id", id);
+        return userDao.selectOne(qw);
+    }
     @Override
     public User selectById(Integer id){
         return userDao.selectById(id);

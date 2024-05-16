@@ -1,15 +1,15 @@
 --初始化一些用户
 INSERT INTO user (user_id, password, user_name, gender, age, role, role_id) VALUES
-(1, 'password1', '张伟', 1, 20, 0, 2021001),
-(2, 'password2', '李娜', 0, 22, 0, 2021002),
-(3, 'password3', '王伟', 1, 25, 1, 10001),
-(4, 'password4', '王伟', 0, 30, 1, 10002),
-(5, 'password5', '张敏', 1, 21, 0, 2021003),
-(6, 'password6', '李娜', 0, 28, 0, 2021004),
-(7, 'password7', '刘洋', 1, 23, 1, 10003),
-(8, 'password8', '赵强', 0, 26, 1, 10004),
-(9, 'password9', '张伟', 1, 24, 0, 2021005),
-(10, 'password10', '孙丽', 0, 29, 1, 10005);
+(1, 'password1', '张伟', 1, '20', 0, 2021001),
+(2, 'password2', '李娜', 0, '22', 0, 2021002),
+(3, 'password3', '王伟', 1, '25', 1, 10001),
+(4, 'password4', '王伟', 0, '30', 1, 10002),
+(5, 'password5', '张敏', 1, '21', 0, 2021003),
+(6, 'password6', '李娜', 0, '28', 0, 2021004),
+(7, 'password7', '刘洋', 1, '23', 1, 10003),
+(8, 'password8', '赵强', 0, '26', 1, 10004),
+(9, 'password9', '张伟', 1, '24', 0, 2021005),
+(10, 'password10', '孙丽', 0, '29', 1, 10005);
 --初始化一些餐厅
 INSERT INTO canteen (canteen_id, canteen_name, canteen_location) VALUES
 (1, '旦苑餐厅', '邯郸校区'),
@@ -97,4 +97,6 @@ INSERT INTO dish (dish_id, dish_name, category, current_price, description, imag
 (51, '炸鸡块', '小吃', 15.00, '香脆炸鸡块', './imgs/fried_chicken.jpg', 0, 12),
 (52, '绿茶', '饮料', 6.00, '清凉绿茶', './imgs/green_tea.jpg', 0, 12);
 
+INSERT INTO manager (manager_id, account, manager_name, password) VALUES
+(0, '22302010020', '王洋', '2230201020')
 

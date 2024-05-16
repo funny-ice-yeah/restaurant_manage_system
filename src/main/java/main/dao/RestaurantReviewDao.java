@@ -7,8 +7,9 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 import main.pojo.RestaurantReview;
 
+import java.util.List;
 @Mapper
 @Repository
 public interface RestaurantReviewDao extends BaseMapper<RestaurantReview>{
-    public RestaurantReview selectByRestaurantId(Integer id);
+    public List<RestaurantReview> selectByRestaurantId(Integer id);
 }

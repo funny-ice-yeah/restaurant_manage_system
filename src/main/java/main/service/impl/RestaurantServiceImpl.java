@@ -1,8 +1,8 @@
 package main.service.impl;
 
-
 import main.dao.RestaurantDao;
 import main.pojo.Restaurant;
+import main.pojo.RestaurantDetails;
 import main.pojo.RestaurantSummary;
 import main.pojo.Dish;
 import main.service.RestaurantService;
@@ -65,6 +65,7 @@ public class RestaurantServiceImpl implements RestaurantService{
     public List<RestaurantSummary> getRestaurantSummariesByKeyword(String keyword){
         List<Restaurant> restaurantList = getRestaurantsByKeyword(keyword);
         List<RestaurantSummary> restaurantSummaries = new ArrayList<>();//创建Summary，包含rest_name，brief_inro和main_dish_names
+        //TODO：添加Canteen_name location等信息组装地址
         for(Restaurant restaurant:restaurantList){
             List<Dish> mainDishs = dishService.selectMainDishsByRestaurantId(restaurant.getRestaurantId());
             List<String> mainDishsName = new ArrayList<>();
@@ -78,6 +79,12 @@ public class RestaurantServiceImpl implements RestaurantService{
         return restaurantSummaries; 
     }
     
- 
+    @Override
+    public RestaurantDetails getRestaurantDetailsById(Integer id){
+        Restaurant restaurant = restaurantDao.selectById(id);
+        List<Dish> menu= dishService.selectByRestaurantId(id);
+        return new RestaurantDetails(restaurant, menu);
+    }
 
+ 
 }

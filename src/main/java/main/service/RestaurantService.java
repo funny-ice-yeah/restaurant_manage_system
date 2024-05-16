@@ -4,6 +4,7 @@ import java.util.List;
 
 import main.pojo.Restaurant;
 import main.pojo.RestaurantSummary;
+import main.pojo.RestaurantDetails;
 public interface RestaurantService {
     public List<Restaurant> selectAll();
     public Restaurant selectById(Integer id);
@@ -13,4 +14,5 @@ public interface RestaurantService {
     public boolean deleteById(Integer id);
     public List<Restaurant> getRestaurantsByKeyword(String keyword);
     public List<RestaurantSummary> getRestaurantSummariesByKeyword(String keyword);
+    public RestaurantDetails getRestaurantDetailsById(Integer id);
 }

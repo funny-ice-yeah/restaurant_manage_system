@@ -9,6 +9,7 @@ import main.service.ManagerService;
 import main.service.RestaurantService;
 import main.service.UserService;
 
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,6 +33,8 @@ public class LoginController {
 
     @PostMapping("/user")
     public ResponseEntity<User> userLogin(@RequestBody User user, HttpSession session) {
+        System.out.println(user.getRoleId());
+        System.out.println(user.getPassword());;
         User resultUser = userService.selectByRoleId(user.getRoleId());
         if (resultUser != null && resultUser.getPassword().equals(user.getPassword())) {
             session.setAttribute("account", user.getRoleId());

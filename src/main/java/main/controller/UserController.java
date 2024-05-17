@@ -30,7 +30,7 @@ public class UserController {
     }
 
     @GetMapping("/selectById")
-    public ResponseEntity<User> getUserById(@RequestParam("id") Integer id){
+    public ResponseEntity<User> getUserById(@RequestParam("userId") Integer id){
         User user = userService.selectById(id);
         return ResponseEntity.ok(user);
     } 
@@ -46,7 +46,7 @@ public class UserController {
     }
 
     @DeleteMapping("/deleteById")
-    public boolean deleteUserById(@RequestParam("id") Integer id){
+    public boolean deleteUserById(@RequestParam("userId") Integer id){
         return userService.deleteById(id);
     }
 }

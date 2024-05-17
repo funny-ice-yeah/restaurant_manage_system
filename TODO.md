@@ -84,3 +84,5 @@
 ## 数据
 - 目前提供了user restaurant dish 和 canteen的初始数据，其他数据预计通过实现的API添加
 - <big>**注：张江食堂目前没有商户入驻，模拟刚建成的食堂，可用于相关异常情况的检测。**</big>
+## 新增
+searchRestaurants完成了“商户搜索与浏览的功能”功能点

@@ -1,10 +1,14 @@
 package main.service.impl;
 
-
 import main.dao.RestaurantDao;
 import main.pojo.Restaurant;
+import main.pojo.RestaurantDetails;
+import main.pojo.RestaurantSummary;
+import main.pojo.Dish;
 import main.service.RestaurantService;
+import main.service.DishService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +22,10 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 public class RestaurantServiceImpl implements RestaurantService{
     @Autowired
     private RestaurantDao restaurantDao;
+
+    @Autowired
+    private DishService dishService;
+    
     @Override
     public List<Restaurant> selectAll(){
         return restaurantDao.selectAll();
@@ -51,6 +59,32 @@ public class RestaurantServiceImpl implements RestaurantService{
     @Override
     public List<Restaurant> getRestaurantsByKeyword(String keyword){
         return restaurantDao.getRestaurantsByKeyword(keyword);
-    } 
+    }
 
+    @Override
+    public List<RestaurantSummary> getRestaurantSummariesByKeyword(String keyword){
+        List<Restaurant> restaurantList = getRestaurantsByKeyword(keyword);
+        List<RestaurantSummary> restaurantSummaries = new ArrayList<>();//创建Summary，包含rest_name，brief_inro和main_dish_names
+        //TODO：添加Canteen_name location等信息组装地址
+        for(Restaurant restaurant:restaurantList){
+            List<Dish> mainDishs = dishService.selectMainDishsByRestaurantId(restaurant.getRestaurantId());
+            List<String> mainDishsName = new ArrayList<>();
+            for(Dish dish : mainDishs){
+                mainDishsName.add(dish.getDishName());
+            }
+            RestaurantSummary restaurantSummary = new RestaurantSummary(restaurant.getRestaurantName(),restaurant.getBriefIntro(),mainDishsName);
+            restaurantSummaries.add(restaurantSummary);
+        }
+
+        return restaurantSummaries; 
+    }
+    
+    @Override
+    public RestaurantDetails getRestaurantDetailsById(Integer id){
+        Restaurant restaurant = restaurantDao.selectById(id);
+        List<Dish> menu= dishService.selectByRestaurantId(id);
+        return new RestaurantDetails(restaurant, menu);
+    }
+
+ 
 }

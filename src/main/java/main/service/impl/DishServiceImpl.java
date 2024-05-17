@@ -34,6 +34,11 @@ public class DishServiceImpl implements DishService{
     }
 
     @Override
+    public List<Dish> selectMainDishsByRestaurantId(Integer id){
+        return dishDao.selectMainDishsByRestaurantId(id);
+    }
+
+    @Override
     public Dish selectById(Integer id){
         return dishDao.selectById(id);
     }

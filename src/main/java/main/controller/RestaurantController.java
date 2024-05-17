@@ -6,9 +6,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import main.pojo.Restaurant;
+// import main.pojo.Restaurant;
+import main.pojo.RestaurantDetails;
+import main.pojo.RestaurantReview;
+import main.pojo.RestaurantSummary;
+import main.service.RestaurantReviewService;
 import main.service.RestaurantService;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import java.util.List;
 
 @RestController
@@ -16,11 +21,24 @@ import java.util.List;
 public class RestaurantController {
     @Autowired
     RestaurantService restaurantService;
-    
-    @GetMapping("/searchByKeyword")
-    public ResponseEntity<List<Restaurant>> searchRestaurants(@RequestParam("keyword") String keyword){
-        List<Restaurant> restaurantList = restaurantService.getRestaurantsByKeyword(keyword);
-        return ResponseEntity.ok(restaurantList);        
+    RestaurantReviewService restaurantReviewService;
+
+    @GetMapping("/search")
+    public ResponseEntity<List<RestaurantSummary>> searchRestaurants(@RequestParam("keyword") String keyword){
+        List<RestaurantSummary> restaurantSummaries = restaurantService.getRestaurantSummariesByKeyword(keyword);
+        return ResponseEntity.ok(restaurantSummaries);        
+    }
+
+    @GetMapping("/details")
+    public ResponseEntity<RestaurantDetails> selectRestaurantDetailsById(@RequestParam("id") Integer id) {
+        RestaurantDetails restaurantDetails = restaurantService.getRestaurantDetailsById(id);
+        return ResponseEntity.ok(restaurantDetails);
+    }
+
+    @GetMapping("/reviews")
+    public ResponseEntity<List<RestaurantReview>> selectRestaurantReview(@RequestParam("id") Integer id) {
+        List<RestaurantReview> restaurantReview = restaurantReviewService.getRestaurantReviewById(id);
+        return ResponseEntity.ok(restaurantReview);
     }
 
     @GetMapping("selectAll")
@@ -28,5 +46,7 @@ public class RestaurantController {
         List<Restaurant> restaurants = restaurantService.selectAll();
         return ResponseEntity.ok(restaurants);
     }
+    
+    
     
 }

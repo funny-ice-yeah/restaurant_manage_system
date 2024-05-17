@@ -22,5 +22,11 @@ public class RestaurantController {
         List<Restaurant> restaurantList = restaurantService.getRestaurantsByKeyword(keyword);
         return ResponseEntity.ok(restaurantList);        
     }
+
+    @GetMapping("selectAll")
+    public ResponseEntity<List<Restaurant>> selelctAll(){
+        List<Restaurant> restaurants = restaurantService.selectAll();
+        return ResponseEntity.ok(restaurants);
+    }
     
 }

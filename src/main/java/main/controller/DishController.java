@@ -1,5 +1,7 @@
 package main.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,6 +32,11 @@ public class DishController {
     @GetMapping("/countQuantity")
     public Integer countQuantity(@RequestParam("id") Integer id, @RequestParam("method") String method) {
         return dishService.countQuantityById(id, method);
+    }
+
+    @GetMapping("selectByRestaurantId")
+    public ResponseEntity<List<Dish>> selectByRestaurantId(@RequestParam("restaurantId") Integer id){
+        return ResponseEntity.ok(dishService.selectByRestaurantId(id));
     }
     
 

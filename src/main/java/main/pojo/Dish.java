@@ -15,7 +15,7 @@ public class Dish {
     private Integer dishId;
     private String dishName;
     private String category;
-    private Float price;
+    private Float currentPrice;
     private String description;
     private String imageUrl;
     private Integer isMainDish;

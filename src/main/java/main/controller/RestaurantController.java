@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-// import main.pojo.Restaurant;
+import main.pojo.Restaurant;
 import main.pojo.RestaurantDetails;
 import main.pojo.RestaurantReview;
 import main.pojo.RestaurantSummary;
@@ -21,6 +21,7 @@ import java.util.List;
 public class RestaurantController {
     @Autowired
     RestaurantService restaurantService;
+    @Autowired
     RestaurantReviewService restaurantReviewService;
 
     @GetMapping("/search")

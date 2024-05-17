@@ -38,7 +38,7 @@ public class RestaurantController {
 
     @GetMapping("/reviews")
     public ResponseEntity<List<RestaurantReview>> selectRestaurantReview(@RequestParam("id") Integer id) {
-        List<RestaurantReview> restaurantReview = restaurantReviewService.getRestaurantReviewById(id);
+        List<RestaurantReview> restaurantReview = restaurantReviewService.selectByRestaurantId(id);
         return ResponseEntity.ok(restaurantReview);
     }
 

@@ -13,4 +13,25 @@
         from order_detail
         where dish_id = #{param};
     </select>
+    <select id="getTotalSalesByDishId" resultType="Integer" parameterType="Integer">
+        SELECT SUM(quantity)
+        FROM order_detail
+        WHERE dish_id = #{param};
+    </select>
+    <select id="getTopCustomerUserIdByDishId" resultType="Integer" parameterType="Integer">
+            <!-- 将返回消费最多的userid，如果有多个，将一并返回 -->
+            SELECT user_id
+            FROM order_detail
+            WHERE dish_id = #{param}
+            GROUPED_BY user_id
+            HAVING SUM(quantity) = (
+                SELECT MAX(customer_total_quantity)
+                FROM(
+                    SELECT SUM(sub.quantity) AS customer_total_quantity
+                    FROM  order_detail AS sub
+                    WHERE dish_id = #{param}
+                    GROUPED_BY user_id                    
+                )
+            );
+    </select>
 </mapper>

@@ -14,4 +14,6 @@ import main.pojo.OrderDetail;
 public interface OrderDetailDao  extends BaseMapper<OrderDetail>{
     public List<OrderDetail> selectByDishId(Integer id);
     public List<OrderDetail> selectByOrderId(Integer id);
+    public Integer getTotalSalesByDishId(Integer id);
+    public List<Integer> getTopCustomerUserIdByDishId(Integer id);
 }

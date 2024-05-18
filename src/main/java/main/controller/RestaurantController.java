@@ -9,12 +9,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import main.pojo.DishAnalysis;
 import main.pojo.Restaurant;
 import main.pojo.RestaurantDetails;
 import main.pojo.RestaurantReview;
 import main.pojo.RestaurantSummary;
+
 import main.service.RestaurantReviewService;
 import main.service.RestaurantService;
+import main.service.DishService;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -29,6 +32,8 @@ public class RestaurantController {
     RestaurantService restaurantService;
     @Autowired
     RestaurantReviewService restaurantReviewService;
+    @Autowired
+    DishService dishService;
 
     @GetMapping("/search")
     public ResponseEntity<List<RestaurantSummary>> searchRestaurants(@RequestParam("keyword") String keyword){
@@ -53,6 +58,13 @@ public class RestaurantController {
         List<Restaurant> restaurants = restaurantService.selectAll();
         return ResponseEntity.ok(restaurants);
     }
+
+    @GetMapping("analyzeDishes")
+    public ResponseEntity<List<DishAnalysis>> analyzeAllDishesByRestaurantId(@RequestParam("id") Integer id) {
+        List<DishAnalysis> dishAnalysis = dishService.analyzeDishByRestaurantId(id);
+        return ResponseEntity.ok(dishAnalysis);
+    }
+    
 
     @PostMapping
     public boolean insert(@RequestBody Restaurant restaurant){

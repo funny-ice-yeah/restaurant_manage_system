@@ -9,6 +9,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RestaurantSummary {
+    private String location;
     private String restaurantName;
     private String briefIntro;
     private List<String> mainDishes;

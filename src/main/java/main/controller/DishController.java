@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import main.pojo.Dish;
+import main.pojo.DishDetail;
 import main.service.DishService;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -34,9 +35,15 @@ public class DishController {
         return dishService.countQuantityById(id, method);
     }
 
-    @GetMapping("selectByRestaurantId")
+    @GetMapping("/selectByRestaurantId")
     public ResponseEntity<List<Dish>> selectByRestaurantId(@RequestParam("restaurantId") Integer id){
         return ResponseEntity.ok(dishService.selectByRestaurantId(id));
+    }
+    
+    @GetMapping("/Details")
+    public ResponseEntity<DishDetail> selectDetailByDishId(@RequestParam("dishId") Integer id) {
+        DishDetail dishDetail = dishService.selecDetailByDishId(id);
+        return ResponseEntity.ok(dishDetail);
     }
     
 

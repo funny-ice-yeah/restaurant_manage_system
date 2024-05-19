@@ -2,14 +2,14 @@ package main.service.impl;
 
 import main.dao.RestaurantDao;
 import main.dao.CanteenDao;
-
+import main.dao.DishDao;
 import main.pojo.Restaurant;
 import main.pojo.RestaurantDetails;
 import main.pojo.RestaurantSummary;
 import main.pojo.Dish;
 
 import main.service.RestaurantService;
-import main.service.DishService;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +27,7 @@ public class RestaurantServiceImpl implements RestaurantService{
     private RestaurantDao restaurantDao;
 
     @Autowired
-    private DishService dishService;
+    private DishDao dishDao;
 
     @Autowired
     private CanteenDao canteenDao;
@@ -76,7 +76,7 @@ public class RestaurantServiceImpl implements RestaurantService{
             Integer canteenId = restaurant.getCanteenId();
             String canteenName = canteenDao.selectById(canteenId).getCanteenName();
             String location = canteenName+restaurant.getLocation();
-            List<Dish> mainDishs = dishService.selectMainDishsByRestaurantId(restaurant.getRestaurantId());
+            List<Dish> mainDishs = dishDao.selectMainDishsByRestaurantId(restaurant.getRestaurantId());
             List<String> mainDishsName = new ArrayList<>();
             for(Dish dish : mainDishs){
                 mainDishsName.add(dish.getDishName());
@@ -91,7 +91,7 @@ public class RestaurantServiceImpl implements RestaurantService{
     @Override
     public RestaurantDetails getRestaurantDetailsById(Integer id){
         Restaurant restaurant = restaurantDao.selectById(id);
-        List<Dish> menu= dishService.selectByRestaurantId(id);
+        List<Dish> menu= dishDao.selectByRestaurantId(id);
         return new RestaurantDetails(restaurant, menu);
     }
 

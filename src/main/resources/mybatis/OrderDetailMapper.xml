@@ -34,4 +34,14 @@
                 )
             );
     </select>
+    <select id="selectTotalSalesByDishIdAndOrdermethodBeforeParticularTime" resultType="Integer">
+        SELECT SUM(od.quantity) 
+        FROM order_detail AS od 
+        JOIN `order` AS o 
+        ON o.order_id = od.order_id 
+        WHERE od.dish_id = #{DishId} 
+        AND o.create_at >= #{Timestamp} 
+        AND o.order_method = #{OrderMethod};
+    </select>
+
 </mapper>

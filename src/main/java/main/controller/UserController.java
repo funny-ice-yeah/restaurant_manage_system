@@ -79,7 +79,7 @@ public class UserController {
 
         Timestamp startTimeStamp = Timestamp.valueOf(startTime);
 
-        List<FavoriteDish> favoriteDishs = favoriteDishService.selectFavoriteDishsByUserId(userId);
+        List<FavoriteDish> favoriteDishs = favoriteDishService.selectByUserId(userId);
         String[] orderMethods = {"线上","排队"};
         List<DishSalesData> dishSalesDatas = new ArrayList<>();
 

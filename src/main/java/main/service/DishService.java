@@ -13,4 +13,7 @@ public interface DishService {
     public Dish selectById(Integer id);
     public DishDetail selecDetailByDishId(Integer id);
     public List<DishAnalysis> analyzeDishByRestaurantId(Integer id);
+    public boolean update(Dish dish);
+    public boolean insert(Dish dish);
+    public boolean delete(Integer id);
 }

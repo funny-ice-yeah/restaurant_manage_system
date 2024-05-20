@@ -107,5 +107,20 @@ public class DishServiceImpl implements DishService{
         return dishAnalysisList; 
     } 
 
+    @Override 
+    public boolean update(Dish dish){
+        return dishDao.updateById(dish) > 0;
+    }
+
+    @Override
+    public boolean insert(Dish dish){
+        return dishDao.insert(dish) > 0;
+    }
+
+    @Override
+    public boolean delete(Integer id){
+        return dishDao.deleteById(id) > 0;
+    }
+
 
 }

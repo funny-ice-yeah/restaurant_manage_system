@@ -30,6 +30,7 @@ public class OrderServiceImpl implements OrderService{
     public List<Order> selectByUserId(Integer id) {
         return orderDao.selectByUserId(id);
     }
+
     @Override
     public boolean insert(Map<String, Object> data){
         Order order = new Order();
@@ -58,6 +59,11 @@ public class OrderServiceImpl implements OrderService{
         order.setTotalPrice(price);
         orderDao.updateById(order);
         return true;
+    }
+
+    @Override
+    public List<Integer> getLoyalCustomerIds(Integer restaurantId, Timestamp startTime, Integer threshold){
+        return orderDao.getLoyalCustomerIds(restaurantId, startTime, threshold); 
     }
 
 }

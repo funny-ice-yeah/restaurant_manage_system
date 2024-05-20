@@ -23,14 +23,14 @@
             SELECT user_id
             FROM order_detail
             WHERE dish_id = #{param}
-            GROUPED_BY user_id
+            GROUP BY user_id
             HAVING SUM(quantity) = (
                 SELECT MAX(customer_total_quantity)
                 FROM(
                     SELECT SUM(sub.quantity) AS customer_total_quantity
                     FROM  order_detail AS sub
                     WHERE dish_id = #{param}
-                    GROUPED_BY user_id                    
+                    GROUP BY user_id                    
                 )
             );
     </select>
@@ -43,5 +43,14 @@
         AND o.create_at >= #{Timestamp} 
         AND o.order_method = #{OrderMethod};
     </select>
-
+    <select id="getOrderDetailsByRestaurantIdAndUserId" resultType="main.pojo.CustomerOrderSales">
+        SELECT od.dish_id,SUM(od.quantity)
+        FROM order_detail AS od 
+        JOIN `order` AS o 
+        ON o.order_id = od.order_id 
+        WHERE o.restaurant_id = #{restaurantId} 
+        AND o.create_at >= #{startTime} 
+        AND o.userId = #{userId}
+        GROUP BY od.dish_id;
+    </select>
 </mapper>

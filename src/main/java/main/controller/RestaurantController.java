@@ -10,15 +10,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import main.pojo.DishAnalysis;
+import main.pojo.LoyalCustomerDistribution;
 import main.pojo.Restaurant;
 import main.pojo.RestaurantDetails;
 import main.pojo.RestaurantSummary;
 
 import main.service.RestaurantReviewService;
 import main.service.RestaurantService;
+import main.service.UserService;
 import main.service.DishService;
+import main.service.OrderDetailService;
+import main.service.OrderService;
+
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import org.springframework.web.bind.annotation.PutMapping;
 
@@ -33,6 +41,12 @@ public class RestaurantController {
     RestaurantReviewService restaurantReviewService;
     @Autowired
     DishService dishService;
+    @Autowired
+    OrderService orderService;
+    @Autowired
+    OrderDetailService orderDetailService;
+    @Autowired
+    UserService userService;
 
     @GetMapping("/search")
     public ResponseEntity<List<RestaurantSummary>> searchRestaurants(@RequestParam("keyword") String keyword){
@@ -58,13 +72,37 @@ public class RestaurantController {
     public ResponseEntity<Restaurant> selectById(@RequestParam("restaurantId") Integer id){
         return ResponseEntity.ok(restaurantService.selectById(id));
     }
-    @GetMapping("analyzeDishes")
+    @GetMapping("/analyzeDishes")
     public ResponseEntity<List<DishAnalysis>> analyzeAllDishesByRestaurantId(@RequestParam("id") Integer id) {
         List<DishAnalysis> dishAnalysis = dishService.analyzeDishByRestaurantId(id);
         return ResponseEntity.ok(dishAnalysis);
     }
     
+    @GetMapping("/loyalCustomerDistribution")
+    public ResponseEntity<List<LoyalCustomerDistribution>> getLoyalCustomerDistribution(@RequestParam("restaurantId") Integer restaurantId, 
+                                                                                        @RequestParam("period") String period,
+                                                                                        @RequestParam("threshold") Integer threshold) {
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime startTime;
+        
+        switch (period) {
+            case "周":
+                startTime = now.minus(1,ChronoUnit.WEEKS);
+                break;
+            case "月":
+                startTime = now.minus(1,ChronoUnit.MONTHS);
+            case "年":
+                startTime = now.minus(1,ChronoUnit.YEARS);
+            default:
+                return ResponseEntity.badRequest().build();
+        }
 
+        Timestamp startTimeStamp = Timestamp.valueOf(startTime);
+        List<LoyalCustomerDistribution> loyalCustomerDistributions = restaurantService.getLoyalCustomerDistribution(restaurantId, threshold, startTimeStamp);
+        return ResponseEntity.ok(loyalCustomerDistributions);
+
+    }
+    
     @PostMapping
     public boolean insert(@RequestBody Restaurant restaurant){
         return restaurantService.insert(restaurant);

@@ -1,16 +1,22 @@
 package main.service.impl;
 
 import main.dao.RestaurantDao;
+import main.dao.UserDao;
 import main.dao.CanteenDao;
 import main.dao.DishDao;
+import main.dao.OrderDao;
+import main.dao.OrderDetailDao;
 import main.pojo.Restaurant;
 import main.pojo.RestaurantDetails;
 import main.pojo.RestaurantSummary;
+import main.pojo.User;
+import main.pojo.CustomerOrderDistribution;
+import main.pojo.CustomerOrderSales;
 import main.pojo.Dish;
-
+import main.pojo.LoyalCustomerDistribution;
 import main.service.RestaurantService;
 
-
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +37,15 @@ public class RestaurantServiceImpl implements RestaurantService{
 
     @Autowired
     private CanteenDao canteenDao;
+
+    @Autowired
+    private OrderDao orderDao;
+
+    @Autowired
+    private OrderDetailDao orderDetailDao;
+
+    @Autowired
+    private UserDao userDao;
     
     @Override
     public List<Restaurant> selectAll(){
@@ -93,6 +108,27 @@ public class RestaurantServiceImpl implements RestaurantService{
         Restaurant restaurant = restaurantDao.selectById(id);
         List<Dish> menu= dishDao.selectByRestaurantId(id);
         return new RestaurantDetails(restaurant, menu);
+    }
+
+    @Override
+    public List<LoyalCustomerDistribution> getLoyalCustomerDistribution(Integer restaurantId,Integer threshold,Timestamp startTimeStamp){
+
+        List<Integer> LoyalUserIds = orderDao.getLoyalCustomerIds(restaurantId, startTimeStamp, threshold);
+        List<LoyalCustomerDistribution> loyalCustomerDistributions = new ArrayList<>();
+        for(Integer userId : LoyalUserIds){
+            User user = userDao.selectById(userId);
+            List<CustomerOrderSales> customerOrderSales = orderDetailDao.getOrderDetailsByRestaurantIdAndUserId(restaurantId, userId, startTimeStamp);
+            List<CustomerOrderDistribution> customerOrderDistributions= new ArrayList<>();
+
+            for(CustomerOrderSales customerOrderSale : customerOrderSales){
+                Dish dish = dishDao.selectById(customerOrderSale.getDishId()); 
+                customerOrderDistributions.add(new CustomerOrderDistribution( dish.getDishId() , dish.getDishName(), customerOrderSale.getTotalPurchase()));
+            }
+
+            loyalCustomerDistributions.add(new LoyalCustomerDistribution(userId, user.getUserName(), customerOrderDistributions));
+        }
+        return loyalCustomerDistributions;
+
     }
 
  

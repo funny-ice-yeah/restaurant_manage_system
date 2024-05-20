@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
+import main.pojo.CustomerOrderSales;
 import main.pojo.OrderDetail;
 
 @Mapper
@@ -19,4 +20,5 @@ public interface OrderDetailDao  extends BaseMapper<OrderDetail>{
     public Integer getTotalSalesByDishId(Integer id);
     public List<Integer> getTopCustomerUserIdByDishId(Integer id);
     public Integer selectTotalSalesByDishIdAndOrdermethodBeforeParticularTime(@Param("DishId")Integer id,@Param("TimeStamp")Timestamp timestamp,@Param("OrderMethod") String orderMethod);
+    public List<CustomerOrderSales> getOrderDetailsByRestaurantIdAndUserId(@Param("restaurantId") Integer restaurantId,@Param("userId") Integer userId,@Param("startTime") Timestamp startTime);
 }

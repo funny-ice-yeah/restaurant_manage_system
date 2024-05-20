@@ -5,12 +5,20 @@
 <mapper namespace="main.dao.OrderDao">
     <select id="selectByUserId" resultType="main.pojo.Order" parameterType="Integer">
         select * 
-        from order
+        from `order`
         where user_id = #{param}
     </select>
     <select id="selectByRestaurantId" resultType="main.pojo.Order" parameterType="Integer">
         select * 
-        from order
+        from `order`
         where restaurant_id = #{param}
     </select> 
+    <select id="getLoyalCustomerIds" resultType="Integer">
+        SELECT user_id
+        FROM `order` 
+        WHERE restaurant_id = #{restaurantId} 
+        AND create_at >= #{startTime}
+        GROUP BY user_id
+        HAVING COUNT(user_id) >= #{threshold};
+    </select>
 </mapper>

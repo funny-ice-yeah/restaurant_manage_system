@@ -1,5 +1,7 @@
 package main.service.impl;
 
+import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,9 +10,13 @@ import org.springframework.stereotype.Service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 
+import main.dao.DishDao;
 import main.dao.FavoriteDishDao;
 import main.dao.OrderDao;
 import main.dao.OrderDetailDao;
+import main.dao.RestaurantDao;
+import main.pojo.Dish;
+import main.pojo.DishSalesData;
 import main.pojo.FavoriteDish;
 import main.pojo.Order;
 import main.pojo.OrderDetail;
@@ -28,6 +34,12 @@ public class FavoriteDishServiceImpl implements FavoriteDishService{
 
     @Autowired
     OrderDetailDao orderDetailDao;
+
+    @Autowired
+    DishDao dishDao;
+
+    @Autowired
+    RestaurantDao restaurantDao;
 
     @Override
     public List<FavoriteDish> selectByUserId(Integer id) {
@@ -61,5 +73,25 @@ public class FavoriteDishServiceImpl implements FavoriteDishService{
         qw.eq("user_id", userId);
         qw.eq("dish_id", dishId);
         return favoriteDishDao.delete(qw) > 0;
+    }
+
+    @Override
+    public List<DishSalesData> getFavouriteDishSales(Integer userId,Timestamp startTimeStamp){
+        List<FavoriteDish> favoriteDishs = favoriteDishDao.selectByUserId(userId);
+        String[] orderMethods = {"线上","排队"};
+        List<DishSalesData> dishSalesDatas = new ArrayList<>();
+
+        for(FavoriteDish favoriteDish : favoriteDishs){
+            Integer dishId = favoriteDish.getDishId();
+            Dish dish = dishDao.selectById(userId);
+            String dishName = dish.getDishName();
+            String restaurantNamebelongTo = restaurantDao.selectById(dish.getRestaurantId()).getRestaurantName();
+            for(String method : orderMethods){
+                Integer totalSales = orderDetailDao.selectTotalSalesByDishIdAndOrdermethodBeforeParticularTime(dishId, startTimeStamp, method);
+                dishSalesDatas.add(new DishSalesData(dishName, restaurantNamebelongTo, totalSales));
+            }
+        }
+        return dishSalesDatas;
+
     }
 }

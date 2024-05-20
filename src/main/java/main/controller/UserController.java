@@ -4,7 +4,6 @@ package main.controller;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,14 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import main.pojo.Dish;
 import main.pojo.DishSalesData;
-import main.pojo.FavoriteDish;
 import main.pojo.User;
-import main.service.DishService;
 import main.service.FavoriteDishService;
-import main.service.OrderDetailService;
-import main.service.RestaurantService;
 import main.service.UserService;
 
 
@@ -36,16 +30,7 @@ public class UserController {
     private UserService userService;
 
     @Autowired
-    private DishService dishService;
-
-    @Autowired
-    private RestaurantService restaurantService;
-
-    @Autowired
     private FavoriteDishService favoriteDishService;
-
-    @Autowired
-    private OrderDetailService orderDetailService;
 
     @GetMapping("/selectAll")
     public ResponseEntity<List<User>> listUser(){
@@ -78,22 +63,7 @@ public class UserController {
         }
 
         Timestamp startTimeStamp = Timestamp.valueOf(startTime);
-
-        List<FavoriteDish> favoriteDishs = favoriteDishService.selectByUserId(userId);
-        String[] orderMethods = {"线上","排队"};
-        List<DishSalesData> dishSalesDatas = new ArrayList<>();
-
-        for(FavoriteDish favoriteDish : favoriteDishs){
-            Integer dishId = favoriteDish.getDishId();
-            Dish dish = dishService.selectById(userId);
-            String dishName = dish.getDishName();
-            String restaurantNamebelongTo = restaurantService.selectById(dish.getRestaurantId()).getRestaurantName();
-            for(String method : orderMethods){
-                Integer totalSales = orderDetailService.getTotalSalesByDishIdAndOrdermethodBeforeParticularTime(dishId, startTimeStamp, method);
-                dishSalesDatas.add(new DishSalesData(dishName, restaurantNamebelongTo, totalSales));
-            }
-        }
-        
+        List<DishSalesData> dishSalesDatas = favoriteDishService.getFavouriteDishSales(userId, startTimeStamp);        
         return ResponseEntity.ok(dishSalesDatas);
     }
     

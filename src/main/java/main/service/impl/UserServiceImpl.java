@@ -33,17 +33,17 @@ public class UserServiceImpl implements UserService{
     }
     @Override
     public boolean insert(User user){
-        return userDao.insert(user) > 0 ? true : false;
+        return userDao.insert(user) > 0;
     }
 
     @Override
     public boolean update(User user){
-        return userDao.updateById(user) > 0 ? true : false;
+        return userDao.updateById(user) > 0;
     }
 
     @Override
     public boolean deleteById(Integer id){
-        return userDao.deleteById(id) > 0 ? true : false;
+        return userDao.deleteById(id) > 0;
     }
 
 }

@@ -20,19 +20,11 @@ public class DishController {
     DishService dishService;
 
     @GetMapping("/selectById")
-    public ResponseEntity<Dish> selectById(Integer id){
+    public ResponseEntity<Dish> selectById(@RequestParam("dishId") Integer id){
         return ResponseEntity.ok(dishService.selectById(id));
     }
 
-    @GetMapping("/countFavorite")
-    public Integer countFavorite(@RequestParam("id") Integer id) {
-        return dishService.countFavoriteById(id);
-    }
 
-    @GetMapping("/countQuantity")
-    public Integer countQuantity(@RequestParam("id") Integer id, @RequestParam("method") String method) {
-        return dishService.countQuantityById(id, method);
-    }
 
     @GetMapping("selectByRestaurantId")
     public ResponseEntity<List<Dish>> selectByRestaurantId(@RequestParam("restaurantId") Integer id){

@@ -10,8 +10,6 @@ import main.dao.FavoriteDishDao;
 import main.dao.OrderDao;
 import main.dao.OrderDetailDao;
 import main.pojo.Dish;
-import main.pojo.Order;
-import main.pojo.OrderDetail;
 import main.service.DishService;
 
 @Service
@@ -43,19 +41,5 @@ public class DishServiceImpl implements DishService{
         return dishDao.selectById(id);
     }
 
-    @Override
-    public Integer countFavoriteById(Integer id) {
-        return favoriteDishDao.selectByDishId(id).size();
-    }
 
-    @Override
-    public Integer countQuantityById(Integer id, String method) {
-        int quantity = 0;
-        List<OrderDetail> orderDetails = orderDetailDao.selectByDishId(id);
-        for(OrderDetail orderDetail: orderDetails){
-            Order order = orderDao.selectById(orderDetail.getOrderId());
-            if(order.getOrderMethod() == method) quantity += orderDetail.getQuantity();
-        } 
-        return quantity;
-    }
 }

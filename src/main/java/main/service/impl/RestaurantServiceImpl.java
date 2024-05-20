@@ -44,17 +44,17 @@ public class RestaurantServiceImpl implements RestaurantService{
     }
     @Override
     public boolean insert(Restaurant restaurant){
-        return restaurantDao.insert(restaurant) > 0 ? true : false;
+        return restaurantDao.insert(restaurant) > 0;
     }
 
     @Override
     public boolean update(Restaurant restaurant){
-        return restaurantDao.updateById(restaurant) > 0 ? true : false;
+        return restaurantDao.updateById(restaurant) > 0;
     }
 
     @Override
     public boolean deleteById(Integer id){
-        return restaurantDao.deleteById(id) > 0 ? true : false;
+        return restaurantDao.deleteById(id) > 0;
     }
     @Override
     public List<Restaurant> getRestaurantsByKeyword(String keyword){

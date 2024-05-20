@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import main.pojo.Restaurant;
 import main.pojo.RestaurantDetails;
-import main.pojo.RestaurantReview;
 import main.pojo.RestaurantSummary;
 import main.service.RestaurantReviewService;
 import main.service.RestaurantService;
@@ -42,16 +41,17 @@ public class RestaurantController {
         return ResponseEntity.ok(restaurantDetails);
     }
 
-    @GetMapping("/reviews")
-    public ResponseEntity<List<RestaurantReview>> selectRestaurantReview(@RequestParam("id") Integer id) {
-        List<RestaurantReview> restaurantReview = restaurantReviewService.selectByRestaurantId(id);
-        return ResponseEntity.ok(restaurantReview);
-    }
 
-    @GetMapping("selectAll")
+
+    @GetMapping("/selectAll")
     public ResponseEntity<List<Restaurant>> selelctAll(){
         List<Restaurant> restaurants = restaurantService.selectAll();
         return ResponseEntity.ok(restaurants);
+    }
+
+    @GetMapping("/selectById")
+    public ResponseEntity<Restaurant> selectById(@RequestParam("restaurantId") Integer id){
+        return ResponseEntity.ok(restaurantService.selectById(id));
     }
 
     @PostMapping
@@ -59,10 +59,13 @@ public class RestaurantController {
         return restaurantService.insert(restaurant);
     }
 
+    
+
     @PutMapping
     public boolean update(@RequestBody Restaurant restaurant){
         return restaurantService.update(restaurant);
     }
+
 
     @DeleteMapping("/deleteById")
     public boolean deleteById(@RequestParam("restaurantId") Integer id){

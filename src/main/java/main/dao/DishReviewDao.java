@@ -13,4 +13,5 @@ import main.pojo.DishReview;
 @Repository
 public interface DishReviewDao extends BaseMapper<DishReview>{
     public List<DishReview> selectByDishId(Integer id);
+    public Float getAverageRatingByDishId(Integer id);
 }

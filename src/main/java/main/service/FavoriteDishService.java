@@ -10,4 +10,5 @@ public interface FavoriteDishService {
     public boolean deleteByDishUserId(Integer dishId, Integer userId);
     public Integer countFavoriteById(Integer id);
     public Integer countQuantityById(Integer id, String method);
+    public List<FavoriteDish> selectFavoriteDishsByUserId(Integer id);
 }

@@ -8,4 +8,9 @@
         from dish_review
         where dish_id = #{param};
     </select>
+    <select id="getAverageRatingByDishId" resultType="Float" parameterType="Integer">
+        SELECT AVG(rating)
+        FROM dish_review
+        WHERE dish_id = #{param};
+    </select>
 </mapper>

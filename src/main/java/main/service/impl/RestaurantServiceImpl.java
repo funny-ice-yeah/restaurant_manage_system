@@ -1,12 +1,15 @@
 package main.service.impl;
 
 import main.dao.RestaurantDao;
+import main.dao.CanteenDao;
+import main.dao.DishDao;
 import main.pojo.Restaurant;
 import main.pojo.RestaurantDetails;
 import main.pojo.RestaurantSummary;
 import main.pojo.Dish;
+
 import main.service.RestaurantService;
-import main.service.DishService;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +27,10 @@ public class RestaurantServiceImpl implements RestaurantService{
     private RestaurantDao restaurantDao;
 
     @Autowired
-    private DishService dishService;
+    private DishDao dishDao;
+
+    @Autowired
+    private CanteenDao canteenDao;
     
     @Override
     public List<Restaurant> selectAll(){
@@ -65,14 +71,17 @@ public class RestaurantServiceImpl implements RestaurantService{
     public List<RestaurantSummary> getRestaurantSummariesByKeyword(String keyword){
         List<Restaurant> restaurantList = getRestaurantsByKeyword(keyword);
         List<RestaurantSummary> restaurantSummaries = new ArrayList<>();//创建Summary，包含rest_name，brief_inro和main_dish_names
-        //TODO：添加Canteen_name location等信息组装地址
+       
         for(Restaurant restaurant:restaurantList){
-            List<Dish> mainDishs = dishService.selectMainDishsByRestaurantId(restaurant.getRestaurantId());
+            Integer canteenId = restaurant.getCanteenId();
+            String canteenName = canteenDao.selectById(canteenId).getCanteenName();
+            String location = canteenName+restaurant.getLocation();
+            List<Dish> mainDishs = dishDao.selectMainDishsByRestaurantId(restaurant.getRestaurantId());
             List<String> mainDishsName = new ArrayList<>();
             for(Dish dish : mainDishs){
                 mainDishsName.add(dish.getDishName());
             }
-            RestaurantSummary restaurantSummary = new RestaurantSummary(restaurant.getRestaurantName(),restaurant.getBriefIntro(),mainDishsName);
+            RestaurantSummary restaurantSummary = new RestaurantSummary(location,restaurant.getRestaurantName(),restaurant.getBriefIntro(),mainDishsName);
             restaurantSummaries.add(restaurantSummary);
         }
 
@@ -82,7 +91,7 @@ public class RestaurantServiceImpl implements RestaurantService{
     @Override
     public RestaurantDetails getRestaurantDetailsById(Integer id){
         Restaurant restaurant = restaurantDao.selectById(id);
-        List<Dish> menu= dishService.selectByRestaurantId(id);
+        List<Dish> menu= dishDao.selectByRestaurantId(id);
         return new RestaurantDetails(restaurant, menu);
     }
 

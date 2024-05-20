@@ -14,6 +14,8 @@ import main.dao.OrderDetailDao;
 import main.pojo.FavoriteDish;
 import main.pojo.Order;
 import main.pojo.OrderDetail;
+
+
 import main.service.FavoriteDishService;
 
 @Service
@@ -61,4 +63,10 @@ public class FavoriteDishServiceImpl implements FavoriteDishService{
         return favoriteDishDao.delete(qw) > 0;
     }
     
+    
+    @Override
+    public List<FavoriteDish> selectFavoriteDishsByUserId(Integer id){
+        return favoriteDishDao.selectByUserId(id);
+    }
+
 }

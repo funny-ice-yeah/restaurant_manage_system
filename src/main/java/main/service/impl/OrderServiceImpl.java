@@ -10,9 +10,11 @@ import org.springframework.stereotype.Service;
 import main.dao.DishDao;
 import main.dao.OrderDao;
 import main.dao.OrderDetailDao;
+import main.pojo.ActivityOneDay;
 import main.pojo.Dish;
 import main.pojo.Order;
 import main.pojo.OrderDetail;
+import main.pojo.OrderFrequency;
 import main.service.OrderService;
 
 @Service
@@ -65,5 +67,17 @@ public class OrderServiceImpl implements OrderService{
     public List<Integer> getLoyalCustomerIds(Integer restaurantId, Timestamp startTime, Integer threshold){
         return orderDao.getLoyalCustomerIds(restaurantId, startTime, threshold); 
     }
+
+    @Override
+    public List<OrderFrequency> getOrderFrequencyForRestaurantByPeriod(Integer restaurantId, Timestamp startsTime, String period){
+        return orderDao.getOrderFrequencyForRestaurantByPeriod(restaurantId, startsTime, period);
+    }
+    
+    @Override
+    public List<ActivityOneDay> getActivityInOneDayForRestaurant(Integer restaurantId, Timestamp startTime){
+        return orderDao.getActivityInOneDayForRestaurant(restaurantId, startTime);
+    }
+
+
 
 }

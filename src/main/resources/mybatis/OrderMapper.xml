@@ -21,4 +21,35 @@
         GROUP BY user_id
         HAVING COUNT(user_id) >= #{threshold};
     </select>
+    <select id="getOrderFrequencyForRestaurantByPeriod" resultType="main.pojo.OrderFrequency">
+        SELECT
+            CASE 
+                WHEN #{period} = '周' THEN DATE_FORMAT(order_time, '%Y-%u')
+                WHEN #{period} = '月' THEN DATE_FORMAT(order_time, '%Y-%m')
+                ELSE DATE_FORMAT(order_time, '%Y-%m-%d')<!-- 默认格式为年-月-日 -->
+            END AS period,         
+            count(order_id)
+        FROM `order`
+        WHERE restaurant_id = #{restaurantId}
+        AND create_at >= #{startTime}
+        GROUP BY period
+        ORDER BY period;
+    </select>
+
+    <select id="getActivityInOneDayForRestaurant" resultType="main.pojo.ActivityOneDay">
+        SELECT
+            CASE 
+                WHEN HOUR(create_at) BETWEEN 0 AND 5 THEN '夜间'
+                WHEN HOUR(create_at) BETWEEN 6 AND 11 THEN '上午'
+                WHEN HOUR(create_at) BETWEEN 12 AND 17 THEN '下午'
+                WHEN HOUR(create_at) BETWEEN 18 AND 23 THEN '晚间'
+            END AS period,         
+            count(order_id)
+        FROM `order`
+        WHERE restaurant_id = #{restaurantId}
+        AND create_at >= #{startTime}
+        GROUP BY period
+        ORDER BY period;
+
+    </select>    
 </mapper>

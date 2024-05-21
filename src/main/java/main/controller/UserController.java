@@ -56,8 +56,10 @@ public class UserController {
                 break;
             case "月":
                 startTime = now.minus(1,ChronoUnit.MONTHS);
+                break;
             case "年":
                 startTime = now.minus(1,ChronoUnit.YEARS);
+                break;
             default:
                 return ResponseEntity.badRequest().build();
         }

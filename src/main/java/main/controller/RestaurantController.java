@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import main.pojo.ActivityOneDay;
 import main.pojo.DishAnalysis;
 import main.pojo.LoyalCustomerDistribution;
+import main.pojo.OrderFrequency;
 import main.pojo.Restaurant;
 import main.pojo.RestaurantDetails;
 import main.pojo.RestaurantSummary;
@@ -91,8 +93,10 @@ public class RestaurantController {
                 break;
             case "月":
                 startTime = now.minus(1,ChronoUnit.MONTHS);
+                break;
             case "年":
                 startTime = now.minus(1,ChronoUnit.YEARS);
+                break;
             default:
                 return ResponseEntity.badRequest().build();
         }
@@ -102,6 +106,51 @@ public class RestaurantController {
         return ResponseEntity.ok(loyalCustomerDistributions);
 
     }
+
+    @GetMapping("/orderFrequency")
+    public ResponseEntity<List<OrderFrequency>> getOrderFrequency(@RequestParam("restaurantId") Integer restaurantId,@RequestParam("period") String period) {
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime startTime;
+        
+        switch (period) {
+            case "周":
+                startTime = now.minus(1,ChronoUnit.WEEKS);
+                break;
+            case "月":
+                startTime = now.minus(1,ChronoUnit.MONTHS);
+                break;
+            default:
+                return ResponseEntity.badRequest().build();
+        }
+
+        Timestamp starTimestamp = Timestamp.valueOf(startTime);
+        List<OrderFrequency> orderFrequencies = orderService.getOrderFrequencyForRestaurantByPeriod(restaurantId, starTimestamp, period);
+        return ResponseEntity.ok(orderFrequencies);
+    }
+
+    @GetMapping("/Activity")
+    public ResponseEntity<List<ActivityOneDay>> getActivityAnalysis(@RequestParam("restaurantId") Integer restaurantId,@RequestParam("period") String period) {
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime startTime;
+        switch (period) {
+            case "周":
+                startTime = now.minus(1,ChronoUnit.WEEKS);
+                break;
+            case "月":
+                startTime = now.minus(1,ChronoUnit.MONTHS);
+                break;
+            case "年":
+                startTime = now.minus(1,ChronoUnit.YEARS);
+                break;
+            default:
+                return ResponseEntity.badRequest().build();
+        }
+        Timestamp starTimestamp = Timestamp.valueOf(startTime);
+        List<ActivityOneDay> activityInOneDay = orderService.getActivityInOneDayForRestaurant(restaurantId, starTimestamp);
+        return ResponseEntity.ok(activityInOneDay);
+    }
+    
+    
     
     @PostMapping
     public boolean insert(@RequestBody Restaurant restaurant){

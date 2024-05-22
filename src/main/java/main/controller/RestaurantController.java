@@ -74,6 +74,7 @@ public class RestaurantController {
     public ResponseEntity<Restaurant> selectById(@RequestParam("restaurantId") Integer id){
         return ResponseEntity.ok(restaurantService.selectById(id));
     }
+
     @GetMapping("/analyzeDishes")
     public ResponseEntity<List<DishAnalysis>> analyzeAllDishesByRestaurantId(@RequestParam("id") Integer id) {
         List<DishAnalysis> dishAnalysis = dishService.analyzeDishByRestaurantId(id);

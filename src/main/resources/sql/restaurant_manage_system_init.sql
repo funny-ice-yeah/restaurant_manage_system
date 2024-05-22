@@ -1,3 +1,4 @@
+USE restaurant_manage_system;
 --初始化一些用户
 INSERT INTO user (user_id, password, user_name, gender, age, role, role_id) VALUES
 (1, 'password1', '张伟', 1, '20', 0, 2021001),
@@ -98,5 +99,7 @@ INSERT INTO dish (dish_id, dish_name, category, current_price, description, imag
 (52, '绿茶', '饮料', 6.00, '清凉绿茶', './imgs/green_tea.jpg', 0, 12);
 
 INSERT INTO manager (manager_id, account, manager_name, password) VALUES
-(0, '22302010020', '王洋', '2230201020')
+(1, '22302010020', '王洋', '2230201020'),
+(2, '22307130433', '刁子捷', '22307130433');
+
 

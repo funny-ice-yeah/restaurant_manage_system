@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 import main.pojo.ActivityOneDay;
+import main.pojo.DishSalesSummary;
 import main.pojo.Order;
 import main.pojo.OrderFrequency;
 
@@ -19,6 +20,7 @@ public interface OrderDao extends BaseMapper<Order>{
     public List<Order> selectByRestaurantId(Integer id);
     public List<Integer> getLoyalCustomerIds(@Param("restaurantId") Integer restaurantId,@Param("startTime") Timestamp startTime,@Param("threshold") Integer threshold);    
     public List<OrderFrequency> getOrderFrequencyForRestaurantByPeriod(@Param("restaurandId") Integer restaurantId,@Param("startTime") Timestamp startsTime,@Param("Period") String period);
-    public List<ActivityOneDay> getActivityInOneDayForRestaurant(@Param("restaurantId") Integer restaurantId,@Param("startTime") Timestamp startTime);    
-
+    public List<ActivityOneDay> getActivityInOneDayForRestaurant(@Param("restaurantId") Integer restaurantId,@Param("startTime") Timestamp startTime);
+    public Integer getTotalOrderNumByConditionAndRestaurantId(@Param("restaurantId") Integer restaurandId, @Param("condition") String condition);
+    public List<DishSalesSummary> getDishSalesSummariesByConditionAndRestaurantId(@Param("restaurantId") Integer restaurantId, @Param("condition") String condition);
 }

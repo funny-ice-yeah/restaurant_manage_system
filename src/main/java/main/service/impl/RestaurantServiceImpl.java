@@ -1,6 +1,7 @@
 package main.service.impl;
 
 import main.dao.RestaurantDao;
+import main.dao.RestaurantReviewDao;
 import main.dao.UserDao;
 import main.dao.CanteenDao;
 import main.dao.DishDao;
@@ -10,9 +11,13 @@ import main.pojo.Restaurant;
 import main.pojo.RestaurantDetails;
 import main.pojo.RestaurantSummary;
 import main.pojo.User;
+import main.pojo.UserGroupAnalysis;
+import main.pojo.UserHabit;
+import main.pojo.UserReviewHabit;
 import main.pojo.CustomerOrderDistribution;
 import main.pojo.CustomerOrderSales;
 import main.pojo.Dish;
+import main.pojo.DishSalesSummary;
 import main.pojo.LoyalCustomerDistribution;
 import main.service.RestaurantService;
 
@@ -46,6 +51,9 @@ public class RestaurantServiceImpl implements RestaurantService{
 
     @Autowired
     private UserDao userDao;
+
+    @Autowired
+    private RestaurantReviewDao restaurantReviewDao;
     
     @Override
     public List<Restaurant> selectAll(){
@@ -129,6 +137,35 @@ public class RestaurantServiceImpl implements RestaurantService{
         }
         return loyalCustomerDistributions;
 
+    }
+
+    @Override
+    public List<UserGroupAnalysis> getUserGroupAnalysis(Integer restaurantId){
+        List<UserGroupAnalysis> userGroupAnalysis = new ArrayList<>();
+        // 确定如下条件
+        String[] conditions = {
+            "age BETWEEN 18 AND 25",
+            "age BETWEEN 26 AND 35",
+            "age BETWEEN 36 AND 45",
+            "age > 45",
+            "role = 0",
+            "role = 1",
+            "gender = 'Male'",
+            "gender = 'Female'"
+        };
+        
+        for(String cond : conditions){
+            Integer orderNum = orderDao.getTotalOrderNumByConditionAndRestaurantId(restaurantId, cond);
+            List<DishSalesSummary> dishSalesSummaries = orderDao.getDishSalesSummariesByConditionAndRestaurantId(restaurantId, cond);
+            UserHabit userHabit = new UserHabit(orderNum, dishSalesSummaries);
+            UserReviewHabit userReviewHabit = restaurantReviewDao.selectUserReviewHabitsByRestaurantIdGivenCondition(restaurantId, cond);
+            String condition_info = cond.replace("age", "年龄").replace("BETWEEEN", "介于").replace("AND", "到").replace("role", "身份").replace("0", "学生")
+                                        .replace("1", "教师").replace("gender", "性别").replace("=", "为").replace(">", "大于")
+                                        .replace("'Male'", "男").replace("'Female'", "女");
+            userGroupAnalysis.add(new UserGroupAnalysis(condition_info, userHabit, userReviewHabit));
+        }
+
+        return userGroupAnalysis;
     }
 
  

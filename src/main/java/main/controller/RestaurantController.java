@@ -16,7 +16,7 @@ import main.pojo.OrderFrequency;
 import main.pojo.Restaurant;
 import main.pojo.RestaurantDetails;
 import main.pojo.RestaurantSummary;
-
+import main.pojo.UserGroupAnalysis;
 import main.service.RestaurantReviewService;
 import main.service.RestaurantService;
 import main.service.UserService;
@@ -148,6 +148,12 @@ public class RestaurantController {
         Timestamp starTimestamp = Timestamp.valueOf(startTime);
         List<ActivityOneDay> activityInOneDay = orderService.getActivityInOneDayForRestaurant(restaurantId, starTimestamp);
         return ResponseEntity.ok(activityInOneDay);
+    }
+    
+    @GetMapping("/UserGroupAnalysis")
+    public ResponseEntity<List<UserGroupAnalysis>> getUserGroupAnalysis(@RequestParam("restaurantId") Integer restaurantId) {
+        List<UserGroupAnalysis> userGroupAnalysis = restaurantService.getUserGroupAnalysis(restaurantId);
+        return ResponseEntity.ok(userGroupAnalysis);
     }
     
     

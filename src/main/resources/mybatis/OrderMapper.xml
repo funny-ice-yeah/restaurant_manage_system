@@ -51,5 +51,22 @@
         GROUP BY period
         ORDER BY period;
 
-    </select>    
+    </select>
+
+    <select id="getTotalOrderNumByConditionAndRestaurantId" resultType="java.lang.Integer">
+        SELECT COUNT(order_id) 
+        FROM `order`
+        WHERE user_id IN (SELECT sub.user_id FROM user AS sub WHERE ${condition})
+          AND restaurant_id = #{restaurantId};
+    </select>
+
+    <select id="getDishSalesSummariesByConditionAndRestaurantId"  resultType="main.pojo.DishPurchaseSummary">
+        SELECT od.dish_id, d.dish_name, SUM(od.quantity) AS totalPurchaseCount
+        FROM order_detail AS od
+        JOIN `order` AS o ON od.order_id = o.order_id
+        JOIN dish AS d ON od.dish_id = d.dish_id
+        WHERE o.user_id IN (SELECT sub.user_id FROM user AS sub WHERE ${condition})
+          AND o.restaurant_id = #{restaurantId}
+        GROUP BY od.dish_id, d.dish_name
+    </select>
 </mapper>

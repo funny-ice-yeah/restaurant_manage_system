@@ -46,7 +46,6 @@ public class UserController {
     
     @GetMapping("/favouriteDishSales")
     public ResponseEntity<List<DishSalesData>> getFavouriteDishSales(@RequestParam("userId") Integer userId,@RequestParam("period") String period) {
-        //提供一个由dish_id得到对应的canteen_name和restaurant_name的方法并且在这里返回用来区分不同食堂同名餐厅的同名菜。
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime startTime;
         

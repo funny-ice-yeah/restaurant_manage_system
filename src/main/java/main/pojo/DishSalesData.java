@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class DishSalesData {
     private String dishName;
-    private String restaurantNameBelongTo;
+    private String location;
+    private String method;
     private Integer totalSales;
 }

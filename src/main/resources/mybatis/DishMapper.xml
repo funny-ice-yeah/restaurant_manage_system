@@ -13,4 +13,11 @@
         from dish 
         where restaurant_id = #{param} and is_main_dish = 1; 
     </select>
+    <select id = "selectLocationByDishId" resultType = "String" parameterType = "Integer">
+        SELECT CONCAT(c.canteen_name, r.location)
+        FROM dish AS d
+        JOIN restaurant AS r ON d.restaurant_id = r.restaurant_id
+        JOIN canteen AS c ON r.canteen_id = c.canteen_id
+        WHERE d.dish_id = #{param};    
+    </select>
 </mapper>

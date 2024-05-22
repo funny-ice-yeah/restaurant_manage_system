@@ -14,5 +14,6 @@ import main.pojo.Dish;
 public interface DishDao extends BaseMapper<Dish>{
     public List<Dish> selectByRestaurantId(Integer Id);
     public List<Dish> selectMainDishsByRestaurantId(Integer id);
+    public String selectLocationByDishId(Integer Id);
 
 }

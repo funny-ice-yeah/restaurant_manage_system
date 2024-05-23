@@ -13,4 +13,5 @@ import main.pojo.Allergy;
 @Repository
 public interface AllergyDao extends BaseMapper<Allergy>{
     public List<Allergy> selectByDishId(Integer id);
+    public List<String> selectalleriesByDishId(Integer id);
 }

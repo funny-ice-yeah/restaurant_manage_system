@@ -11,8 +11,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class DishDetail {
     private Dish dish;
-    private List<Allergy> allergies;
-    private List<Nutrition> nutritions;
-    private List<Ingredient> ingredients;
+    private String allergies;
+    private String nutritions;
+    private String ingredients;
     private List<DishReview> dishReviews;
 }

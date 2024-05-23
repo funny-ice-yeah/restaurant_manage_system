@@ -12,4 +12,5 @@ import main.pojo.Ingredient;
 @Repository
 public interface IngredientDao extends BaseMapper<Ingredient>{
     public List<Ingredient> selectByDishId(Integer id);
+    public List<String> selectIngredientsByDishId(Integer id);
 }

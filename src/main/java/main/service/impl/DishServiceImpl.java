@@ -17,13 +17,10 @@ import main.dao.OrderDao;
 import main.dao.OrderDetailDao;
 import main.dao.UserDao;
 
-import main.pojo.Allergy;
 import main.pojo.Dish;
 import main.pojo.DishAnalysis;
 import main.pojo.DishDetail;
 import main.pojo.DishReview;
-import main.pojo.Ingredient;
-import main.pojo.Nutrition;
 import main.pojo.User;
 
 import main.service.DishService;
@@ -75,9 +72,9 @@ public class DishServiceImpl implements DishService{
     @Override
     public DishDetail selecDetailByDishId(Integer id){
         Dish dish = dishDao.selectById(id);
-        List<Allergy> allergies= allergyDao.selectByDishId(id);
-        List<Nutrition> nutritions = nutritionDao.selectByDishId(id);
-        List<Ingredient> ingredients = ingredientDao.selectByDishId(id);
+        String allergies= String.join("、", allergyDao.selectalleriesByDishId(id));
+        String nutritions = String.join("、", nutritionDao.selectNutritionsByDishId(id));
+        String ingredients = String.join("、", ingredientDao.selectIngredientsByDishId(id));
         List<DishReview> dishReviews = dishReviewDao.selectByDishId(id);
         return new DishDetail(dish, allergies, nutritions, ingredients, dishReviews);
     }

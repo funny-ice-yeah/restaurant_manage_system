@@ -8,4 +8,9 @@
         from allergy
         where dish_id = #{param};
     </select>
+    <select id="selectalleriesByDishId" resultType="String">
+        SELECT allergy
+        FROM allergy
+        where dish_id = #{param};
+    </select>
 </mapper>

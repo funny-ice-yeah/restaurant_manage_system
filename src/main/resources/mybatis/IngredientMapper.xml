@@ -8,4 +8,9 @@
         from ingredient
         where dish_id = #{param};
     </select>
+    <select id="selectIngredientsByDishId" resultType = "String">
+        SELECT ingredient
+        FROM ingredient
+        WHERE dish_id = #{param};
+    </select>
 </mapper>

@@ -13,4 +13,5 @@ import main.pojo.Nutrition;
 @Repository
 public interface NutritionDao extends BaseMapper<Nutrition>{
     public List<Nutrition> selectByDishId(Integer id);
+    public List<String> selectNutritionsByDishId(Integer id);
 }

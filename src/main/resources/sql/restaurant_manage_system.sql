@@ -126,12 +126,14 @@ CREATE TABLE IF NOT EXISTS seat (
     status VARCHAR(255) NOT NULL
 );
 
+
 CREATE TABLE IF NOT EXISTS seat_reservation (
     seat_id INT NOT NULL,
     user_id INT NOT NULL,
     canteen_id INT NOT NULL,
     time_booked TIMESTAMP NOT NULL,
     create_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    status VARCHAR(255) NOT NULL,
     PRIMARY KEY(canteen_id,seat_id, user_id)
 );
 

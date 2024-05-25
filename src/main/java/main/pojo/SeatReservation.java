@@ -15,4 +15,5 @@ public class SeatReservation {
     private Integer userId;
     private Timestamp time;
     private Timestamp createdAt;
+    private String status;
 }

@@ -9,11 +9,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import main.pojo.Order;
-
+import main.pojo.OrderDetail;
 import main.service.DishService;
+import main.service.OrderDetailService;
 import main.service.OrderService;
 
 @RestController
@@ -23,11 +25,19 @@ public class OrderController {
     OrderService orderService;
 
     @Autowired
+    OrderDetailService orderDetailService;
+
+    @Autowired
     DishService dishService;
 
-    @GetMapping("/selectById")
-    public ResponseEntity<List<Order>> selectByUserId(Integer id){
+    @GetMapping("/selectByUserId")
+    public ResponseEntity<List<Order>> selectByUserId(@RequestParam("userId")Integer id){
         return ResponseEntity.ok(orderService.selectByUserId(id));
+    }
+
+    @GetMapping("/selectOrderDetailByOrderId")
+    public ResponseEntity<List<OrderDetail>> selectOrderDetailByOrderId(@RequestParam("orderId")Integer id){
+        return ResponseEntity.ok(orderDetailService.selectByOrderId(id));
     }
 
     @PostMapping

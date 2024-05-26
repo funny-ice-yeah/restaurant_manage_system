@@ -2,6 +2,7 @@ package main.service.impl;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +27,24 @@ public class DishReviewServiceImpl implements DishReviewService{
     @Override
     public List<DishReview> selectByUserId(Integer id) {
         QueryWrapper<DishReview> qw = new QueryWrapper<>();
-        qw.eq("dish_id", id);
+        qw.eq("user_id", id);
         return dishReviewDao.selectList(qw);
+    }
+
+    @Override
+    public boolean insert(DishReview dishReview) {
+        return dishReviewDao.insert(dishReview) > 0;
+    }
+
+    @Override
+    public boolean update(DishReview dishReview) {
+        return dishReviewDao.updateById(dishReview) > 0;
+    }
+
+    @Override
+    public boolean deleteByUserId(Integer id) {
+        QueryWrapper<DishReview> qw = new QueryWrapper<>();
+        qw.eq("user_id", id);
+        return dishReviewDao.delete(qw) > 0;
     }
 }

@@ -27,6 +27,20 @@ public class RestaurantReviewServiceImpl implements RestaurantReviewService {
         qw.eq("user_id", id);
         return restaurantReviewDao.selectList(qw);
     }
+    @Override
+    public boolean insert(RestaurantReview restaurantReview) {
+        return restaurantReviewDao.insert(restaurantReview) > 0;
+    }
+    @Override
+    public boolean update(RestaurantReview restaurantReview) {
+        return restaurantReviewDao.updateById(restaurantReview) > 0;
+    }
+    @Override
+    public boolean deleteByUserId(Integer id) {
+        QueryWrapper<RestaurantReview> qw = new QueryWrapper<>();
+        qw.eq("user_id", id);
+        return restaurantReviewDao.delete(qw) > 0;
+    }
 
     
 }

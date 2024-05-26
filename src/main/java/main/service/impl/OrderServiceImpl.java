@@ -52,7 +52,7 @@ public class OrderServiceImpl implements OrderService{
             OrderDetail orderDetail = new OrderDetail(); 
             orderDetail.setDishId(dish.getDishId());
             orderDetail.setOrderId(order.getOrderId());
-            int quantity = Integer.valueOf((String)map.get("quantity"));
+            int quantity = (Integer)map.get("quantity");
             orderDetail.setQuantity(quantity);
             price += quantity * dish.getCurrentPrice();
             orderDetailDao.insert(orderDetail);

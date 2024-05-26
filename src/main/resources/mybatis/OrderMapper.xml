@@ -60,7 +60,7 @@
           AND restaurant_id = #{restaurantId};
     </select>
 
-    <select id="getDishSalesSummariesByConditionAndRestaurantId"  resultType="main.pojo.DishPurchaseSummary">
+    <select id="getDishSalesSummariesByConditionAndRestaurantId"  resultType="main.pojo.DishSalesSummary">
         SELECT od.dish_id, d.dish_name, SUM(od.quantity) AS totalPurchaseCount
         FROM order_detail AS od
         JOIN `order` AS o ON od.order_id = o.order_id

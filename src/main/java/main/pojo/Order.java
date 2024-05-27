@@ -21,7 +21,7 @@ public class Order {
     private Timestamp orderTime;
     private String orderMethod;
     private Float totalPrice;
-    private Timestamp createdAt;
+    private Timestamp createAt;
     private Integer userId;
     private Integer restaurantId;
 }

@@ -15,12 +15,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 import main.pojo.DishReview;
 import main.service.DishReviewService;
+import main.service.DishService;
 
 @RestController
 @RequestMapping("/dishReview")
 public class DishReviewController {
     @Autowired
     DishReviewService dishReviewService;
+
+    @Autowired
+    DishService dishService;
+    
 
     @GetMapping("/selectByUserId")
     public ResponseEntity<List<DishReview>> selectByUserId(@RequestParam("userId")Integer id){
@@ -32,6 +37,10 @@ public class DishReviewController {
         return ResponseEntity.ok(dishReviewService.selectByDishId(id));
     }
 
+    @GetMapping("/selectByRestaurantId")
+    public ResponseEntity<List<DishReview>> selectByRestaurantId(@RequestParam("restaurantId")Integer id){
+        return ResponseEntity.ok(dishReviewService.selectByRestaurantId(id));
+    }
     @PostMapping
     public boolean insert(@RequestBody DishReview dishReview){
         return dishReviewService.insert(dishReview);

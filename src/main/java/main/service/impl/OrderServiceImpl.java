@@ -7,6 +7,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+
 import main.dao.DishDao;
 import main.dao.OrderDao;
 import main.dao.OrderDetailDao;
@@ -76,6 +78,13 @@ public class OrderServiceImpl implements OrderService{
     @Override
     public List<ActivityOneDay> getActivityInOneDayForRestaurant(Integer restaurantId, Timestamp startTime){
         return orderDao.getActivityInOneDayForRestaurant(restaurantId, startTime);
+    }
+
+    @Override
+    public List<Order> selelctByRestaurantId(Integer id) {
+        QueryWrapper<Order> qw = new QueryWrapper<>();
+        qw.eq("restaurant_id", id);
+        return orderDao.selectList(qw);
     }
 
 

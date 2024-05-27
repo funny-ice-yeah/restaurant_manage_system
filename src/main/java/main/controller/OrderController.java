@@ -35,6 +35,11 @@ public class OrderController {
         return ResponseEntity.ok(orderService.selectByUserId(id));
     }
 
+    @GetMapping("/selectByRestaurantId")
+    public ResponseEntity<List<Order>> selectByRestaurantId(@RequestParam("restaurantId")Integer id){
+        return ResponseEntity.ok(orderService.selelctByRestaurantId(id));
+    }
+
     @GetMapping("/selectOrderDetailByOrderId")
     public ResponseEntity<List<OrderDetail>> selectOrderDetailByOrderId(@RequestParam("orderId")Integer id){
         return ResponseEntity.ok(orderDetailService.selectByOrderId(id));

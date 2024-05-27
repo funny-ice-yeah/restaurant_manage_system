@@ -66,6 +66,11 @@ public class OrderServiceImpl implements OrderService{
     }
 
     @Override
+    public boolean update(Order order){
+        return orderDao.updateById(order) > 0;
+    }
+
+    @Override
     public List<Integer> getLoyalCustomerIds(Integer restaurantId, Timestamp startTime, Integer threshold){
         return orderDao.getLoyalCustomerIds(restaurantId, startTime, threshold); 
     }

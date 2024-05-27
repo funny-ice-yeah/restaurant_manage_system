@@ -12,6 +12,7 @@ public interface OrderService {
     public List<Order> selectByUserId(Integer id);
     public List<Order> selelctByRestaurantId(Integer id);
     public boolean insert(Map<String, Object> data);
+    public boolean update(Order order);
     List<Integer> getLoyalCustomerIds(Integer restaurantId, Timestamp startTime, Integer threshold);
     List<OrderFrequency> getOrderFrequencyForRestaurantByPeriod(Integer restaurantId, Timestamp startsTime, String period);
     List<ActivityOneDay> getActivityInOneDayForRestaurant(Integer restaurantId, Timestamp startTime);    

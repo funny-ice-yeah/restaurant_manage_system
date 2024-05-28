@@ -3,8 +3,11 @@ package main.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 
 import main.dao.AllergyDao;
 import main.dao.NutritionDao;
@@ -117,6 +120,14 @@ public class DishServiceImpl implements DishService{
     @Override
     public boolean delete(Integer id){
         return dishDao.deleteById(id) > 0;
+    }
+
+    @Override
+    public List<Dish> selectByKeywordRestaurantId(String keyword, Integer id) {
+        QueryWrapper<Dish> qw = new QueryWrapper<>();
+        qw.like("dish_name", keyword);
+        qw.eq("restaurant_id", id);
+        return dishDao.selectList(qw);
     }
 
 

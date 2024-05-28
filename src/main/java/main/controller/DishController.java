@@ -29,6 +29,10 @@ public class DishController {
         return ResponseEntity.ok(dishService.selectById(id));
     }
 
+    @GetMapping("/selectByKeywordRestaurantId")
+    public ResponseEntity<List<Dish>> selectByKeywordRestaurantId(@RequestParam("keyword") String keyword, @RequestParam("restaurantId") Integer id){
+        return ResponseEntity.ok(dishService.selectByKeywordRestaurantId(keyword, id));
+    }
 
 
     @GetMapping("/selectByRestaurantId")

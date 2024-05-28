@@ -6,6 +6,7 @@ import java.util.List;
 import main.pojo.Dish;
 import main.pojo.DishAnalysis;
 import main.pojo.DishDetail;
+import main.pojo.Price;
 
 public interface DishService {
     public List<Dish> selectByRestaurantId(Integer id);
@@ -14,6 +15,7 @@ public interface DishService {
     public Dish selectById(Integer id);
     public DishDetail selecDetailByDishId(Integer id);
     public List<DishAnalysis> analyzeDishByRestaurantId(Integer id);
+    public List<Price> selectPricesById(Integer id);
     public boolean update(Dish dish);
     public boolean insert(Dish dish);
     public boolean delete(Integer id);

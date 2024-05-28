@@ -18,12 +18,14 @@ import main.dao.DishDao;
 import main.dao.FavoriteDishDao;
 import main.dao.OrderDao;
 import main.dao.OrderDetailDao;
+import main.dao.PriceDao;
 import main.dao.UserDao;
 
 import main.pojo.Dish;
 import main.pojo.DishAnalysis;
 import main.pojo.DishDetail;
 import main.pojo.DishReview;
+import main.pojo.Price;
 import main.pojo.User;
 
 import main.service.DishService;
@@ -56,6 +58,9 @@ public class DishServiceImpl implements DishService{
 
     @Autowired
     DishReviewDao dishReviewDao;
+
+    @Autowired
+    PriceDao priceDao;
 
     @Override
     public List<Dish> selectByRestaurantId(Integer id){
@@ -109,6 +114,13 @@ public class DishServiceImpl implements DishService{
 
     @Override 
     public boolean update(Dish dish){
+        Dish oldDish = dishDao.selectById(dish.getDishId());
+        if(oldDish.getCurrentPrice() != dish.getCurrentPrice()){
+            Price price = new Price();
+            price.setDishId(dish.getDishId());
+            price.setPrice(dish.getCurrentPrice());
+            priceDao.insert(price);
+        }
         return dishDao.updateById(dish) > 0;
     }
 
@@ -127,7 +139,16 @@ public class DishServiceImpl implements DishService{
         QueryWrapper<Dish> qw = new QueryWrapper<>();
         qw.like("dish_name", keyword);
         qw.eq("restaurant_id", id);
+        qw.orderBy(true, true, "create_at");
         return dishDao.selectList(qw);
+    }
+
+    @Override
+    public List<Price> selectPricesById(Integer id) {
+        QueryWrapper<Price> qw = new QueryWrapper<>();
+        qw.eq("dish_id", id);
+        qw.orderBy(true, true, "create_at");
+        return priceDao.selectList(qw);
     }
 
 

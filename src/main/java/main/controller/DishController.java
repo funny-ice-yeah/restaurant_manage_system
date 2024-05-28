@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import main.pojo.Dish;
 import main.pojo.DishDetail;
+import main.pojo.Price;
 import main.service.DishService;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -46,6 +47,10 @@ public class DishController {
         return ResponseEntity.ok(dishDetail);
     }
 
+    @GetMapping("selectPricesById")
+    public ResponseEntity<List<Price>> selectPricesById(@RequestParam("dishId") Integer id){
+        return ResponseEntity.ok(dishService.selectPricesById(id));
+    }
     @PutMapping
     public boolean update(@RequestBody Dish dish){
         return dishService.update(dish);

@@ -50,11 +50,17 @@ public class RestaurantController {
     @Autowired
     UserService userService;
 
-    @GetMapping("/search")
-    public ResponseEntity<List<RestaurantSummary>> searchRestaurants(@RequestParam("keyword") String keyword){
+    @GetMapping("/searchRestaurantSummaries")
+    public ResponseEntity<List<RestaurantSummary>> searchRestaurantSummaries(@RequestParam("keyword") String keyword){
         List<RestaurantSummary> restaurantSummaries = restaurantService.getRestaurantSummariesByKeyword(keyword);
         return ResponseEntity.ok(restaurantSummaries);        
     }
+
+    @GetMapping("/searchRestaurants")
+    public ResponseEntity<List<Restaurant>> searchRestaurants(@RequestParam("keyword") String keyword){
+        List<Restaurant> restaurants = restaurantService.getRestaurantsByKeyword(keyword);
+        return ResponseEntity.ok(restaurants);        
+    } 
 
     @GetMapping("/details")
     public ResponseEntity<RestaurantDetails> selectRestaurantDetailsById(@RequestParam("id") Integer id) {

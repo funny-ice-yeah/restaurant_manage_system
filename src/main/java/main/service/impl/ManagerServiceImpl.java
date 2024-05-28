@@ -25,5 +25,17 @@ public class ManagerServiceImpl implements ManagerService{
         QueryWrapper<Manager> qw = new QueryWrapper<>();
         qw.eq("account", account);
         return managerDao.selectOne(qw);
+    }
+
+    @Override
+    public Manager selectById(Integer id) {
+        QueryWrapper<Manager> qw = new QueryWrapper<>();
+        qw.eq("manager_id", id);
+        return managerDao.selectOne(qw);
+    }
+
+    @Override
+    public boolean update(Manager manager) {
+        return managerDao.updateById(manager) > 0;
     }    
 }

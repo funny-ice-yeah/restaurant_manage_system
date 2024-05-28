@@ -40,6 +40,11 @@ public class DishController {
     public ResponseEntity<List<Dish>> selectByRestaurantId(@RequestParam("restaurantId") Integer id){
         return ResponseEntity.ok(dishService.selectByRestaurantId(id));
     }
+
+    @GetMapping("/selectMainDishByRestaurantId")
+    public ResponseEntity<List<Dish>> selectMainDishByRestaurantId(@RequestParam("restaurantId") Integer id){
+        return ResponseEntity.ok(dishService.selectMainDishsByRestaurantId(id));
+    }
     
     @GetMapping("/Details")
     public ResponseEntity<DishDetail> selectDetailByDishId(@RequestParam("dishId") Integer id) {

@@ -37,68 +37,68 @@ INSERT INTO restaurant (restaurant_id, restaurant_name, account, password, locat
 (12, '吉野家', 'yoshinoya1', 'yoshinoya123', '二楼', '日式快餐 直营店', 2);
 -- 初始化一些菜品
 INSERT INTO dish (dish_id, dish_name, category, current_price, description, image_url, is_main_dish, restaurant_id) VALUES
-(1, '巨无霸', '汉堡', 20.00, '经典牛肉汉堡', 'big_mac.jpg', 1, 1),
-(2, '麦辣鸡腿堡', '汉堡', 16.00, '香辣鸡腿汉堡', 'chicken_burger.jpg', 1, 1),
-(3, '薯条', '小吃', 10.00, '金黄脆薯', 'fries_1.jpg', 0, 1),
-(4, '麦乐鸡', '小吃', 9.00, '鸡肉块', 'nuggets_2.jpg', 0, 1),
-(5, '可乐', '饮料', 5.00, '冰爽可乐', 'cola_1.jpg', 0, 1),
-(6, '巨无霸', '汉堡', 22.00, '经典牛肉汉堡', 'big_mac.jpg', 1, 2),
-(7, '麦辣鸡腿堡', '汉堡', 17.00, '香辣鸡腿汉堡', 'chicken_burger.jpg', 0, 2),
-(8, '薯条', '小吃', 10.00, '金黄脆薯', 'fries_2.jpg', 1, 2),
-(9, '麦乐鸡', '小吃', 15.00, '鸡肉块', 'nuggets_1.jpg', 0, 2),
-(10, '可乐', '饮料', 5.00, '冰爽可乐', 'cola_2.jpg', 0, 2),
-(11, '巨无霸', '汉堡', 25.00, '经典牛肉汉堡', 'big_mac.jpg', 1, 3),
-(12, '麦辣鸡腿堡', '汉堡', 18.00, '香辣鸡腿汉堡', 'chicken_burger.jpg', 1, 3),
-(13, '薯条', '小吃', 9.00, '金黄脆薯', 'fries_2.jpg', 0, 3),
-(14, '麦乐鸡', '小吃', 12.00, '鸡肉块', 'nuggets_1.jpg', 1, 3),
-(15, '可乐', '饮料', 3.00, '冰爽可乐', 'cola_2.jpg', 0, 3);
+(1, '巨无霸', '汉堡', 20.00, '经典牛肉汉堡', 'http://127.0.0.1:8080/images/dish/big_mac.jpg', 1, 1),
+(2, '麦辣鸡腿堡', '汉堡', 16.00, '香辣鸡腿汉堡', 'http://127.0.0.1:8080/images/dish/chicken_burger.jpg', 1, 1),
+(3, '薯条', '小吃', 10.00, '金黄脆薯', 'http://127.0.0.1:8080/images/dish/fries_1.jpg', 0, 1),
+(4, '麦乐鸡', '小吃', 9.00, '鸡肉块', 'http://127.0.0.1:8080/images/dish/nuggets_2.jpg', 0, 1),
+(5, '可乐', '饮料', 5.00, '冰爽可乐', 'http://127.0.0.1:8080/images/dish/cola_1.jpg', 0, 1),
+(6, '巨无霸', '汉堡', 22.00, '经典牛肉汉堡', 'http://127.0.0.1:8080/images/dish/big_mac.jpg', 1, 2),
+(7, '麦辣鸡腿堡', '汉堡', 17.00, '香辣鸡腿汉堡', 'http://127.0.0.1:8080/images/dish/chicken_burger.jpg', 0, 2),
+(8, '薯条', '小吃', 10.00, '金黄脆薯', 'http://127.0.0.1:8080/images/dish/fries_2.jpg', 1, 2),
+(9, '麦乐鸡', '小吃', 15.00, '鸡肉块', 'http://127.0.0.1:8080/images/dish/nuggets_1.jpg', 0, 2),
+(10, '可乐', '饮料', 5.00, '冰爽可乐', 'http://127.0.0.1:8080/images/dish/cola_2.jpg', 0, 2),
+(11, '巨无霸', '汉堡', 25.00, '经典牛肉汉堡', 'http://127.0.0.1:8080/images/dish/big_mac.jpg', 1, 3),
+(12, '麦辣鸡腿堡', '汉堡', 18.00, '香辣鸡腿汉堡', 'http://127.0.0.1:8080/images/dish/chicken_burger.jpg', 1, 3),
+(13, '薯条', '小吃', 9.00, '金黄脆薯', 'http://127.0.0.1:8080/images/dish/fries_2.jpg', 0, 3),
+(14, '麦乐鸡', '小吃', 12.00, '鸡肉块', 'http://127.0.0.1:8080/images/dish/nuggets_1.jpg', 1, 3),
+(15, '可乐', '饮料', 3.00, '冰爽可乐', 'http://127.0.0.1:8080/images/dish/cola_2.jpg', 0, 3);
 
 INSERT INTO dish (dish_id, dish_name, category, current_price, description, image_url, is_main_dish, restaurant_id) VALUES
-(16, '原味鸡', '鸡肉', 12.00, '香脆原味鸡', 'original_chicken.jpg', 1, 4),
-(17, '香辣鸡翅', '鸡肉', 15.00, '香辣鸡翅', 'spicy_wings_1.jpg', 1, 4),
-(18, '田园鸡腿堡', '汉堡', 18.00, '美味鸡腿堡', 'yummy_chicken_burger.jpg', 1, 4),
-(19, '劲脆鸡腿堡', '汉堡', 20.00, '劲脆鸡腿堡', 'crispy_burger.jpg', 1, 4),
-(20, '九珍果汁', '饮料', 8.00, '新鲜果汁', 'juice.jpg', 0, 4),
-(21, '原味鸡', '鸡肉', 15.00, '香脆原味鸡', 'original_chicken.jpg', 1, 5),
-(22, '香辣鸡翅', '鸡肉', 15.00, '香辣鸡翅', 'spicy_wings_2.jpg', 1, 5),
-(23, '田园鸡腿堡', '汉堡', 18.00, '美味鸡腿堡', 'yummy_chicken_burger.jpg', 0, 5),
-(24, '劲脆鸡腿堡', '汉堡', 18.00, '劲脆鸡腿堡', 'crispy_burger.jpg', 0, 5),
-(25, '九珍果汁', '饮料', 8.00, '新鲜果汁', 'juice.jpg', 0, 5);
+(16, '原味鸡', '鸡肉', 12.00, '香脆原味鸡', 'http://127.0.0.1:8080/images/dish/original_chicken.jpg', 1, 4),
+(17, '香辣鸡翅', '鸡肉', 15.00, '香辣鸡翅', 'http://127.0.0.1:8080/images/dish/spicy_wings_1.jpg', 1, 4),
+(18, '田园鸡腿堡', '汉堡', 18.00, '美味鸡腿堡', 'http://127.0.0.1:8080/images/dish/yummy_chicken_burger.jpg', 1, 4),
+(19, '劲脆鸡腿堡', '汉堡', 20.00, '劲脆鸡腿堡', 'http://127.0.0.1:8080/images/dish/crispy_burger.jpg', 1, 4),
+(20, '九珍果汁', '饮料', 8.00, '新鲜果汁', 'http://127.0.0.1:8080/images/dish/juice.jpg', 0, 4),
+(21, '原味鸡', '鸡肉', 15.00, '香脆原味鸡', 'http://127.0.0.1:8080/images/dish/original_chicken.jpg', 1, 5),
+(22, '香辣鸡翅', '鸡肉', 15.00, '香辣鸡翅', 'http://127.0.0.1:8080/images/dish/spicy_wings_2.jpg', 1, 5),
+(23, '田园鸡腿堡', '汉堡', 18.00, '美味鸡腿堡', 'http://127.0.0.1:8080/images/dish/yummy_chicken_burger.jpg', 0, 5),
+(24, '劲脆鸡腿堡', '汉堡', 18.00, '劲脆鸡腿堡', 'http://127.0.0.1:8080/images/dish/crispy_burger.jpg', 0, 5),
+(25, '九珍果汁', '饮料', 8.00, '新鲜果汁', 'http://127.0.0.1:8080/images/dish/juice.jpg', 0, 5);
 
 INSERT INTO dish (dish_id, dish_name, category, current_price, description, image_url, is_main_dish, restaurant_id) VALUES
-(26, '脆皮炸鸡', '鸡肉', 14.00, '香脆炸鸡', 'crispy_chicken.jpg', 1, 6),
-(27, '鸡肉卷', '卷类', 12.00, '美味鸡肉卷', 'chicken_wrap.jpg', 1, 6),
-(28, '薯条', '小吃', 9.00, '金黄脆薯', 'fries_3.jpg', 0, 6),
-(29, '甜筒', '甜品', 6.00, '香草冰淇淋', 'ice_cream.jpg', 0, 6),
-(30, '柠檬茶', '饮料', 7.00, '清新柠檬茶', 'lemon_tea.jpg', 0, 6),
-(31, '脆皮炸鸡', '鸡肉', 15.00, '香脆炸鸡', 'crispy_chicken.jpg', 1, 7),
-(32, '鸡肉卷', '卷类', 13.00, '美味鸡肉卷', 'chicken_wrap.jpg', 1, 7),
-(33, '薯条', '小吃', 8.00, '金黄脆薯', 'fries_3.jpg', 0, 7),
-(34, '甜筒', '甜品', 5.00, '香草冰淇淋', 'ice_cream.jpg', 0, 7),
-(35, '柠檬茶', '饮料', 6.00, '清新柠檬茶', 'lemon_tea.jpg', 0, 7);
+(26, '脆皮炸鸡', '鸡肉', 14.00, '香脆炸鸡', 'http://127.0.0.1:8080/images/dish/crispy_chicken.jpg', 1, 6),
+(27, '鸡肉卷', '卷类', 12.00, '美味鸡肉卷', 'http://127.0.0.1:8080/images/dish/chicken_wrap.jpg', 1, 6),
+(28, '薯条', '小吃', 9.00, '金黄脆薯', 'http://127.0.0.1:8080/images/dish/fries_3.jpg', 0, 6),
+(29, '甜筒', '甜品', 6.00, '香草冰淇淋', 'http://127.0.0.1:8080/images/dish/ice_cream.jpg', 0, 6),
+(30, '柠檬茶', '饮料', 7.00, '清新柠檬茶', 'http://127.0.0.1:8080/images/dish/lemon_tea.jpg', 0, 6),
+(31, '脆皮炸鸡', '鸡肉', 15.00, '香脆炸鸡', 'http://127.0.0.1:8080/images/dish/crispy_chicken.jpg', 1, 7),
+(32, '鸡肉卷', '卷类', 13.00, '美味鸡肉卷', 'http://127.0.0.1:8080/images/dish/chicken_wrap.jpg', 1, 7),
+(33, '薯条', '小吃', 8.00, '金黄脆薯', 'http://127.0.0.1:8080/images/dish/fries_3.jpg', 0, 7),
+(34, '甜筒', '甜品', 5.00, '香草冰淇淋', 'http://127.0.0.1:8080/images/dish/ice_cream.jpg', 0, 7),
+(35, '柠檬茶', '饮料', 6.00, '清新柠檬茶', 'http://127.0.0.1:8080/images/dish/lemon_tea.jpg', 0, 7);
 
 INSERT INTO dish (dish_id, dish_name, category, current_price, description, image_url, is_main_dish, restaurant_id) VALUES
-(36, '拿铁', '咖啡', 28.00, '香浓拿铁', 'latte.jpg', 1, 8),
-(37, '抹茶星冰乐', '饮料', 32.00, '清新抹茶', 'green_tea_frappe.jpg', 0, 8),
-(38, '蓝莓麦芬', '甜品', 18.00, '蓝莓麦芬蛋糕', 'blueberry_muffin.jpg', 0, 8),
-(39, '美式咖啡', '咖啡', 25.00, '纯美式咖啡', 'americano.jpg', 1, 9),
-(40, '焦糖玛奇朵', '饮料', 35.00, '香甜焦糖玛奇朵', 'caramel_macchiato.jpg', 0, 9),
-(41, '巧克力蛋糕', '甜品', 20.00, '浓郁巧克力蛋糕', 'chocolate_cake.jpg', 0, 9);
+(36, '拿铁', '咖啡', 28.00, '香浓拿铁', 'http://127.0.0.1:8080/images/dish/latte.jpg', 1, 8),
+(37, '抹茶星冰乐', '饮料', 32.00, '清新抹茶', 'http://127.0.0.1:8080/images/dish/green_tea_frappe.jpg', 0, 8),
+(38, '蓝莓麦芬', '甜品', 18.00, '蓝莓麦芬蛋糕', 'http://127.0.0.1:8080/images/dish/blueberry_muffin.jpg', 0, 8),
+(39, '美式咖啡', '咖啡', 25.00, '纯美式咖啡', 'http://127.0.0.1:8080/images/dish/americano.jpg', 1, 9),
+(40, '焦糖玛奇朵', '饮料', 35.00, '香甜焦糖玛奇朵', 'http://127.0.0.1:8080/images/dish/caramel_macchiato.jpg', 0, 9),
+(41, '巧克力蛋糕', '甜品', 20.00, '浓郁巧克力蛋糕', 'http://127.0.0.1:8080/images/dish/chocolate_cake.jpg', 0, 9);
 
 INSERT INTO dish (dish_id, dish_name, category, current_price, description, image_url, is_main_dish, restaurant_id) VALUES
-(42, '关东煮', '小吃', 15.00, '热腾腾的关东煮', 'oden.jpg', 1, 10),
-(43, '饭团', '主食', 8.00, '各种口味的饭团', 'rice_ball.jpg', 1, 10),
-(44, '乌龙茶', '饮料', 5.00, '清爽乌龙茶', 'oolong_tea.jpg', 0, 10),
-(45, '关东煮', '小吃', 16.00, '热腾腾的关东煮', 'oden.jpg', 1, 11),
-(46, '饭团', '主食', 9.00, '各种口味的饭团', 'rice_ball.jpg', 1, 11),
-(47, '红茶', '饮料', 6.00, '香浓红茶', 'black_tea.jpg', 0, 11);
+(42, '关东煮', '小吃', 15.00, '热腾腾的关东煮', 'http://127.0.0.1:8080/images/dish/oden.jpg', 1, 10),
+(43, '饭团', '主食', 8.00, '各种口味的饭团', 'http://127.0.0.1:8080/images/dish/rice_ball.jpg', 1, 10),
+(44, '乌龙茶', '饮料', 5.00, '清爽乌龙茶', 'http://127.0.0.1:8080/images/dish/oolong_tea.jpg', 0, 10),
+(45, '关东煮', '小吃', 16.00, '热腾腾的关东煮', 'http://127.0.0.1:8080/images/dish/oden.jpg', 1, 11),
+(46, '饭团', '主食', 9.00, '各种口味的饭团', 'http://127.0.0.1:8080/images/dish/rice_ball.jpg', 1, 11),
+(47, '红茶', '饮料', 6.00, '香浓红茶', 'http://127.0.0.1:8080/images/dish/black_tea.jpg', 0, 11);
 
 INSERT INTO dish (dish_id, dish_name, category, current_price, description, image_url, is_main_dish, restaurant_id) VALUES
-(48, '牛肉饭', '主食', 25.00, '经典牛肉饭', 'beef_rice.jpg', 1, 12),
-(49, '鸡肉饭', '主食', 22.00, '美味鸡肉饭', 'chicken_rice.jpg', 1, 12),
-(50, '味增汤', '汤类', 8.00, '传统味增汤', 'miso_soup.jpg', 0, 12),
-(51, '炸鸡块', '小吃', 15.00, '香脆炸鸡块', 'fried_chicken.jpg', 0, 12),
-(52, '绿茶', '饮料', 6.00, '清凉绿茶', 'green_tea.jpg', 0, 12);
+(48, '牛肉饭', '主食', 25.00, '经典牛肉饭', 'http://127.0.0.1:8080/images/dish/beef_rice.jpg', 1, 12),
+(49, '鸡肉饭', '主食', 22.00, '美味鸡肉饭', 'http://127.0.0.1:8080/images/dish/chicken_rice.jpg', 1, 12),
+(50, '味增汤', '汤类', 8.00, '传统味增汤', 'http://127.0.0.1:8080/images/dish/miso_soup.jpg', 0, 12),
+(51, '炸鸡块', '小吃', 15.00, '香脆炸鸡块', 'http://127.0.0.1:8080/images/dish/fried_chicken.jpg', 0, 12),
+(52, '绿茶', '饮料', 6.00, '清凉绿茶', 'http://127.0.0.1:8080/images/dish/green_tea.jpg', 0, 12);
 
 INSERT INTO manager (manager_id, account, manager_name, password) VALUES
 (1, '22302010020', '王洋', '2230201020'),

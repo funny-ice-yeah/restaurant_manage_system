@@ -26,7 +26,7 @@ public class DishReviewServiceImpl implements DishReviewService{
     @Override
     public List<DishReview> selectByDishId(Integer id) {
         QueryWrapper<DishReview> qw = new QueryWrapper<>();
-        qw.eq("user_id", id);
+        qw.eq("dish_id", id);
         return dishReviewDao.selectList(qw);
     }
 

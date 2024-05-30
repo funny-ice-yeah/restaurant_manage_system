@@ -1,6 +1,6 @@
 -- Active: 1716358865468@@127.0.0.1@3306@restaurant_manage_system
 USE restaurant_manage_system;
---初始化一些用户
+-- 初始化一些用户
 INSERT INTO user (user_id, password, user_name, gender, age, role, role_id) VALUES
 (1, 'password1', '张伟', 1, '20', 0, 2021001),
 (2, 'password2', '李娜', 0, '22', 0, 2021002),
@@ -12,7 +12,7 @@ INSERT INTO user (user_id, password, user_name, gender, age, role, role_id) VALU
 (8, 'password8', '赵强', 0, '26', 1, 10004),
 (9, 'password9', '张伟', 1, '24', 0, 2021005),
 (10, 'password10', '孙丽', 0, '29', 1, 10005);
---初始化一些餐厅
+-- 初始化一些餐厅
 INSERT INTO canteen (canteen_id, canteen_name, canteen_location) VALUES
 (1, '旦苑餐厅', '邯郸校区'),
 (2, '南苑餐厅', '邯郸校区'),
@@ -20,7 +20,7 @@ INSERT INTO canteen (canteen_id, canteen_name, canteen_location) VALUES
 (4, '江湾食堂', '江湾校区'),
 (5, '枫林西餐厅', '枫林校区'),
 (6, '张江食堂', '张江校区');
---初始化一些商户
+-- 初始化一些商户
 INSERT INTO restaurant (restaurant_id, restaurant_name, account, password, location, brief_intro, canteen_id) VALUES
 (1, '麦当劳', 'mcdonalds1', 'mcdonalds123', '一楼东', '美式快餐 普通店', 1),
 (2, '麦当劳', 'mcdonalds2', 'mcdonalds456', '一楼大厅', '美式快餐 旗舰店', 3),
@@ -34,7 +34,7 @@ INSERT INTO restaurant (restaurant_id, restaurant_name, account, password, locat
 (10, '全家便利店', 'familymart1', 'familymart123', '一楼大厅', '便利店连锁 直营店', 4),
 (11, '全家便利店', 'familymart2', 'familymart456', '一楼南', '便利店连锁 直营店', 2),
 (12, '吉野家', 'yoshinoya1', 'yoshinoya123', '二楼', '日式快餐 直营店', 2);
---初始化一些菜品
+-- 初始化一些菜品
 INSERT INTO dish (dish_id, dish_name, category, current_price, description, image_url, is_main_dish, restaurant_id) VALUES
 (1, '巨无霸', '汉堡', 20.00, '经典牛肉汉堡', './imgs/big_mac.jpg', 1, 1),
 (2, '麦辣鸡腿堡', '汉堡', 16.00, '香辣鸡腿汉堡', './imgs/chicken_burger.jpg', 1, 1),

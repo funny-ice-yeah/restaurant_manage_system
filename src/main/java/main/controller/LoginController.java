@@ -39,8 +39,11 @@ public class LoginController {
         if (resultUser != null && resultUser.getPassword().equals(user.getPassword())) {
             session.setAttribute("account", user.getRoleId());
             session.setAttribute("role", 0);
+            return ResponseEntity.ok(resultUser);
+        }else{
+            return ResponseEntity.ok(null);
         }
-        return ResponseEntity.ok(resultUser);
+
     }
 
     @PostMapping("/restaurant")
@@ -49,8 +52,11 @@ public class LoginController {
         if(resultRestaurant != null && resultRestaurant.getPassword().equals(restaurant.getPassword())){
             session.setAttribute("account", resultRestaurant.getAccount());
             session.setAttribute("role", 1);
+            return ResponseEntity.ok(resultRestaurant);
+        }else{
+            return ResponseEntity.ok(null);
         }
-        return ResponseEntity.ok(resultRestaurant);
+       
     }
     @PostMapping("/manager")
     public ResponseEntity<Manager> managerLogin(@RequestBody Manager manager, HttpSession session){
@@ -58,8 +64,11 @@ public class LoginController {
         if(resultManager != null && resultManager.getPassword().equals(manager.getPassword())){
             session.setAttribute("account", resultManager.getAccount());
             session.setAttribute("role", 1);
+            return ResponseEntity.ok(resultManager);
+        }else{
+            return ResponseEntity.ok(null);
         }
-        return ResponseEntity.ok(resultManager);
+        
     } 
 
     @GetMapping("/verify")

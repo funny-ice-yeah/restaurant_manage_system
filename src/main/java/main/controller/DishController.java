@@ -46,7 +46,7 @@ public class DishController {
         return ResponseEntity.ok(dishService.selectMainDishsByRestaurantId(id));
     }
     
-    @GetMapping("/Details")
+    @GetMapping("/details")
     public ResponseEntity<DishDetail> selectDetailByDishId(@RequestParam("dishId") Integer id) {
         DishDetail dishDetail = dishService.selecDetailByDishId(id);
         return ResponseEntity.ok(dishDetail);

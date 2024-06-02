@@ -1,6 +1,7 @@
 package main.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,8 @@ import main.pojo.Dish;
 import main.pojo.DishDetail;
 import main.pojo.Price;
 import main.service.DishService;
+import main.service.OrderDetailService;
+
 import org.springframework.web.bind.annotation.RequestParam;
 
 
@@ -25,6 +28,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class DishController {
     @Autowired
     private DishService dishService;
+
+    @Autowired
+    private OrderDetailService orderDetailService;
 
 
     @GetMapping("/selectById")
@@ -54,7 +60,12 @@ public class DishController {
         return ResponseEntity.ok(dishDetail);
     }
 
-    @GetMapping("selectPricesById")
+    @GetMapping("/selectSalesById")
+    public ResponseEntity<Map<String, Integer>> selectSalesById(@RequestParam("dishId") Integer id){
+        return ResponseEntity.ok(orderDetailService.selectSalesById(id));
+    }
+
+    @GetMapping("/selectPricesById")
     public ResponseEntity<List<Price>> selectPricesById(@RequestParam("dishId") Integer id){
         return ResponseEntity.ok(dishService.selectPricesById(id));
     }

@@ -20,10 +20,12 @@
     </select>
     <select id="getTopCustomerUserIdByDishId" resultType="Integer" parameterType="Integer">
             <!-- 将返回消费最多的userid，如果有多个，将一并返回 -->
-            SELECT user_id
-            FROM order_detail
-            WHERE dish_id = #{param}
-            GROUP BY user_id
+            SELECT o.user_id
+            FROM `order` AS o 
+            JOIN order_detail AS od
+            ON o.order_id = od.order_id
+            WHERE od.dish_id = #{param}
+            GROUP BY o.user_id
             HAVING SUM(quantity) = (
                 SELECT MAX(customer_total_quantity)
                 FROM(
@@ -31,7 +33,7 @@
                     FROM  order_detail AS sub
                     WHERE dish_id = #{param}
                     GROUP BY user_id                    
-                )
+                ) AS max_query
             );
     </select>
     <select id="selectTotalSalesByDishIdAndOrdermethodBeforeParticularTime" resultType="Integer">
@@ -44,13 +46,13 @@
         AND o.order_method = #{OrderMethod};
     </select>
     <select id="getOrderDetailsByRestaurantIdAndUserId" resultType="main.pojo.CustomerOrderSales">
-        SELECT od.dish_id,SUM(od.quantity)
+        SELECT od.dish_id,SUM(od.quantity) AS total_purchase
         FROM order_detail AS od 
         JOIN `order` AS o 
         ON o.order_id = od.order_id 
         WHERE o.restaurant_id = #{restaurantId} 
         AND o.create_at >= #{startTime} 
-        AND o.userId = #{userId}
+        AND o.user_id = #{userId}
         GROUP BY od.dish_id;
     </select>
 </mapper>

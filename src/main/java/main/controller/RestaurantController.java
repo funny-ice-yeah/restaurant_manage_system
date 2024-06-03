@@ -82,7 +82,7 @@ public class RestaurantController {
     }
 
     @GetMapping("/analyzeDishes")
-    public ResponseEntity<List<DishAnalysis>> analyzeAllDishesByRestaurantId(@RequestParam("id") Integer id) {
+    public ResponseEntity<List<DishAnalysis>> analyzeAllDishesByRestaurantId(@RequestParam("restaurantId") Integer id) {
         List<DishAnalysis> dishAnalysis = dishService.analyzeDishByRestaurantId(id);
         return ResponseEntity.ok(dishAnalysis);
     }

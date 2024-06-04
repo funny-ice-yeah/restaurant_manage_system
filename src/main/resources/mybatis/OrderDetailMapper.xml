@@ -42,7 +42,7 @@
         JOIN `order` AS o 
         ON o.order_id = od.order_id 
         WHERE od.dish_id = #{DishId} 
-        AND o.create_at >= #{Timestamp} 
+        AND o.create_at >= #{TimeStamp} 
         AND o.order_method = #{OrderMethod};
     </select>
     <select id="getOrderDetailsByRestaurantIdAndUserId" resultType="main.pojo.CustomerOrderSales">

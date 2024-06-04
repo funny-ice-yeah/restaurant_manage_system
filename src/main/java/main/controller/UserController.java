@@ -45,7 +45,7 @@ public class UserController {
     }
     
     @GetMapping("/favouriteDishSales")
-    public ResponseEntity<List<DishSalesData>> getFavouriteDishSales(@RequestParam("userId") Integer userId,@RequestParam("period") String period) {
+    public ResponseEntity<List<DishSalesData>> getFavouriteDishSales(@RequestParam("userId") Integer userId,@RequestParam("period") String period, @RequestParam("method") String method) {
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime startTime;
         
@@ -64,7 +64,7 @@ public class UserController {
         }
 
         Timestamp startTimeStamp = Timestamp.valueOf(startTime);
-        List<DishSalesData> dishSalesDatas = favoriteDishService.getFavouriteDishSales(userId, startTimeStamp);        
+        List<DishSalesData> dishSalesDatas = favoriteDishService.getFavouriteDishSales(userId, startTimeStamp, method);        
         return ResponseEntity.ok(dishSalesDatas);
     }
     

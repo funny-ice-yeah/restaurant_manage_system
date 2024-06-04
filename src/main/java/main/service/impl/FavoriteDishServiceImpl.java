@@ -76,9 +76,15 @@ public class FavoriteDishServiceImpl implements FavoriteDishService{
     }
 
     @Override
-    public List<DishSalesData> getFavouriteDishSales(Integer userId,Timestamp startTimeStamp){
+    public List<DishSalesData> getFavouriteDishSales(Integer userId,Timestamp startTimeStamp, String orderMethod){
         List<FavoriteDish> favoriteDishs = favoriteDishDao.selectByUserId(userId);
-        String[] orderMethods = {"线上","排队"};
+        String[] orderMethods = null;
+        if(orderMethod.equals("所有")){
+            orderMethods = new String[]{"线上", "排队"};
+        }else{
+            orderMethods = new String[]{orderMethod};
+        }
+
         List<DishSalesData> dishSalesDatas = new ArrayList<>();
 
         for(FavoriteDish favoriteDish : favoriteDishs){

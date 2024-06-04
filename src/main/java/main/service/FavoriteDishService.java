@@ -12,6 +12,6 @@ public interface FavoriteDishService {
     public boolean deleteByDishUserId(Integer dishId, Integer userId);
     public Integer countFavoriteById(Integer id);
     public Integer countQuantityById(Integer id, String method);
-    public List<DishSalesData> getFavouriteDishSales(Integer userId,Timestamp startTimeStamp);
+    public List<DishSalesData> getFavouriteDishSales(Integer userId,Timestamp startTimeStamp, String method);
 
 }

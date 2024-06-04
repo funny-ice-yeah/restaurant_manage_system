@@ -10,10 +10,12 @@ import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 
 import main.dao.DishDao;
+import main.dao.MessageDao;
 import main.dao.OrderDao;
 import main.dao.OrderDetailDao;
 import main.pojo.ActivityOneDay;
 import main.pojo.Dish;
+import main.pojo.Message;
 import main.pojo.Order;
 import main.pojo.OrderDetail;
 import main.pojo.OrderFrequency;
@@ -29,6 +31,9 @@ public class OrderServiceImpl implements OrderService{
 
     @Autowired
     DishDao dishDao;
+
+    @Autowired
+    MessageDao messageDao;
     
     @Override
     public List<Order> selectByUserId(Integer id) {
@@ -67,6 +72,15 @@ public class OrderServiceImpl implements OrderService{
 
     @Override
     public boolean update(Order order){
+        Order oldOrder = orderDao.selectById(order.getOrderId());
+        if(!order.getOrderStatus().equals(oldOrder.getOrderStatus())){
+            Message message = new Message();
+            message.setSubject("订单状态变化");
+            message.setContent("您的订单状态已由"+oldOrder.getOrderStatus()+"转变为"+order.getOrderStatus());
+            message.setOrderId(order.getOrderId());
+            message.setUserId(order.getUserId());
+            messageDao.insert(message);
+        }
         return orderDao.updateById(order) > 0;
     }
 

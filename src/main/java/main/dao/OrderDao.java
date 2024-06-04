@@ -19,7 +19,7 @@ public interface OrderDao extends BaseMapper<Order>{
     public List<Order> selectByUserId(Integer id);
     public List<Order> selectByRestaurantId(Integer id);
     public List<Integer> getLoyalCustomerIds(@Param("restaurantId") Integer restaurantId,@Param("startTime") Timestamp startTime,@Param("threshold") Integer threshold);    
-    public List<OrderFrequency> getOrderFrequencyForRestaurantByPeriod(@Param("restaurandId") Integer restaurantId,@Param("startTime") Timestamp startsTime,@Param("Period") String period);
+    public List<OrderFrequency> getOrderFrequencyForRestaurantByPeriod(@Param("restaurantId") Integer restaurantId,@Param("startTime") Timestamp startsTime,@Param("period") String period);
     public List<ActivityOneDay> getActivityInOneDayForRestaurant(@Param("restaurantId") Integer restaurantId,@Param("startTime") Timestamp startTime);
     public Integer getTotalOrderNumByConditionAndRestaurantId(@Param("restaurantId") Integer restaurandId, @Param("condition") String condition);
     public List<DishSalesSummary> getDishSalesSummariesByConditionAndRestaurantId(@Param("restaurantId") Integer restaurantId, @Param("condition") String condition);

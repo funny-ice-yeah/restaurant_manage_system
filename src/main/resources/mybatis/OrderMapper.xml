@@ -28,7 +28,7 @@
                 WHEN #{period} = '月' THEN DATE_FORMAT(order_time, '%Y-%m')
                 ELSE DATE_FORMAT(order_time, '%Y-%m-%d')<!-- 默认格式为年-月-日 -->
             END AS period,         
-            count(order_id)
+            count(order_id) as orderNum
         FROM `order`
         WHERE restaurant_id = #{restaurantId}
         AND create_at >= #{startTime}
@@ -44,7 +44,7 @@
                 WHEN HOUR(create_at) BETWEEN 12 AND 17 THEN '下午'
                 WHEN HOUR(create_at) BETWEEN 18 AND 23 THEN '晚间'
             END AS period,         
-            count(order_id)
+        count(order_id) as orderNum
         FROM `order`
         WHERE restaurant_id = #{restaurantId}
         AND create_at >= #{startTime}
@@ -61,7 +61,7 @@
     </select>
 
     <select id="getDishSalesSummariesByConditionAndRestaurantId"  resultType="main.pojo.DishSalesSummary">
-        SELECT od.dish_id, d.dish_name, SUM(od.quantity) AS totalPurchaseCount
+        SELECT od.dish_id, d.dish_name, SUM(od.quantity) AS totalSales
         FROM order_detail AS od
         JOIN `order` AS o ON od.order_id = o.order_id
         JOIN dish AS d ON od.dish_id = d.dish_id

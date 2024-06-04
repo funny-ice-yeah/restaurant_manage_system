@@ -135,7 +135,7 @@ public class RestaurantController {
         return ResponseEntity.ok(orderFrequencies);
     }
 
-    @GetMapping("/Activity")
+    @GetMapping("/activity")
     public ResponseEntity<List<ActivityOneDay>> getActivityAnalysis(@RequestParam("restaurantId") Integer restaurantId,@RequestParam("period") String period) {
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime startTime;
@@ -157,7 +157,7 @@ public class RestaurantController {
         return ResponseEntity.ok(activityInOneDay);
     }
     
-    @GetMapping("/UserGroupAnalysis")
+    @GetMapping("/userGroupAnalysis")
     public ResponseEntity<List<UserGroupAnalysis>> getUserGroupAnalysis(@RequestParam("restaurantId") Integer restaurantId) {
         List<UserGroupAnalysis> userGroupAnalysis = restaurantService.getUserGroupAnalysis(restaurantId);
         return ResponseEntity.ok(userGroupAnalysis);

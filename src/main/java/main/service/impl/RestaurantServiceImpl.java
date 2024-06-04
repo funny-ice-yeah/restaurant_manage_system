@@ -160,7 +160,7 @@ public class RestaurantServiceImpl implements RestaurantService{
             UserHabit userHabit = new UserHabit(orderNum, dishSalesSummaries);
             UserReviewHabit userReviewHabit = restaurantReviewDao.selectUserReviewHabitsByRestaurantIdGivenCondition(restaurantId, cond);
             String condition_info = cond.replace("age", "年龄").replace("BETWEEEN", "介于").replace("AND", "到").replace("role", "身份").replace("0", "学生")
-                                        .replace("1", "教师").replace("gender", "性别").replace("=", "为").replace(">", "大于")
+                                        .replace("\\b1\\b", "教师").replace("gender", "性别").replace("=", "为").replace(">", "大于")
                                         .replace("'Male'", "男").replace("'Female'", "女");
             userGroupAnalysis.add(new UserGroupAnalysis(condition_info, userHabit, userReviewHabit));
         }

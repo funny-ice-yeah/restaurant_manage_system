@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 public class SeatReservation {
     private Integer seatId;
     private Integer userId;
-    private Timestamp time;
+    private Timestamp timeBooked;
     private Timestamp createdAt;
     private String status;
 }

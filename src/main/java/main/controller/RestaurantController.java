@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import main.pojo.ActivityOneDay;
 import main.pojo.DishAnalysis;
 import main.pojo.LoyalCustomerDistribution;
+import main.pojo.MonthlyRevenue;
 import main.pojo.OrderFrequency;
 import main.pojo.Restaurant;
 import main.pojo.RestaurantDetails;
@@ -161,6 +162,12 @@ public class RestaurantController {
     public ResponseEntity<List<UserGroupAnalysis>> getUserGroupAnalysis(@RequestParam("restaurantId") Integer restaurantId) {
         List<UserGroupAnalysis> userGroupAnalysis = restaurantService.getUserGroupAnalysis(restaurantId);
         return ResponseEntity.ok(userGroupAnalysis);
+    }
+    
+    @GetMapping("/monthly-revenue")
+    public ResponseEntity<List<MonthlyRevenue>> getThisYearMonthlyRevenue(@RequestParam("restaurantId") Integer restaurantId) {
+        List<MonthlyRevenue> monthlyRevenues = restaurantService.getMonthlyRevenues(restaurantId);
+        return ResponseEntity.ok(monthlyRevenues);
     }
     
     

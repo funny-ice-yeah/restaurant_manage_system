@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import main.pojo.LoyalCustomerDistribution;
+import main.pojo.MonthlyRevenue;
 import main.pojo.Restaurant;
 import main.pojo.RestaurantSummary;
 import main.pojo.UserGroupAnalysis;
@@ -20,4 +21,5 @@ public interface RestaurantService {
     public RestaurantDetails getRestaurantDetailsById(Integer id);
     public List<LoyalCustomerDistribution> getLoyalCustomerDistribution(Integer restaurantId,Integer threshold,Timestamp startTimeStamp);
     public List<UserGroupAnalysis> getUserGroupAnalysis(Integer restaurantId);
+    public List<MonthlyRevenue> getMonthlyRevenues(Integer restaurantId); 
 }

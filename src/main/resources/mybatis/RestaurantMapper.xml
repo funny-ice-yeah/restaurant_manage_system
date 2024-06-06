@@ -16,5 +16,14 @@
         SELECT * 
         FROM restaurant
         WHERE restaurant_name LIKE CONCAT('%',#{param},'%');
+    </select>
+    <select id="getMonthlyRevenues" parameterType="Integer" resultType="main.pojo.MonthlyRevenue">
+        SELECT MONTH(order_time) AS analysedMonth,
+            SUM(total_price) AS revenue
+        FROM `order`
+        WHERE restaurant_id = #{restaurantId}
+        AND order_time >= DATE_SUB(CURRENT_DATE,INTERVAL 1 YEAR)
+        GROUP BY MONTH(order_time)
+        ORDER BY MONTH(order_time);
     </select>    
 </mapper>

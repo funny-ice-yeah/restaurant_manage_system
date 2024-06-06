@@ -19,6 +19,7 @@ import main.pojo.CustomerOrderSales;
 import main.pojo.Dish;
 import main.pojo.DishSalesSummary;
 import main.pojo.LoyalCustomerDistribution;
+import main.pojo.MonthlyRevenue;
 import main.service.RestaurantService;
 
 import java.sql.Timestamp;
@@ -166,6 +167,11 @@ public class RestaurantServiceImpl implements RestaurantService{
         }
 
         return userGroupAnalysis;
+    }
+
+    @Override
+    public List<MonthlyRevenue> getMonthlyRevenues(Integer restaurantId){
+        return restaurantDao.getMonthlyRevenues(restaurantId);
     }
 
  

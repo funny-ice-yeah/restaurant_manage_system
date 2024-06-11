@@ -139,7 +139,7 @@ public class DishServiceImpl implements DishService{
         QueryWrapper<Dish> qw = new QueryWrapper<>();
         qw.like("dish_name", keyword);
         qw.eq("restaurant_id", id);
-        //qw.orderBy(true, true, "create_at");
+        qw.orderBy(true, true, "create_at");
         return dishDao.selectList(qw);
     }
 

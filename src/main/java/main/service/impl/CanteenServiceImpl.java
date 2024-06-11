@@ -3,6 +3,7 @@ package main.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 
@@ -14,6 +15,7 @@ import main.pojo.Seat;
 import main.pojo.SeatReservation;
 import main.service.CanteenService;
 
+@Service
 public class CanteenServiceImpl implements CanteenService{
     @Autowired
     private CanteenDao canteenDao;

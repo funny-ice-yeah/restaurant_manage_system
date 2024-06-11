@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import main.dto.UserDTO;
 import main.pojo.DishSalesData;
 import main.pojo.User;
 import main.service.FavoriteDishService;
@@ -39,9 +40,10 @@ public class UserController {
     }
 
     @GetMapping("/selectById")
-    public ResponseEntity<User> getUserById(@RequestParam("userId") Integer id){
+    public ResponseEntity<UserDTO> getUserById(@RequestParam("userId") Integer id){
         User user = userService.selectById(id);
-        return ResponseEntity.ok(user);
+        UserDTO userDTO = userService.convert2Dto(user);
+        return ResponseEntity.ok(userDTO);
     }
     
     @GetMapping("/favouriteDishSales")
@@ -74,7 +76,8 @@ public class UserController {
     }
 
     @PutMapping
-    public boolean updateUser(@RequestBody User user){
+    public boolean updateUser(@RequestBody UserDTO userDTO){
+        User user = userService.convert2Pojo(userDTO);
         return userService.update(user);
     }
 

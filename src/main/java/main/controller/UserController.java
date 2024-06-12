@@ -34,9 +34,10 @@ public class UserController {
     private FavoriteDishService favoriteDishService;
 
     @GetMapping("/selectAll")
-    public ResponseEntity<List<User>> listUser(){
+    public ResponseEntity<List<UserDTO>> listUser(){
         List<User> userList = userService.selectAll();
-        return ResponseEntity.ok(userList);
+        List<UserDTO> userDTOList = userList.stream().map(userService::convert2Dto).toList();
+        return ResponseEntity.ok(userDTOList);
     }
 
     @GetMapping("/selectById")
@@ -71,7 +72,8 @@ public class UserController {
     }
     
     @PostMapping
-    public boolean createUser(@RequestBody User user){
+    public boolean createUser(@RequestBody UserDTO userDTO){
+        User user = userService.convert2Pojo(userDTO);
         return userService.insert(user);
     }
 

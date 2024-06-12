@@ -25,6 +25,7 @@ import main.service.RestaurantService;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -151,8 +152,8 @@ public class RestaurantServiceImpl implements RestaurantService{
             "age > 45",
             "role = 0",
             "role = 1",
-            "gender = 'Male'",
-            "gender = 'Female'"
+            "gender = 0",
+            "gender = 1"
         };
         
         for(String cond : conditions){
@@ -160,9 +161,16 @@ public class RestaurantServiceImpl implements RestaurantService{
             List<DishSalesSummary> dishSalesSummaries = orderDao.getDishSalesSummariesByConditionAndRestaurantId(restaurantId, cond);
             UserHabit userHabit = new UserHabit(orderNum, dishSalesSummaries);
             UserReviewHabit userReviewHabit = restaurantReviewDao.selectUserReviewHabitsByRestaurantIdGivenCondition(restaurantId, cond);
-            String condition_info = cond.replace("age", "年龄").replace("BETWEEN", "介于").replace("AND", "到").replace("role", "身份").replace("\\b0\\b", "学生")
-                                        .replace("\\b1\\b", "职工").replace("gender", "性别").replace("=", "为").replace(">", "大于")
-                                        .replace("'Male'", "男").replace("'Female'", "女");
+            Pattern role0Pattern = Pattern.compile("\\brole\\s*=\\s*0\\b");
+            Pattern role1Pattern = Pattern.compile("\\brole\\s*=\\s*1\\b");    
+            Pattern gender0Pattern = Pattern.compile("\\bgender\\s*=\\s*0\\b");
+            Pattern gender1Pattern = Pattern.compile("\\bgender\\s*=\\s*1\\b");        
+            String condition_info = cond.replace("age", "年龄").replace("BETWEEN", "介于").replace("AND", "到")
+                                        .replace("gender", "性别").replace("=", "为").replace(">", "大于");
+            condition_info = role0Pattern.matcher(condition_info).replaceAll("学生");
+            condition_info = role1Pattern.matcher(condition_info).replaceAll("职工");
+            condition_info = gender0Pattern.matcher(condition_info).replaceAll("男性顾客");
+            condition_info = gender1Pattern.matcher(condition_info).replaceAll("女性顾客");
             userGroupAnalysis.add(new UserGroupAnalysis(condition_info, userHabit, userReviewHabit));
         }
 

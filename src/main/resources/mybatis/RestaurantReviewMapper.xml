@@ -9,7 +9,7 @@
         where restaurant_id = #{param};
     </select>
     <select id="selectUserReviewHabitsByRestaurantIdGivenCondition" resultType="main.pojo.UserReviewHabit">
-        SELECT COUNT(review_id) AS reviewNum, AVG(rating) AS averageScore
+        SELECT COUNT(review_id) AS reviewNum, AVG(rating) AS averageRating
         FROM restaurant_review
         WHERE user_id IN (SELECT sub.user_id FROM user AS sub WHERE ${condition})
         AND restaurant_id = #{restaurantId};    

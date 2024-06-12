@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import main.dto.RestaurantDTO;
 import main.pojo.ActivityOneDay;
 import main.pojo.DishAnalysis;
 import main.pojo.LoyalCustomerDistribution;
@@ -58,9 +59,9 @@ public class RestaurantController {
     }
 
     @GetMapping("/searchRestaurants")
-    public ResponseEntity<List<Restaurant>> searchRestaurants(@RequestParam("keyword") String keyword){
-        List<Restaurant> restaurants = restaurantService.getRestaurantsByKeyword(keyword);
-        return ResponseEntity.ok(restaurants);        
+    public ResponseEntity<List<RestaurantDTO>> searchRestaurants(@RequestParam("keyword") String keyword){
+        List<RestaurantDTO> restaurantDTOs = restaurantService.getRestaurantsByKeyword(keyword);
+        return ResponseEntity.ok(restaurantDTOs);        
     } 
 
     @GetMapping("/details")
@@ -72,9 +73,9 @@ public class RestaurantController {
 
 
     @GetMapping("/selectAll")
-    public ResponseEntity<List<Restaurant>> selelctAll(){
-        List<Restaurant> restaurants = restaurantService.selectAll();
-        return ResponseEntity.ok(restaurants);
+    public ResponseEntity<List<RestaurantDTO>> selelctAll(){
+        List<RestaurantDTO> restaurantDtos = restaurantService.selectAll();
+        return ResponseEntity.ok(restaurantDtos);
     }
 
     @GetMapping("/selectById")

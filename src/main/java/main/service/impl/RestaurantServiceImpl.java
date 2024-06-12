@@ -3,7 +3,7 @@ package main.service.impl;
 import main.dao.RestaurantDao;
 import main.dao.RestaurantReviewDao;
 import main.dao.UserDao;
-import main.dao.CanteenDao;
+import main.dto.RestaurantDTO;
 import main.dao.DishDao;
 import main.dao.OrderDao;
 import main.dao.OrderDetailDao;
@@ -43,9 +43,6 @@ public class RestaurantServiceImpl implements RestaurantService{
     private DishDao dishDao;
 
     @Autowired
-    private CanteenDao canteenDao;
-
-    @Autowired
     private OrderDao orderDao;
 
     @Autowired
@@ -58,7 +55,7 @@ public class RestaurantServiceImpl implements RestaurantService{
     private RestaurantReviewDao restaurantReviewDao;
     
     @Override
-    public List<Restaurant> selectAll(){
+    public List<RestaurantDTO> selectAll(){
         return restaurantDao.selectAll();
     }
 
@@ -88,25 +85,23 @@ public class RestaurantServiceImpl implements RestaurantService{
         return restaurantDao.deleteById(id) > 0;
     }
     @Override
-    public List<Restaurant> getRestaurantsByKeyword(String keyword){
+    public List<RestaurantDTO> getRestaurantsByKeyword(String keyword){
         return restaurantDao.getRestaurantsByKeyword(keyword);
     }
 
     @Override
     public List<RestaurantSummary> getRestaurantSummariesByKeyword(String keyword){
-        List<Restaurant> restaurantList = getRestaurantsByKeyword(keyword);
+        List<RestaurantDTO> restaurantDTOList = getRestaurantsByKeyword(keyword);
         List<RestaurantSummary> restaurantSummaries = new ArrayList<>();//创建Summary，包含rest_name，brief_inro和main_dish_names
        
-        for(Restaurant restaurant:restaurantList){
-            Integer canteenId = restaurant.getCanteenId();
-            String canteenName = canteenDao.selectById(canteenId).getCanteenName();
-            String location = canteenName+restaurant.getLocation();
-            List<Dish> mainDishs = dishDao.selectMainDishsByRestaurantId(restaurant.getRestaurantId());
+        for(RestaurantDTO restaurantDto:restaurantDTOList){
+            String location = restaurantDto.getLocation();
+            List<Dish> mainDishs = dishDao.selectMainDishsByRestaurantId(restaurantDto.getRestaurantId());
             List<String> mainDishsName = new ArrayList<>();
             for(Dish dish : mainDishs){
                 mainDishsName.add(dish.getDishName());
             }
-            RestaurantSummary restaurantSummary = new RestaurantSummary(location,restaurant.getRestaurantName(),restaurant.getBriefIntro(),mainDishsName);
+            RestaurantSummary restaurantSummary = new RestaurantSummary(location,restaurantDto.getRestaurantName(),restaurantDto.getBriefIntro(),mainDishsName);
             restaurantSummaries.add(restaurantSummary);
         }
 

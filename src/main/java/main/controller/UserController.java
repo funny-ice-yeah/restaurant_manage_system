@@ -72,15 +72,33 @@ public class UserController {
     }
     
     @PostMapping
-    public boolean createUser(@RequestBody UserDTO userDTO){
+    public  ResponseEntity<String> createUser(@RequestBody UserDTO userDTO){
+        if (userDTO.getAge() != null && userDTO.getAge() < 0) {
+            return ResponseEntity.badRequest().body("年龄不能为负数");
+        }
+
         User user = userService.convert2Pojo(userDTO);
-        return userService.insert(user);
+        boolean created = userService.insert(user); 
+        if(created){
+            return ResponseEntity.ok("创建成功");
+        }else{
+            return ResponseEntity.status(500).body("创建失败");
+        }
+
     }
 
     @PutMapping
-    public boolean updateUser(@RequestBody UserDTO userDTO){
+    public ResponseEntity<String> updateUser(@RequestBody UserDTO userDTO){
+        if (userDTO.getAge() != null && userDTO.getAge() < 0) {
+            return ResponseEntity.badRequest().body("年龄不能为负数");
+        }
         User user = userService.convert2Pojo(userDTO);
-        return userService.update(user);
+        boolean updated =  userService.update(user);
+        if(updated){
+            return ResponseEntity.ok("更新成功");
+        }else{
+            return ResponseEntity.status(500).body("更新失败");
+        }
     }
 
     @DeleteMapping("/deleteById")

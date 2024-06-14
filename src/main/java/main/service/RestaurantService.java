@@ -3,6 +3,7 @@ package main.service;
 import java.sql.Timestamp;
 import java.util.List;
 
+import main.dto.BriefRestaurantDTO;
 import main.dto.RestaurantDTO;
 import main.pojo.LoyalCustomerDistribution;
 import main.pojo.MonthlyRevenue;
@@ -11,13 +12,14 @@ import main.pojo.RestaurantSummary;
 import main.pojo.UserGroupAnalysis;
 import main.pojo.RestaurantDetails;
 public interface RestaurantService {
-    public List<RestaurantDTO> selectAll();
+    public List<BriefRestaurantDTO> selectAll4U();
+    public List<RestaurantDTO> selectAll4M();
     public Restaurant selectById(Integer id);
     public Restaurant selectByAccount(String account);
     public boolean insert(Restaurant restaurant);
     public boolean update(Restaurant restaurant);
     public boolean deleteById(Integer id);
-    public List<RestaurantDTO> getRestaurantsByKeyword(String keyword);
+    public List<BriefRestaurantDTO> getRestaurantsByKeyword(String keyword);
     public List<RestaurantSummary> getRestaurantSummariesByKeyword(String keyword);
     public RestaurantDetails getRestaurantDetailsById(Integer id);
     public List<LoyalCustomerDistribution> getLoyalCustomerDistribution(Integer restaurantId,Integer threshold,Timestamp startTimeStamp);

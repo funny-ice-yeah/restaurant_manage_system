@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import main.dto.BriefRestaurantDTO;
 import main.dto.RestaurantDTO;
 import main.pojo.ActivityOneDay;
 import main.pojo.DishAnalysis;
@@ -59,8 +60,8 @@ public class RestaurantController {
     }
 
     @GetMapping("/searchRestaurants")
-    public ResponseEntity<List<RestaurantDTO>> searchRestaurants(@RequestParam("keyword") String keyword){
-        List<RestaurantDTO> restaurantDTOs = restaurantService.getRestaurantsByKeyword(keyword);
+    public ResponseEntity<List<BriefRestaurantDTO>> searchRestaurants(@RequestParam("keyword") String keyword){
+        List<BriefRestaurantDTO> restaurantDTOs = restaurantService.getRestaurantsByKeyword(keyword);
         return ResponseEntity.ok(restaurantDTOs);        
     } 
 
@@ -72,11 +73,18 @@ public class RestaurantController {
 
 
 
-    @GetMapping("/selectAll")
-    public ResponseEntity<List<RestaurantDTO>> selelctAll(){
-        List<RestaurantDTO> restaurantDtos = restaurantService.selectAll();
+    @GetMapping("/selectAll4U")
+    public ResponseEntity<List<BriefRestaurantDTO>> selelctAll4U(){
+        List<BriefRestaurantDTO> brestaurantDtos = restaurantService.selectAll4U();
+        return ResponseEntity.ok(brestaurantDtos);
+    }
+
+    @GetMapping("/selectAll4M")
+    public ResponseEntity<List<RestaurantDTO>> selelctAll4M(){
+        List<RestaurantDTO> restaurantDtos = restaurantService.selectAll4M();
         return ResponseEntity.ok(restaurantDtos);
     }
+
 
     @GetMapping("/selectById")
     public ResponseEntity<Restaurant> selectById(@RequestParam("restaurantId") Integer id){

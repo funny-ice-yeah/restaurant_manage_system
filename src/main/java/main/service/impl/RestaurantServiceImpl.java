@@ -3,6 +3,7 @@ package main.service.impl;
 import main.dao.RestaurantDao;
 import main.dao.RestaurantReviewDao;
 import main.dao.UserDao;
+import main.dto.BriefRestaurantDTO;
 import main.dto.RestaurantDTO;
 import main.dao.DishDao;
 import main.dao.OrderDao;
@@ -55,8 +56,13 @@ public class RestaurantServiceImpl implements RestaurantService{
     private RestaurantReviewDao restaurantReviewDao;
     
     @Override
-    public List<RestaurantDTO> selectAll(){
-        return restaurantDao.selectAll();
+    public List<BriefRestaurantDTO> selectAll4U(){
+        return restaurantDao.selectAll4U();
+    }
+
+    @Override
+    public List<RestaurantDTO> selectAll4M(){
+        return restaurantDao.selectAll4M();
     }
 
     @Override
@@ -85,16 +91,16 @@ public class RestaurantServiceImpl implements RestaurantService{
         return restaurantDao.deleteById(id) > 0;
     }
     @Override
-    public List<RestaurantDTO> getRestaurantsByKeyword(String keyword){
+    public List<BriefRestaurantDTO> getRestaurantsByKeyword(String keyword){
         return restaurantDao.getRestaurantsByKeyword(keyword);
     }
 
     @Override
     public List<RestaurantSummary> getRestaurantSummariesByKeyword(String keyword){
-        List<RestaurantDTO> restaurantDTOList = getRestaurantsByKeyword(keyword);
+        List<BriefRestaurantDTO> restaurantDTOList = getRestaurantsByKeyword(keyword);
         List<RestaurantSummary> restaurantSummaries = new ArrayList<>();//创建Summary，包含rest_name，brief_inro和main_dish_names
        
-        for(RestaurantDTO restaurantDto:restaurantDTOList){
+        for(BriefRestaurantDTO restaurantDto:restaurantDTOList){
             String location = restaurantDto.getLocation();
             List<Dish> mainDishs = dishDao.selectMainDishsByRestaurantId(restaurantDto.getRestaurantId());
             List<String> mainDishsName = new ArrayList<>();

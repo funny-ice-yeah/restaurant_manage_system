@@ -25,6 +25,12 @@ public class FavoriteRestaurantServiceImpl implements FavoriteRestaurantService{
 
     @Override
     public boolean insert(FavoriteRestaurant favoriteRestaurant) {
+        QueryWrapper<FavoriteRestaurant> qw = new QueryWrapper<>();
+        qw.eq("user_id", favoriteRestaurant.getUserId());
+        qw.eq("restaurant_id", favoriteRestaurant.getRestaurantId());
+        if(favoriteRestaurantDao.selectOne(qw) != null){
+            return false;
+        }
         return favoriteRestaurantDao.insert(favoriteRestaurant) > 0;
     }
 

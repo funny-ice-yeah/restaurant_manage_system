@@ -1,6 +1,7 @@
 package main.service.impl;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -44,8 +45,10 @@ public class OrderServiceImpl implements OrderService{
     public boolean insert(Map<String, Object> data){
         Order order = new Order();
         order.setOrderStatus("准备中");
-        order.setOrderTime(new Timestamp(System.currentTimeMillis()));
-        order.setOrderMethod("线上");
+        String orderTime = (String) data.get("orderTime");
+        LocalDateTime localDateTime = LocalDateTime.parse(orderTime);
+        order.setOrderTime(Timestamp.valueOf(localDateTime));
+        order.setOrderMethod((String)data.get("orderMethod"));
         order.setTotalPrice(0f);
         order.setUserId((Integer)data.get("userId"));
         order.setRestaurantId((Integer)data.get("restaurantId"));

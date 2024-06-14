@@ -14,34 +14,40 @@ import org.springframework.web.bind.annotation.RestController;
 
 import main.service.RestaurantReviewService;
 import main.pojo.RestaurantReview;
+
 @RestController
 @RequestMapping("/restaurantReview")
 public class RestaurantReviewController {
-   @Autowired
-   private RestaurantReviewService restaurantReviewService;
-   
-   @GetMapping("/selectByRestaurantId")
-   public List<RestaurantReview> selectByRestaurantId(@RequestParam("restaurantId") Integer id){
+    @Autowired
+    private RestaurantReviewService restaurantReviewService;
+
+    @GetMapping("/selectByRestaurantId")
+    public List<RestaurantReview> selectByRestaurantId(@RequestParam("restaurantId") Integer id) {
         return restaurantReviewService.selectByRestaurantId(id);
-   }
+    }
 
-   @GetMapping("/selectByUserId")
-   public List<RestaurantReview> selectByUserId(@RequestParam("userId") Integer id){
+    @GetMapping("/selectByUserId")
+    public List<RestaurantReview> selectByUserId(@RequestParam("userId") Integer id) {
         return restaurantReviewService.selectByUserId(id);
-   }
+    }
 
-   @PostMapping
-   public boolean insert(@RequestBody RestaurantReview restaurantReview){
-     return restaurantReviewService.insert(restaurantReview);
-   }
+    @PostMapping
+    public boolean insert(@RequestBody RestaurantReview restaurantReview) {
+        return restaurantReviewService.insert(restaurantReview);
+    }
 
-   @PutMapping
-   public boolean update(@RequestBody RestaurantReview restaurantReview){
-     return restaurantReviewService.update(restaurantReview);
-   }
+    @PutMapping
+    public boolean update(@RequestBody RestaurantReview restaurantReview) {
+          return restaurantReviewService.update(restaurantReview);
+    }
 
-   @DeleteMapping
-   public boolean deleteByUserId(Integer id){
-     return restaurantReviewService.deleteByUserId(id);
-   }
+    @DeleteMapping("/deleteByUserId")
+    public boolean deleteByUserId(@RequestParam("userId") Integer id) {
+        return restaurantReviewService.deleteByUserId(id);
+    }
+
+    @DeleteMapping("/deleteByReviewId")
+    public boolean deleteByReviewId(@RequestParam("reviewId") Integer id) {
+        return restaurantReviewService.deleteByReviewId(id);
+    }
 }

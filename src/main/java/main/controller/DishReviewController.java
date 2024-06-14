@@ -51,8 +51,13 @@ public class DishReviewController {
         return dishReviewService.update(dishReview);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/deleteByUserId")
     public boolean deleteByUserId(@RequestParam("userId") Integer id){
         return dishReviewService.deleteByUserId(id);
+    }
+
+    @DeleteMapping("/deleteByReviewId")
+    public boolean deleteByReviewId(@RequestParam("reviewId") Integer id){
+        return dishReviewService.deleteByReviewId(id);
     }
 }

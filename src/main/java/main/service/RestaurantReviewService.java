@@ -10,4 +10,5 @@ public interface RestaurantReviewService {
     public boolean insert(RestaurantReview restaurantReview);
     public boolean update(RestaurantReview restaurantReview);
     public boolean deleteByUserId(Integer id);
+    public boolean deleteByReviewId(Integer id);
 }

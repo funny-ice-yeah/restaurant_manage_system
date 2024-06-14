@@ -42,5 +42,11 @@ public class RestaurantReviewServiceImpl implements RestaurantReviewService {
         return restaurantReviewDao.delete(qw) > 0;
     }
 
+    @Override
+    public boolean deleteByReviewId(Integer id){
+        QueryWrapper<RestaurantReview> qw = new QueryWrapper<>();
+        qw.eq("review_id", id);
+        return restaurantReviewDao.delete(qw) > 0;
+    }
     
 }

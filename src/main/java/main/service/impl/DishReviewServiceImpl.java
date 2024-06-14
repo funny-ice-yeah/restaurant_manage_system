@@ -64,4 +64,11 @@ public class DishReviewServiceImpl implements DishReviewService{
         }
         return dishReviews;
     }
+
+    @Override
+    public boolean deleteByReviewId(Integer id){
+        QueryWrapper<DishReview> qw = new QueryWrapper<>();
+        qw.eq("review_id", id);
+        return dishReviewDao.delete(qw) > 0;
+    }
 }

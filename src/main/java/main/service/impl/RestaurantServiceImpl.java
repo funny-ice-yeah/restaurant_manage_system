@@ -177,5 +177,4 @@ public class RestaurantServiceImpl implements RestaurantService{
         return restaurantDao.getMonthlyRevenues(restaurantId);
     }
 
- 
 }

@@ -14,5 +14,5 @@ import lombok.NoArgsConstructor;
 public class Allergy {
    @TableId(type=IdType.AUTO)
    private Integer dishId;
-   private String ingredient; 
+   private String allergy; 
 }

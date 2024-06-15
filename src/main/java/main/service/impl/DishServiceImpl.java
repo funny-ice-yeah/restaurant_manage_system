@@ -20,11 +20,13 @@ import main.dao.OrderDao;
 import main.dao.OrderDetailDao;
 import main.dao.PriceDao;
 import main.dao.UserDao;
-
+import main.pojo.Allergy;
 import main.pojo.Dish;
 import main.pojo.DishAnalysis;
 import main.pojo.DishDetail;
 import main.pojo.DishReview;
+import main.pojo.Ingredient;
+import main.pojo.Nutrition;
 import main.pojo.Price;
 import main.pojo.User;
 
@@ -148,6 +150,52 @@ public class DishServiceImpl implements DishService{
         qw.eq("dish_id", id);
         qw.orderBy(true, true, "create_at");
         return priceDao.selectList(qw);
+    }
+
+    @Override
+    public boolean deleteDetail(String type, String name, Integer id) {
+        if(type.equals("ingredients")){
+            QueryWrapper<Ingredient> qw = new QueryWrapper<>();
+            qw.eq("dish_id", id);
+            qw.eq("ingredient", name);
+            return ingredientDao.delete(qw) > 0;
+        }else if(type.equals("nutritions")){
+            QueryWrapper<Nutrition> qw = new QueryWrapper<>();
+            qw.eq("dish_id", id);
+            qw.eq("nutrition", name);
+            return nutritionDao.delete(qw) > 0;
+        }else{
+            QueryWrapper<Allergy> qw = new QueryWrapper<>();
+            qw.eq("dish_id", id);
+            qw.eq("allergy", name);
+            return allergyDao.delete(qw) > 0;
+        }
+    }
+
+    @Override
+    public boolean insertDetail(String type, String name, Integer id) {
+        if(type.equals("ingredients")){
+            QueryWrapper<Ingredient> qw = new QueryWrapper<>();
+            qw.eq("dish_id", id);
+            qw.eq("ingredient", name);
+            if(ingredientDao.selectOne(qw) != null) return false;
+            Ingredient ingredient = new Ingredient(id, name);
+            return ingredientDao.insert(ingredient) > 0;
+        }else if(type.equals("nutritions")){
+            QueryWrapper<Nutrition> qw = new QueryWrapper<>();
+            qw.eq("dish_id", id);
+            qw.eq("nutrition", name); 
+            if(nutritionDao.selectOne(qw) != null) return false;
+            Nutrition nutrition = new Nutrition(id, name);
+            return nutritionDao.insert(nutrition) > 0;
+        }else{
+            QueryWrapper<Allergy> qw = new QueryWrapper<>();
+            qw.eq("dish_id", id);
+            qw.eq("allergy", name); 
+            if(allergyDao.selectOne(qw) != null) return false;
+            Allergy allergy = new Allergy(id, name);
+            return allergyDao.insert(allergy) > 0;
+        }
     }
 
 

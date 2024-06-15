@@ -81,9 +81,18 @@ public class DishController {
         return dishService.insert(dish);
     }
 
+    @PostMapping("/insertDetail")
+    public boolean insertDetail(@RequestParam("dishId") Integer id, @RequestParam("name") String name, @RequestParam("type") String type){
+        return dishService.insertDetail(type, name, id);
+    }
+
     @DeleteMapping("/deleteById")
     public boolean deleteById(@RequestParam("dishId") Integer id){
         return dishService.delete(id);
     }
 
+    @DeleteMapping("/deleteDetail")
+    public boolean deleteDetail(@RequestParam("dishId") Integer id, @RequestParam("name") String name, @RequestParam("type") String type){
+        return dishService.deleteDetail(type, name, id);
+    }
 }

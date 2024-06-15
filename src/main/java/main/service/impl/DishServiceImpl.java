@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 
@@ -127,8 +128,13 @@ public class DishServiceImpl implements DishService{
     }
 
     @Override
+    @Transactional
     public boolean insert(Dish dish){
-        return dishDao.insert(dish) > 0;
+        boolean dishInsertSuccess = dishDao.insert(dish) > 0 ;  
+        Price price = new Price();
+        price.setDishId(dish.getDishId());
+        price.setPrice(dish.getCurrentPrice());
+        return dishInsertSuccess && priceDao.insert(price) > 0;
     }
 
     @Override

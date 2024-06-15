@@ -119,24 +119,6 @@ CREATE TABLE IF NOT EXISTS favorite_dish (
     PRIMARY KEY(user_id, dish_id)
 );
 
-CREATE TABLE IF NOT EXISTS seat (
-    seat_id INT AUTO_INCREMENT PRIMARY KEY,
-    canteen_id INT NOT NULL,
-    location VARCHAR(255) NOT NULL,
-    status VARCHAR(255) NOT NULL
-);
-
-
-CREATE TABLE IF NOT EXISTS seat_reservation (
-    seat_id INT NOT NULL,
-    user_id INT NOT NULL,
-    canteen_id INT NOT NULL,
-    time_booked TIMESTAMP NOT NULL,
-    create_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    status VARCHAR(255) NOT NULL,
-    PRIMARY KEY(canteen_id,seat_id, user_id)
-);
-
 CREATE TABLE IF NOT EXISTS price (
     dish_id INT NOT NULL,
     price DECIMAL(10, 2) NOT NULL,
@@ -160,10 +142,6 @@ ALTER TABLE favorite_restaurant ADD FOREIGN KEY(user_id) REFERENCES user(user_id
 ALTER TABLE favorite_restaurant ADD FOREIGN KEY(restaurant_id) REFERENCES restaurant(restaurant_id) ON DELETE CASCADE;  
 ALTER TABLE favorite_dish ADD FOREIGN KEY(user_id) REFERENCES user(user_id) ON DELETE CASCADE;  
 ALTER TABLE favorite_dish ADD FOREIGN KEY(dish_id) REFERENCES dish(dish_id) ON DELETE CASCADE;  
-ALTER TABLE seat ADD FOREIGN KEY(canteen_id) REFERENCES canteen(canteen_id) ON DELETE CASCADE;  
-ALTER TABLE seat_reservation ADD FOREIGN KEY(seat_id) REFERENCES seat(seat_id) ON DELETE CASCADE;  
-ALTER TABLE seat_reservation ADD FOREIGN KEY(user_id) REFERENCES user(user_id) ON DELETE CASCADE;
-ALTER TABLE seat_reservation ADD FOREIGN KEY(canteen_id) REFERENCES canteen(canteen_id) ON DELETE CASCADE;  
 ALTER TABLE price ADD FOREIGN KEY(dish_id) REFERENCES dish(dish_id) ON DELETE CASCADE;
 ALTER TABLE allergy ADD FOREIGN KEY(dish_id) REFERENCES dish(dish_id) ON DELETE CASCADE;  
 ALTER TABLE ingredient ADD FOREIGN KEY(dish_id) REFERENCES dish(dish_id) ON DELETE CASCADE;  

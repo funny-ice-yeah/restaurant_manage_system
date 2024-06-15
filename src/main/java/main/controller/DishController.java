@@ -1,5 +1,6 @@
 package main.controller;
 
+
 import java.util.List;
 import java.util.Map;
 
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.multipart.MultipartFile;
 
 import main.pojo.Dish;
 import main.pojo.DishDetail;
@@ -84,6 +85,11 @@ public class DishController {
     @PostMapping("/insertDetail")
     public boolean insertDetail(@RequestParam("dishId") Integer id, @RequestParam("name") String name, @RequestParam("type") String type){
         return dishService.insertDetail(type, name, id);
+    }
+
+    @PostMapping("/uploadImage")
+    public boolean uploadImage(@RequestParam("file")MultipartFile file, @RequestParam("dishId") Integer id){
+        return dishService.uploadImage(file, id);
     }
 
     @DeleteMapping("/deleteById")

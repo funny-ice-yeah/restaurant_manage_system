@@ -2,6 +2,7 @@ package main.service;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
 
 import main.pojo.Dish;
 import main.pojo.DishAnalysis;
@@ -19,6 +20,7 @@ public interface DishService {
     public boolean update(Dish dish);
     public boolean insert(Dish dish);
     public boolean insertDetail(String type, String name, Integer id);
+    public boolean uploadImage(MultipartFile file, Integer id);
     public boolean delete(Integer id);
     public boolean deleteDetail(String type, String name, Integer id);
 }

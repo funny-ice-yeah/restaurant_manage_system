@@ -1,12 +1,21 @@
 package main.service.impl;
 
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.system.ApplicationHome;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 
@@ -202,6 +211,32 @@ public class DishServiceImpl implements DishService{
             Allergy allergy = new Allergy(id, name);
             return allergyDao.insert(allergy) > 0;
         }
+    }
+
+    @Override
+    public boolean uploadImage(MultipartFile file, Integer id) {
+        ApplicationHome applicationHome = new ApplicationHome(this.getClass());
+        String path0 = applicationHome.getDir().getAbsolutePath() + "\\static\\images\\dish\\";
+        String path1 = applicationHome.getDir().getParentFile().getParentFile() + "\\src\\main\\resources\\static\\images\\dish\\";
+        String originFileName = file.getOriginalFilename();
+        @SuppressWarnings("null")
+        String[] splitFileName = originFileName.split("\\.");
+        String uuid = UUID.randomUUID().toString().replace("-", "");
+        String fileName = splitFileName[0] + uuid + "." + splitFileName[1];
+        path0 = path0 + fileName;
+        path1 = path1 + fileName;
+        try{
+            file.transferTo(new File(path0));
+            Path source = Paths.get(path0);
+            Path target = Paths.get(path1);
+            Files.copy(source, target); 
+        }catch (IOException e){
+            e.printStackTrace();
+            return false;
+        }
+        Dish dish = dishDao.selectById(id);
+        dish.setImageUrl("http://127.0.0.1:8080/images/dish/"+fileName);
+        return dishDao.updateById(dish) > 0;
     }
 
 

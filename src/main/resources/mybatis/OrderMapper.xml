@@ -18,6 +18,7 @@
         FROM `order` 
         WHERE restaurant_id = #{restaurantId} 
         AND create_at >= #{startTime}
+        AND order_status LIKE '%已完成%'         
         GROUP BY user_id
         HAVING COUNT(user_id) >= #{threshold};
     </select>
@@ -32,6 +33,7 @@
         FROM `order`
         WHERE restaurant_id = #{restaurantId}
         AND create_at >= #{startTime}
+        AND order_status LIKE '%已完成%'         
         GROUP BY period
         ORDER BY period;
     </select>
@@ -47,6 +49,7 @@
         count(order_id) as orderNum
         FROM `order`
         WHERE restaurant_id = #{restaurantId}
+        AND order_status LIKE '%已完成%'                 
         AND create_at >= #{startTime}
         GROUP BY period
         ORDER BY period;
@@ -57,7 +60,9 @@
         SELECT COUNT(order_id) 
         FROM `order`
         WHERE user_id IN (SELECT sub.user_id FROM user AS sub WHERE ${condition})
-          AND restaurant_id = #{restaurantId};
+        AND restaurant_id = #{restaurantId}
+        AND order_status LIKE '%已完成%';       
+
     </select>
 
     <select id="getDishSalesSummariesByConditionAndRestaurantId"  resultType="main.pojo.DishSalesSummary">
@@ -66,7 +71,8 @@
         JOIN `order` AS o ON od.order_id = o.order_id
         JOIN dish AS d ON od.dish_id = d.dish_id
         WHERE o.user_id IN (SELECT sub.user_id FROM user AS sub WHERE ${condition})
-          AND o.restaurant_id = #{restaurantId}
-        GROUP BY od.dish_id, d.dish_name
+        AND o.restaurant_id = #{restaurantId}
+        AND o.order_status LIKE '%已完成%'         
+        GROUP BY od.dish_id, d.dish_name;
     </select>
 </mapper>

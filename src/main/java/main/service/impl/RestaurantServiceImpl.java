@@ -166,8 +166,7 @@ public class RestaurantServiceImpl implements RestaurantService{
             Pattern role1Pattern = Pattern.compile("\\brole\\s*=\\s*1\\b");    
             Pattern gender0Pattern = Pattern.compile("\\bgender\\s*=\\s*0\\b");
             Pattern gender1Pattern = Pattern.compile("\\bgender\\s*=\\s*1\\b");        
-            String condition_info = cond.replace("age", "年龄").replace("BETWEEN", "介于").replace("AND", "到")
-                                        .replace("gender", "性别").replace("=", "为").replace(">", "大于");
+            String condition_info = cond.replace("age", "年龄").replace("BETWEEN", "介于").replace("AND", "到").replace(">", "大于");
             condition_info = role0Pattern.matcher(condition_info).replaceAll("学生");
             condition_info = role1Pattern.matcher(condition_info).replaceAll("职工");
             condition_info = gender0Pattern.matcher(condition_info).replaceAll("男性顾客");

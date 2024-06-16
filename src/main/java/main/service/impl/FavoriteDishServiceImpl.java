@@ -95,9 +95,9 @@ public class FavoriteDishServiceImpl implements FavoriteDishService{
 
         for(FavoriteDish favoriteDish : favoriteDishs){
             Integer dishId = favoriteDish.getDishId();
-            Dish dish = dishDao.selectById(userId);
+            Dish dish = dishDao.selectById(dishId);
             String dishName = dish.getDishName();
-            String location = dishDao.selectLocationByDishId(dish.getDishId());
+            String location = dishDao.selectLocationByDishId(dishId);
             for(String method : orderMethods){
                 Integer totalSales = orderDetailDao.selectTotalSalesByDishIdAndOrdermethodBeforeParticularTime(dishId, startTimeStamp, method);
                 dishSalesDatas.add(new DishSalesData(dishName, location, method, totalSales));

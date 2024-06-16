@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 
+import java.time.Duration;
 import main.dao.DishDao;
 import main.dao.MessageDao;
 import main.dao.OrderDao;
@@ -44,10 +45,19 @@ public class OrderServiceImpl implements OrderService{
     @Override
     public boolean insert(Map<String, Object> data){
         Order order = new Order();
-        order.setOrderStatus("准备中");
+
         String orderTime = (String) data.get("orderTime");
         LocalDateTime localDateTime = LocalDateTime.parse(orderTime);
         order.setOrderTime(Timestamp.valueOf(localDateTime));
+
+        LocalDateTime curDateTime = LocalDateTime.now();
+        Duration duration = Duration.between(curDateTime, localDateTime);
+        if(duration.toMinutes() <= 20){
+            order.setOrderStatus("准备中");
+        }else{
+            order.setOrderStatus("已预订");
+        }
+
         order.setOrderMethod((String)data.get("orderMethod"));
         order.setTotalPrice(0f);
         order.setUserId((Integer)data.get("userId"));
@@ -79,12 +89,21 @@ public class OrderServiceImpl implements OrderService{
         if(!order.getOrderStatus().equals(oldOrder.getOrderStatus())){
             Message message = new Message();
             message.setSubject("订单状态变化");
-            message.setContent("您的订单状态已由"+oldOrder.getOrderStatus()+"转变为"+order.getOrderStatus());
+            if(order.getOrderStatus().equals("已完成")){
+                message.setContent("订单已完成");
+            }else if(order.getOrderStatus().equals("准备中")){
+                message.setContent("订单已确认");
+            }else if(order.getOrderStatus().equals("已取消")){
+                if(!oldOrder.getOrderStatus().equals("确认中")) return false;
+                message.setContent("订单已取消");
+            }
             message.setOrderId(order.getOrderId());
             message.setUserId(order.getUserId());
             messageDao.insert(message);
+            oldOrder.setOrderStatus(order.getOrderStatus());
+            return orderDao.updateById(oldOrder) > 0;
         }
-        return orderDao.updateById(order) > 0;
+        return false;
     }
 
     @Override

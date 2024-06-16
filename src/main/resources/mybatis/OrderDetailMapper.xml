@@ -47,7 +47,8 @@
         JOIN `order` AS o 
         ON o.order_id = od.order_id 
         WHERE od.dish_id = #{DishId} 
-        AND o.create_at >= #{TimeStamp} 
+        AND o.create_at >= #{TimeStamp}
+        AND o.order_status LIKE '%已完成%'         
         AND o.order_method = #{OrderMethod};
     </select>
     <select id="getOrderDetailsByRestaurantIdAndUserId" resultType="main.pojo.CustomerOrderSales">
@@ -58,6 +59,7 @@
         WHERE o.restaurant_id = #{restaurantId} 
         AND o.create_at >= #{startTime} 
         AND o.user_id = #{userId}
+        AND o.order_status LIKE '%已完成%' 
         GROUP BY od.dish_id;
     </select>
 </mapper>

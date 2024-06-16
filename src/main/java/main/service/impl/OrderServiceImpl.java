@@ -92,6 +92,7 @@ public class OrderServiceImpl implements OrderService{
             if(order.getOrderStatus().equals("已完成")){
                 message.setContent("订单已完成");
             }else if(order.getOrderStatus().equals("准备中")){
+                if(!oldOrder.getOrderStatus().equals("确认中")) return false;
                 message.setContent("订单已确认");
             }else if(order.getOrderStatus().equals("已取消")){
                 if(!oldOrder.getOrderStatus().equals("确认中")) return false;

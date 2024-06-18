@@ -66,8 +66,8 @@ public class RestaurantServiceImpl implements RestaurantService{
     }
 
     @Override
-    public Restaurant selectById(Integer id){
-        return restaurantDao.selectById(id);
+    public BriefRestaurantDTO selectById(Integer id){
+        return restaurantDao.selectByRestaurantId(id);
     }
 
     @Override

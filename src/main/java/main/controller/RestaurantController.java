@@ -87,7 +87,7 @@ public class RestaurantController {
 
 
     @GetMapping("/selectById")
-    public ResponseEntity<Restaurant> selectById(@RequestParam("restaurantId") Integer id){
+    public ResponseEntity<BriefRestaurantDTO> selectById(@RequestParam("restaurantId") Integer id){
         return ResponseEntity.ok(restaurantService.selectById(id));
     }
 

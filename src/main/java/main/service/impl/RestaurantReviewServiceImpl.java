@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 
 import main.dao.RestaurantReviewDao;
+import main.dto.RestaurantReviewDTO;
 import main.pojo.RestaurantReview;
 import main.service.RestaurantReviewService;
 
@@ -17,15 +18,11 @@ public class RestaurantReviewServiceImpl implements RestaurantReviewService {
 
     @Override
     public List<RestaurantReview> selectByRestaurantId(Integer id) {
-        QueryWrapper<RestaurantReview> qw = new QueryWrapper<>();
-        qw.eq("restaurant_id", id);
-        return restaurantReviewDao.selectList(qw);
+        return restaurantReviewDao.selectByRestaurantId(id);
     }
     @Override
-    public List<RestaurantReview> selectByUserId(Integer id) {
-        QueryWrapper<RestaurantReview> qw = new QueryWrapper<>();
-        qw.eq("user_id", id);
-        return restaurantReviewDao.selectList(qw);
+    public List<RestaurantReviewDTO> selectByUserId(Integer id) {
+        return restaurantReviewDao.selectByUserId(id);
     }
     @Override
     public boolean insert(RestaurantReview restaurantReview) {

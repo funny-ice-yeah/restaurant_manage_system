@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import main.dto.DishReviewDTO;
 import main.pojo.DishReview;
 import main.service.DishReviewService;
 import main.service.DishService;
@@ -28,7 +29,7 @@ public class DishReviewController {
     
 
     @GetMapping("/selectByUserId")
-    public ResponseEntity<List<DishReview>> selectByUserId(@RequestParam("userId")Integer id){
+    public ResponseEntity<List<DishReviewDTO>> selectByUserId(@RequestParam("userId")Integer id){
         return ResponseEntity.ok(dishReviewService.selectByUserId(id));
     }
 

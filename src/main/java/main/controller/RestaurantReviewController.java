@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import main.service.RestaurantReviewService;
+import main.dto.RestaurantReviewDTO;
 import main.pojo.RestaurantReview;
 
 @RestController
@@ -27,7 +28,7 @@ public class RestaurantReviewController {
     }
 
     @GetMapping("/selectByUserId")
-    public List<RestaurantReview> selectByUserId(@RequestParam("userId") Integer id) {
+    public List<RestaurantReviewDTO> selectByUserId(@RequestParam("userId") Integer id) {
         return restaurantReviewService.selectByUserId(id);
     }
 

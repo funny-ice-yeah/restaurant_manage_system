@@ -14,7 +14,7 @@ import main.pojo.RestaurantDetails;
 public interface RestaurantService {
     public List<BriefRestaurantDTO> selectAll4U();
     public List<RestaurantDTO> selectAll4M();
-    public Restaurant selectById(Integer id);
+    public BriefRestaurantDTO selectById(Integer id);
     public Restaurant selectByAccount(String account);
     public boolean insert(Restaurant restaurant);
     public boolean update(Restaurant restaurant);

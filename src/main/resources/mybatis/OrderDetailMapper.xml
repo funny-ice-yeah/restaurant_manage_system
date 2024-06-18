@@ -4,14 +4,14 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="main.dao.OrderDetailDao">
     <select id="selectByOrderId" resultType="main.pojo.OrderDetail">
-        select * 
-        from order_detail
-        where order_id = #{param};
+        SELECT order_detail.quantity,order_detail.order_id,order_detail.dish_id,dish.dish_name 
+        FROM order_detail JOIN dish ON dish.dish_id = order_detail.dish_id
+        AND order_detail.order_id = #{param};
     </select>
     <select id="selectByDishId" resultType="main.pojo.OrderDetail">
-        select * 
-        from order_detail
-        where dish_id = #{param};
+        SELECT order_detail.quantity,order_detail.order_id,order_detail.dish_id,dish.dish_name 
+        FROM order_detail JOIN dish ON dish.dish_id = order_detail.dish_id
+        AND order_detail.dish_id = #{param};
     </select>
     <select id="getTotalSalesByDishId" resultType="Integer" parameterType="Integer">
         SELECT SUM(quantity)

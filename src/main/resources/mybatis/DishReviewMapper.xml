@@ -3,6 +3,12 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="main.dao.DishReviewDao">
+    <select id="selectByUserId" resultType="main.dto.DishReviewDTO" parameterType = "Integer">
+        SELECT review_id,dish_name,rating,content
+        FROM dish_review,dish 
+        WHERE dish_review.dish_id = dish.dish_id 
+        AND dish_review.user_id = #{param};
+    </select>
     <select id="selectByDishId" resultType="main.pojo.DishReview" parameterType="Integer">
         select * 
         from dish_review

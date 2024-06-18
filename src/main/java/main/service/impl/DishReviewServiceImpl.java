@@ -11,6 +11,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 
 import main.dao.DishDao;
 import main.dao.DishReviewDao;
+import main.dto.DishReviewDTO;
 import main.pojo.Dish;
 import main.pojo.DishReview;
 import main.service.DishReviewService;
@@ -31,10 +32,8 @@ public class DishReviewServiceImpl implements DishReviewService{
     }
 
     @Override
-    public List<DishReview> selectByUserId(Integer id) {
-        QueryWrapper<DishReview> qw = new QueryWrapper<>();
-        qw.eq("user_id", id);
-        return dishReviewDao.selectList(qw);
+    public List<DishReviewDTO> selectByUserId(Integer id) {
+        return dishReviewDao.selectByUserId(id);
     }
 
     @Override

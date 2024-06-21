@@ -126,13 +126,6 @@ public class DishServiceImpl implements DishService{
 
     @Override 
     public boolean update(Dish dish){
-        Dish oldDish = dishDao.selectById(dish.getDishId());
-        if(oldDish.getCurrentPrice() != dish.getCurrentPrice()){
-            Price price = new Price();
-            price.setDishId(dish.getDishId());
-            price.setPrice(dish.getCurrentPrice());
-            priceDao.insert(price);
-        }
         return dishDao.updateById(dish) > 0;
     }
 

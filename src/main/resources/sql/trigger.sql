@@ -5,7 +5,7 @@ CREATE TRIGGER after_dish_price_update
 AFTER UPDATE ON dish
 FOR EACH ROW
 BEGIN
-    IF NEW.current_price != OLD.current_price THEN
+    IF NEW.current_price <> OLD.current_price THEN
         INSERT INTO price (dish_id, price)
         VALUES (NEW.dish_id, NEW.current_price);
     END IF;

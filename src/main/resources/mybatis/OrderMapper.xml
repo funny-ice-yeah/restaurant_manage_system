@@ -28,7 +28,7 @@
             count(order_id) as orderNum
         FROM `order`
         WHERE restaurant_id = #{restaurantId}
-        AND create_at >= #{startTime}
+        AND order_time >= #{startTime}
         AND order_status LIKE '%已完成%'         
         GROUP BY period
         ORDER BY period;

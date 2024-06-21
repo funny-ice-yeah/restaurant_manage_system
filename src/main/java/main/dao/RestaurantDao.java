@@ -22,4 +22,5 @@ public interface RestaurantDao extends BaseMapper<Restaurant>{
     public Restaurant selectByName(String name);
     public List<BriefRestaurantDTO> getRestaurantsByKeyword(String keyword);
     public List<MonthlyRevenue> getMonthlyRevenues(@Param("restaurantId") Integer restaurantId);
+    public RestaurantDTO selectFullByRestaurantId(@Param("restaurantId") Integer restaurantId);
 }

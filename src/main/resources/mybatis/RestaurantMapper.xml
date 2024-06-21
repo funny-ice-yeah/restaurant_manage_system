@@ -22,6 +22,13 @@
         WHERE restaurant_id = #{restaurantId};
     </select>
 
+    <select id="selectFullByRestaurantId" resultType= "main.dto.RestaurantDTO">
+        SELECT r.restaurant_id,r.restaurant_name,CONCAT(c.canteen_name, r.location) AS location,r.account,r.password,r.canteen_id,r.brief_intro 
+        FROM restaurant AS r
+        JOIN canteen AS c ON r.canteen_id = c.canteen_id 
+        WHERE restaurant_id = #{restaurantId};
+    </select>
+
     <select id="selectByName" parameterType="String" resultType="main.pojo.Restaurant">
         select * 
         from restaurant

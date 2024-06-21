@@ -100,6 +100,11 @@ public class RestaurantController {
         return ResponseEntity.ok(restaurantService.selectById(id));
     }
 
+    @GetMapping("/selectFullById")
+    public ResponseEntity<RestaurantDTO> selectFullById(@RequestParam("restaurantId") Integer id){
+        return ResponseEntity.ok(restaurantService.selectFullById(id));
+    }
+    
     @GetMapping("/analyzeDishes")
     public ResponseEntity<List<DishAnalysis>> analyzeAllDishesByRestaurantId(@RequestParam("restaurantId") Integer id) {
         List<DishAnalysis> dishAnalysis = dishService.analyzeDishByRestaurantId(id);

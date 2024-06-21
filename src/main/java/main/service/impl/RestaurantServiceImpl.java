@@ -73,6 +73,11 @@ public class RestaurantServiceImpl implements RestaurantService{
     }
 
     @Override
+    public RestaurantDTO selectFullById(Integer id){
+        return restaurantDao.selectFullByRestaurantId(id);
+    }
+
+    @Override
     public Restaurant selectByAccount(String account){
         QueryWrapper<Restaurant> qw = new QueryWrapper<>();
         qw.eq("account", account);

@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 
 import main.dao.UserDao;
 import main.dto.UserDTO;
@@ -19,7 +21,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public List<User> selectAll(){
-        return userDao.selectAll();
+        return userDao.selectList(null);
     }
 
     @Override
@@ -71,6 +73,16 @@ public class UserServiceImpl implements UserService{
         user.setGender("男".equals(userDTO.getGender()) ? 0:1);
         user.setRole("学生".equals(userDTO.getRole())  ? 0:1);
         return user;
+    }
+
+    @Override
+    public List<UserDTO> selectPage(Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<User> userList = selectAll(); 
+        PageInfo<User> userPage = new PageInfo<>(userList);
+        userList = userPage.getList();
+        List<UserDTO> userDTOList = userList.stream().map(this::convert2Dto).toList();
+        return userDTOList;
     }
 
 }

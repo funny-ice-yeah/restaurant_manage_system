@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+
 import main.dto.BriefRestaurantDTO;
 import main.dto.RestaurantDTO;
 import main.pojo.ActivityOneDay;
@@ -84,6 +87,12 @@ public class RestaurantController {
         List<RestaurantDTO> restaurantDtos = restaurantService.selectAll4M();
         return ResponseEntity.ok(restaurantDtos);
     }
+
+    @GetMapping("selectPage4M")
+    public ResponseEntity<List<RestaurantDTO>> selectPage4M(@RequestParam("pageSize") Integer pageSize, @RequestParam("pageNum") Integer pageNum){
+       return ResponseEntity.ok(restaurantService.selectPage4M(pageSize, pageNum));
+    }
+    
 
 
     @GetMapping("/selectById")

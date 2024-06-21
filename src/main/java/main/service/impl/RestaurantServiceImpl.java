@@ -32,6 +32,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 
 
 
@@ -180,6 +182,14 @@ public class RestaurantServiceImpl implements RestaurantService{
     @Override
     public List<MonthlyRevenue> getMonthlyRevenues(Integer restaurantId){
         return restaurantDao.getMonthlyRevenues(restaurantId);
+    }
+
+    @Override
+    public List<RestaurantDTO> selectPage4M(Integer pageSize, Integer pageNum) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<RestaurantDTO> restaurantList = selectAll4M();
+        PageInfo<RestaurantDTO> pageInfo = new PageInfo<>(restaurantList);
+        return pageInfo.getList();
     }
 
 }

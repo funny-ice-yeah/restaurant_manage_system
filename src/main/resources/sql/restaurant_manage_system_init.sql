@@ -12,7 +12,7 @@ INSERT INTO user (user_id, password, user_name, gender, age, role, role_id) VALU
 (8, 'password8', '赵强', 0, '26', 1, 10004),
 (9, 'password9', '张伟', 1, '24', 0, 2021005),
 (10, 'password10', '孙丽', 0, '29', 1, 10005),
-(11, '1', '王洋', 1, '21', 0, 22302010020);
+(11, '1', '王洋', 1, '21', 1, 22302010020);
 -- 初始化一些餐厅
 INSERT INTO canteen (canteen_id, canteen_name, canteen_location) VALUES
 (1, '旦苑餐厅', '邯郸校区'),

@@ -14,11 +14,7 @@
         AND order_detail.dish_id = #{param};
     </select>
     <select id="getTotalSalesByDishId" resultType="Integer" parameterType="Integer">
-        SELECT SUM(quantity)
-        FROM order_detail,`order`
-        WHERE dish_id = #{param}
-        AND order_detail.order_id = `order`.order_id 
-        AND order_status like '%已完成%';
+        CALL GetTotalSalesByDishId(#{param});
     </select>
     <select id="getTopCustomerUserIdByDishId" resultType="Integer" parameterType="Integer">
         CALL GetTopCustomerUserIdByDishId(#{param});

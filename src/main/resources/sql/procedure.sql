@@ -24,6 +24,15 @@ BEGIN
     WHERE dish_id = dishId;
 END $$
 
+CREATE PROCEDURE GetTotalSalesByDishId(IN dishId INT)
+BEGIN
+    SELECT SUM(od.quantity) AS totalSales
+    FROM order_detail od
+    JOIN `order` o ON od.order_id = o.order_id
+    WHERE od.dish_id = dishId
+    AND o.order_status LIKE '%已完成%';
+END $$
+
 CREATE PROCEDURE GetTopCustomerUserIdByDishId(IN dishId INT)
 BEGIN
     SELECT o.user_id

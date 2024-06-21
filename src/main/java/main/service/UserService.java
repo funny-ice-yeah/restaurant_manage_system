@@ -9,6 +9,7 @@ public interface UserService {
     public List<User> selectAll();
     public User selectById(Integer id);
     public User selectByRoleId(String id);
+    public List<UserDTO> selectPage(Integer pageNum, Integer pageSize);
     public boolean insert(User user);
     public boolean update(User user);
     public boolean deleteById(Integer id);

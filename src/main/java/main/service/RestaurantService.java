@@ -16,6 +16,7 @@ public interface RestaurantService {
     public List<RestaurantDTO> selectAll4M();
     public BriefRestaurantDTO selectById(Integer id);
     public Restaurant selectByAccount(String account);
+    public List<RestaurantDTO> selectPage4M(Integer pageSize, Integer pageNum);
     public boolean insert(Restaurant restaurant);
     public boolean update(Restaurant restaurant);
     public boolean deleteById(Integer id);

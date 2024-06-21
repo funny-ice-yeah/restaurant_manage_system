@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+
 import main.dto.UserDTO;
 import main.pojo.DishSalesData;
 import main.pojo.User;
@@ -38,6 +41,11 @@ public class UserController {
         List<User> userList = userService.selectAll();
         List<UserDTO> userDTOList = userList.stream().map(userService::convert2Dto).toList();
         return ResponseEntity.ok(userDTOList);
+    }
+
+    @GetMapping("/selectPage")
+    public ResponseEntity<List<UserDTO>> selectPage(@RequestParam("pageSize") Integer pageSize, @RequestParam("pageNum") Integer pageNum){
+        return ResponseEntity.ok(userService.selectPage(pageNum, pageSize));
     }
 
     @GetMapping("/selectById")

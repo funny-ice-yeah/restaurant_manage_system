@@ -35,13 +35,6 @@
 
     </select>
     <select id="getMonthlyRevenues" parameterType="Integer" resultType="main.pojo.MonthlyRevenue">
-        SELECT MONTH(order_time) AS month,
-            SUM(total_price) AS monthlyRevenue
-        FROM `order`
-        WHERE restaurant_id = #{restaurantId}
-        AND YEAR(order_time) = YEAR(CURRENT_DATE)
-        AND order_status LIKE '%已完成%'
-        GROUP BY MONTH(order_time)
-        ORDER BY MONTH(order_time);
-    </select>    
+        CALL GetMonthlyRevenues(#{restaurantId});
+    </select>   
 </mapper>

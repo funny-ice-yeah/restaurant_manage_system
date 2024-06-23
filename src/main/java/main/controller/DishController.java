@@ -50,6 +50,11 @@ public class DishController {
         return ResponseEntity.ok(dishService.selectByRestaurantId(id));
     }
 
+    @GetMapping("/selectPageByRestaurantId")
+    public ResponseEntity<Map<String, Object>> selectPageByRestaurantId(@RequestParam("restaurantId") Integer id, @RequestParam("pageSize")Integer pageSize, @RequestParam("pageNum") Integer pageNum){
+        return ResponseEntity.ok(dishService.selectPageByRestaurantId(id, pageNum, pageSize));
+    }
+
     @GetMapping("/selectMainDishByRestaurantId")
     public ResponseEntity<List<Dish>> selectMainDishByRestaurantId(@RequestParam("restaurantId") Integer id){
         return ResponseEntity.ok(dishService.selectMainDishsByRestaurantId(id));

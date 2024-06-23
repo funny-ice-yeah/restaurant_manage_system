@@ -2,6 +2,7 @@ package main.service.impl;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 
 import java.time.Duration;
 import main.dao.DishDao;
@@ -42,6 +45,8 @@ public class OrderServiceImpl implements OrderService{
     public List<Order> selectByUserId(Integer id) {
         return orderDao.selectByUserId(id);
     }
+
+    
 
     @Override
     @Transactional
@@ -129,6 +134,30 @@ public class OrderServiceImpl implements OrderService{
         QueryWrapper<Order> qw = new QueryWrapper<>();
         qw.eq("restaurant_id", id);
         return orderDao.selectList(qw);
+    }
+
+
+
+    @Override
+    public Map<String, Object> selectPageByUserId(Integer id, Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        PageInfo<Order> pageInfo = new PageInfo<>(orderDao.selectByUserId(id)); 
+        Map<String, Object> result = new HashMap<>();
+        result.put("data", pageInfo.getList());
+        result.put("total", pageInfo.getTotal());
+        return result;
+    }
+
+
+
+    @Override
+    public Map<String, Object> selectPageByRestaurantId(Integer id, Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        PageInfo<Order> pageInfo = new PageInfo<>(orderDao.selectByRestaurantId(id)); 
+        Map<String, Object> result = new HashMap<>();
+        result.put("data", pageInfo.getList());
+        result.put("total", pageInfo.getTotal());
+        return result;
     }
 
 

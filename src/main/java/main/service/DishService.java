@@ -1,6 +1,7 @@
 package main.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -11,6 +12,7 @@ import main.pojo.Price;
 
 public interface DishService {
     public List<Dish> selectByRestaurantId(Integer id);
+    public Map<String, Object> selectPageByRestaurantId(Integer id, Integer pageNum, Integer pageSize);
     public List<Dish> selectMainDishsByRestaurantId(Integer id);
     public List<Dish> selectByKeywordRestaurantId(String keyword, Integer id);
     public Dish selectById(Integer id);

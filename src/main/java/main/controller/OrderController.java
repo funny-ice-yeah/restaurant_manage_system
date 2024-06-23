@@ -36,9 +36,20 @@ public class OrderController {
         return ResponseEntity.ok(orderService.selectByUserId(id));
     }
 
+    @GetMapping("/selectPageByUserId")
+    public ResponseEntity<Map<String, Object>> selectPageByUserId(@RequestParam("userId")Integer id, @RequestParam("pageSize") Integer pageSize, @RequestParam("pageNum") Integer pageNum){
+        return ResponseEntity.ok(orderService.selectPageByUserId(id, pageNum, pageSize));
+    }
+
+
     @GetMapping("/selectByRestaurantId")
     public ResponseEntity<List<Order>> selectByRestaurantId(@RequestParam("restaurantId")Integer id){
         return ResponseEntity.ok(orderService.selelctByRestaurantId(id));
+    }
+
+    @GetMapping("/selectPageByRestaurantId")
+    public ResponseEntity<Map<String, Object>> selectPageByRestaurantId(@RequestParam("restaurantId")Integer id, @RequestParam("pageSize") Integer pageSize, @RequestParam("pageNum") Integer pageNum){
+        return ResponseEntity.ok(orderService.selectPageByRestaurantId(id, pageNum, pageSize));
     }
 
     @GetMapping("/selectOrderDetailByOrderId")

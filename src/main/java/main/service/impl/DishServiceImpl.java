@@ -7,7 +7,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 
@@ -18,6 +20,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 
 import main.dao.AllergyDao;
 import main.dao.NutritionDao;
@@ -230,6 +234,16 @@ public class DishServiceImpl implements DishService{
         Dish dish = dishDao.selectById(id);
         dish.setImageUrl("http://127.0.0.1:8080/images/dish/"+fileName);
         return dishDao.updateById(dish) > 0;
+    }
+
+    @Override
+    public Map<String, Object> selectPageByRestaurantId(Integer id, Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        PageInfo<Dish> pageInfo = new PageInfo<>(dishDao.selectByRestaurantId(id));
+        Map<String, Object> result = new HashMap<>();
+        result.put("data", pageInfo.getList());
+        result.put("total", pageInfo.getTotal());
+        return result;
     }
 
 

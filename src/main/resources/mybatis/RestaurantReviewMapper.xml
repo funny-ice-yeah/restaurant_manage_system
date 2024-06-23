@@ -7,12 +7,12 @@
         SELECT review_id,restaurant_name,rating,content
         FROM restaurant_review,restaurant 
         WHERE restaurant_review.restaurant_id = restaurant.restaurant_id 
-        AND restaurant_review.user_id = #{param};
+        AND restaurant_review.user_id = #{param}
     </select>
     <select id="selectByRestaurantId" resultType="main.pojo.RestaurantReview" parameterType="Integer">
         select * 
         from restaurant_review
-        where restaurant_id = #{param};
+        where restaurant_id = #{param}
     </select>
     <select id="selectUserReviewHabitsByRestaurantIdGivenCondition" resultType="main.pojo.UserReviewHabit">
         SELECT COUNT(review_id) AS reviewNum, AVG(rating) AS averageRating

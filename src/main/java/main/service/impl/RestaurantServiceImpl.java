@@ -25,7 +25,9 @@ import main.service.RestaurantService;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -190,11 +192,25 @@ public class RestaurantServiceImpl implements RestaurantService{
     }
 
     @Override
-    public List<RestaurantDTO> selectPage4M(Integer pageSize, Integer pageNum) {
+    public Map<String, Object> selectPage4M(Integer pageSize, Integer pageNum) {
         PageHelper.startPage(pageNum, pageSize);
-        List<RestaurantDTO> restaurantList = selectAll4M();
+        List<RestaurantDTO> restaurantList = restaurantDao.selectAll4M();
         PageInfo<RestaurantDTO> pageInfo = new PageInfo<>(restaurantList);
-        return pageInfo.getList();
+        Map<String, Object> result = new HashMap<>();
+        result.put("data", pageInfo.getList());
+        result.put("total", pageInfo.getTotal());
+        return result;
+    }
+
+    @Override
+    public Map<String, Object> selectPage4U(Integer pageSize, Integer pageNum) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<BriefRestaurantDTO> restaurantList = restaurantDao.selectAll4U();
+        PageInfo<BriefRestaurantDTO> pageInfo = new PageInfo<>(restaurantList);
+        Map<String, Object> result = new HashMap<>();
+        result.put("data", pageInfo.getList());
+        result.put("total", pageInfo.getTotal());
+        return result;
     }
 
 }

@@ -10,7 +10,9 @@ import main.pojo.OrderFrequency;
 
 public interface OrderService {
     public List<Order> selectByUserId(Integer id);
+    public Map<String, Object> selectPageByUserId(Integer id, Integer pageNum, Integer pageSize);
     public List<Order> selelctByRestaurantId(Integer id);
+    public Map<String, Object> selectPageByRestaurantId(Integer id, Integer pageNum, Integer pageSize);
     public boolean insert(Map<String, Object> data);
     public boolean update(Order order);
     List<Integer> getLoyalCustomerIds(Integer restaurantId, Timestamp startTime, Integer threshold);

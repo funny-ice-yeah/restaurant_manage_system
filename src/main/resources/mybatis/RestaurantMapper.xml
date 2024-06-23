@@ -13,7 +13,7 @@
     <select id="selectAll4U" resultType="main.dto.BriefRestaurantDTO">
         SELECT r.restaurant_id,r.restaurant_name,CONCAT(c.canteen_name, r.location) AS location,r.brief_intro 
         FROM restaurant AS r
-        JOIN canteen as c ON r.canteen_id = c.canteen_id ;
+        JOIN canteen as c ON r.canteen_id = c.canteen_id 
     </select>
     <select id="selectByRestaurantId" resultType= "main.dto.BriefRestaurantDTO">
         SELECT r.restaurant_id,r.restaurant_name,CONCAT(c.canteen_name, r.location) AS location,r.brief_intro 

@@ -6,7 +6,7 @@
     <select id="selectByRestaurantId" resultType="main.pojo.Dish" parameterType="Integer">
         select * 
         from dish
-        where restaurant_id = #{param};
+        where restaurant_id = #{param}
     </select>
     <select id="selectMainDishsByRestaurantId" resultType = "main.pojo.Dish" parameterType="Integer">
         select * 

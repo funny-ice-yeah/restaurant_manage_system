@@ -1,13 +1,16 @@
 package main.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 
 import main.dao.DishDao;
 import main.dao.DishReviewDao;
@@ -70,4 +73,16 @@ public class DishReviewServiceImpl implements DishReviewService{
         qw.eq("review_id", id);
         return dishReviewDao.delete(qw) > 0;
     }
+
+    @Override
+    public Map<String, Object> selectPageByUserId(Integer id, Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        PageInfo<DishReviewDTO> pageInfo = new PageInfo<>(dishReviewDao.selectByUserId(id));
+        Map<String, Object> result = new HashMap<>();
+        result.put("data", pageInfo.getList());
+        result.put("total", pageInfo.getTotal());
+        return result;
+    }
+
+
 }

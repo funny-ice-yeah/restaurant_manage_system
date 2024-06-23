@@ -1,6 +1,7 @@
 package main.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -33,6 +34,11 @@ public class DishReviewController {
         return ResponseEntity.ok(dishReviewService.selectByUserId(id));
     }
 
+    @GetMapping("/selectPageByUserId")
+    public ResponseEntity<Map<String, Object>> selectPageByUserId(@RequestParam("userId")Integer id, @RequestParam("pageSize") Integer pageSize, @RequestParam("pageNum") Integer pageNum){
+        return ResponseEntity.ok(dishReviewService.selectPageByUserId(id, pageNum, pageSize));
+    }
+
     @GetMapping("/selectByDishId")
     public ResponseEntity<List<DishReview>> selectByDishId(@RequestParam("dishId")Integer id){
         return ResponseEntity.ok(dishReviewService.selectByDishId(id));
@@ -42,6 +48,9 @@ public class DishReviewController {
     public ResponseEntity<List<DishReview>> selectByRestaurantId(@RequestParam("restaurantId")Integer id){
         return ResponseEntity.ok(dishReviewService.selectByRestaurantId(id));
     }
+
+
+
     @PostMapping
     public boolean insert(@RequestBody DishReview dishReview){
         return dishReviewService.insert(dishReview);

@@ -1,10 +1,14 @@
 package main.service.impl;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 
 import main.dao.RestaurantReviewDao;
 import main.dto.RestaurantReviewDTO;
@@ -44,6 +48,26 @@ public class RestaurantReviewServiceImpl implements RestaurantReviewService {
         QueryWrapper<RestaurantReview> qw = new QueryWrapper<>();
         qw.eq("review_id", id);
         return restaurantReviewDao.delete(qw) > 0;
+    }
+    @Override
+    public Map<String, Object> selectPageByRestaurantId(Integer id, Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<RestaurantReview> restaurantReviews = restaurantReviewDao.selectByRestaurantId(id);
+        PageInfo<RestaurantReview> pageInfo = new PageInfo<>(restaurantReviews);
+        Map<String, Object> result = new HashMap<>();
+        result.put("data", pageInfo.getList());
+        result.put("total", pageInfo.getTotal());
+        return result;
+    }
+    @Override
+    public Map<String, Object> selectPageByUserId(Integer id, Integer pageNum, Integer pageSize) { 
+        PageHelper.startPage(pageNum, pageSize);
+        List<RestaurantReviewDTO> restaurantReviewDTOs = restaurantReviewDao.selectByUserId(id);
+        PageInfo<RestaurantReviewDTO> pageInfo = new PageInfo<>(restaurantReviewDTOs);
+        Map<String, Object> result = new HashMap<>();
+        result.put("data", pageInfo.getList());
+        result.put("total", pageInfo.getTotal());
+        return result;
     }
     
 }

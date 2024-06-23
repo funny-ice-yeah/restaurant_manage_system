@@ -1,6 +1,8 @@
 package main.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -76,13 +78,16 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public List<UserDTO> selectPage(Integer pageNum, Integer pageSize) {
+    public Map<String, Object> selectPage(Integer pageNum, Integer pageSize) {
         PageHelper.startPage(pageNum, pageSize);
-        List<User> userList = selectAll(); 
+        List<User> userList = userDao.selectList(null);
         PageInfo<User> userPage = new PageInfo<>(userList);
         userList = userPage.getList();
         List<UserDTO> userDTOList = userList.stream().map(this::convert2Dto).toList();
-        return userDTOList;
+        Map<String, Object> result = new HashMap<>();
+        result.put("data", userDTOList);
+        result.put("total", userPage.getTotal());
+        return result;
     }
 
 }

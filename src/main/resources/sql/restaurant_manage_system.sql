@@ -179,12 +179,12 @@ CREATE INDEX idx_restaurant_name ON restaurant(restaurant_name);
 
 CREATE INDEX idx_dish_restaurant_id ON dish(restaurant_id);
 CREATE INDEX idx_dish_name ON dish(dish_name);
-CREATE INDEX idx_dish_is_main_dish ON dish(is_main_dish);--主菜
+CREATE INDEX idx_dish_is_main_dish ON dish(is_main_dish); -- 主菜
 
 CREATE INDEX idx_order_user_id ON `order`(user_id);
 CREATE INDEX idx_order_restaurant_id ON `order`(restaurant_id);
 CREATE INDEX idx_order_status ON `order`(order_status);
-CREATE INDEX idx_order_time ON `order`(order_time);--订餐
+CREATE INDEX idx_order_time ON `order`(order_time); -- 订餐
 
 CREATE INDEX idx_order_detail_order_id ON order_detail(order_id);
 CREATE INDEX idx_order_detail_dish_id ON order_detail(dish_id);

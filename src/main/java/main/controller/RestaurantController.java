@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 
 import main.dto.BriefRestaurantDTO;
 import main.dto.RestaurantDTO;
@@ -36,6 +34,8 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.web.bind.annotation.PutMapping;
 
 
@@ -88,9 +88,14 @@ public class RestaurantController {
         return ResponseEntity.ok(restaurantDtos);
     }
 
-    @GetMapping("selectPage4M")
-    public ResponseEntity<List<RestaurantDTO>> selectPage4M(@RequestParam("pageSize") Integer pageSize, @RequestParam("pageNum") Integer pageNum){
+    @GetMapping("/selectPage4M")
+    public ResponseEntity<Map<String, Object>> selectPage4M(@RequestParam("pageSize") Integer pageSize, @RequestParam("pageNum") Integer pageNum){
        return ResponseEntity.ok(restaurantService.selectPage4M(pageSize, pageNum));
+    }
+
+    @GetMapping("/selectPage4U")
+    public ResponseEntity<Map<String, Object>> selectPage4U(@RequestParam("pageSize") Integer pageSize, @RequestParam("pageNum") Integer pageNum){
+        return ResponseEntity.ok(restaurantService.selectPage4U(pageSize, pageNum));
     }
     
 

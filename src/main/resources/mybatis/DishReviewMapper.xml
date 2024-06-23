@@ -7,12 +7,12 @@
         SELECT review_id,dish_name,rating,content
         FROM dish_review,dish 
         WHERE dish_review.dish_id = dish.dish_id 
-        AND dish_review.user_id = #{param};
+        AND dish_review.user_id = #{param}
     </select>
     <select id="selectByDishId" resultType="main.pojo.DishReview" parameterType="Integer">
         select * 
         from dish_review
-        where dish_id = #{param};
+        where dish_id = #{param}
     </select>
     <select id="getAverageRatingByDishId" resultType="Float" parameterType="Integer">
         CALL GetAverageRatingByDishId(#{param});

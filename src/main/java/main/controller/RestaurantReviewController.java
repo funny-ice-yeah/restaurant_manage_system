@@ -1,8 +1,10 @@
 package main.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,6 +32,16 @@ public class RestaurantReviewController {
     @GetMapping("/selectByUserId")
     public List<RestaurantReviewDTO> selectByUserId(@RequestParam("userId") Integer id) {
         return restaurantReviewService.selectByUserId(id);
+    }
+
+    @GetMapping("/selectPageByRestaurantId")
+    public ResponseEntity<Map<String, Object>> selectByRestaurantId(@RequestParam("restaurantId") Integer id, @RequestParam("pageNum") Integer pageNum, @RequestParam("pageSize") Integer pageSize){
+        return ResponseEntity.ok(restaurantReviewService.selectPageByRestaurantId(id, pageNum, pageSize));
+    }
+
+    @GetMapping("/selectPageByUserId")
+    public ResponseEntity<Map<String, Object>> selectByUserId(@RequestParam("userId") Integer id, @RequestParam("pageNum") Integer pageNum, @RequestParam("pageSize") Integer pageSize){
+        return ResponseEntity.ok(restaurantReviewService.selectPageByUserId(id, pageNum, pageSize));
     }
 
     @PostMapping

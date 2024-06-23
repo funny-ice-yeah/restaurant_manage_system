@@ -2,6 +2,7 @@ package main.service;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Map;
 
 import main.dto.BriefRestaurantDTO;
 import main.dto.RestaurantDTO;
@@ -17,7 +18,8 @@ public interface RestaurantService {
     public BriefRestaurantDTO selectById(Integer id);
     public RestaurantDTO selectFullById(Integer id);
     public Restaurant selectByAccount(String account);
-    public List<RestaurantDTO> selectPage4M(Integer pageSize, Integer pageNum);
+    public Map<String, Object> selectPage4M(Integer pageSize, Integer pageNum);
+    public Map<String, Object> selectPage4U(Integer pageSize, Integer pageNum);
     public boolean insert(Restaurant restaurant);
     public boolean update(Restaurant restaurant);
     public boolean deleteById(Integer id);

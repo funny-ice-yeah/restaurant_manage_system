@@ -1,8 +1,22 @@
 # 食堂点餐系统
+##  ER图
+见[ER](./assets/E-R%20Model.jpg)
+## 表结构
+见[schema](./assets/schema.png)，基本按照ER图而来：
+1. 将ingredient、allergy、nutrition三个多值属性建立对应表
+2. 将联系集order_detail、favourite_dish、favourite_restaurant建立了对应的表结构
+3. 其他实体集均建立了表结构
+
+## 索引
+见[.\src\main\resources\sql\restaurant_manage_system.sql](.\src\main\resources\sql\restaurant_manage_system.sql)末尾  
+建立索引主要考虑了：
+1. 主键(频繁查询的属性的单值索引)
+2. 常用来JOIN的属性
+3. 频繁查询的属性的联合索引
+
 ## 部署
 1. 前往github上clone对应前端后端  
 [前端](https://github.com/funny-ice-yeah/restaurant-system-frontend)
-
 [后端](https://github.com/funny-ice-yeah/restaurant_manage_system)  
 2. 在application.yml中修改对应的本地数据库连接
 3. 运行[SQL](.\src\main\resources\sql)目录下的sql语句以初始化数据库
@@ -12,7 +26,15 @@
 ## 查询需求
 ### 基础查询说明
 1. 查询菜品及商户  
-采用模糊查询，用户只需要输入部分文字就可以查询到对应店家或菜品，如“全家”-“全家便利店”
+采用模糊查询，用户只需要输入部分文字就可以查询到对应店家或菜品，如“全家”-“全家便利店”。主要通过字符串匹配符`LIKE`与通配符`%`实现。
+```SQL
+    SELECT r.restaurant_id,r.restaurant_name,CONCAT(c.canteen_name, r.location) AS location,r.brief_intro 
+    FROM restaurant AS r
+    JOIN canteen as c ON r.canteen_id = c.canteen_id 
+    WHERE restaurant_name LIKE CONCAT('%',#{param},'%');
+```
+
+其他查询比较基础，就是比较基础的CRUD操作，由于篇幅较长，这里略去。
 
 ### 进阶查询需求说明
 1. 菜品数据分析：商户可以查看某个商户所有菜品的评分、销量以及购买该菜品次数最多的人。   

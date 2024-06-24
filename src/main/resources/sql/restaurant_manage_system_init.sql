@@ -102,8 +102,8 @@ INSERT INTO dish (dish_id, dish_name, category, current_price, description, imag
 
 INSERT INTO manager (manager_id, account, manager_name, password) VALUES
 (1, '22302010020', '王洋', '2230201020'),
-(2, '22307130433', '刁子捷', '22307130433');
-
+(2, '22307130433', '刁子捷', '22307130433'),
+(3, 'admin', 'administrator', '123456789');
 INSERT INTO allergy (dish_id, allergy) VALUES
 (1, '麸质'),
 (1, '乳制品'),

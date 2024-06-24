@@ -1,4 +1,13 @@
 # 食堂点餐系统
+## 部署
+1. 前往github上clone对应前端后端  
+[前端](https://github.com/funny-ice-yeah/restaurant-system-frontend)
+
+[后端](https://github.com/funny-ice-yeah/restaurant_manage_system)  
+2. 在application.yml中修改对应的本地数据库连接
+3. 运行[SQL](.\src\main\resources\sql)目录下的sql语句以初始化数据库
+4. 运行对应前后端，在[http://localhost:5173/](http://localhost:5173/)进入登录界面。第一次登录可以通过账号`admin`和密码`123456789`进入管理员界面，查询对应商户或用户的账号或密码或创建自己的商户或用户账号。
+
 
 ## 查询需求
 ### 基础查询说明

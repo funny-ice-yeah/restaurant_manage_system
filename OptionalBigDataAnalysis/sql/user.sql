@@ -11,3 +11,11 @@ CREATE TABLE IF NOT EXISTS user (
     role INT NOT NULL,
     role_id VARCHAR(255) NOT NULL
 );
+
+CREATE TABLE PROFILE (
+    profile_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    profile_name VARCHAR(255),
+    FOREIGN KEY (user_id) REFERENCES user(user_id)
+);
+
